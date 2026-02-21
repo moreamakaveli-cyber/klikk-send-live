@@ -17,17 +17,12 @@ export default function OrderConfirmed() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Takk for bestillingen!
+            Takk for din bestilling!
           </h1>
           
-          <div className="space-y-4 text-lg text-gray-700 mb-12">
-            <p className="font-medium">
-              Du får straks en SMS fra budet vårt.
-            </p>
-            <p>
-              Vi kontakter deg snart for bekrefting av ankomst og pris.
-            </p>
-          </div>
+          <p className="text-lg text-gray-700 mb-12">
+            Du får snart en SMS med bekreftelse på pris og tidspunkt for henting fra budet vårt.
+          </p>
 
           <div className="flex justify-center gap-4">
             <Link href="/">

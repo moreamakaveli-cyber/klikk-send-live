@@ -37,6 +37,9 @@ export default function KontaktOss() {
 
               {/* Telefonnumre */}
               <div>
+                <p className="text-lg mb-2">
+                  For rask respons, kontakt oss på telefon:
+                </p>
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <Phone className="w-6 h-6 text-orange-600" />
                   <span className="text-lg font-semibold text-gray-900">Telefon:</span>

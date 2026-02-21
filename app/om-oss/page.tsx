@@ -25,7 +25,7 @@ export default function OmOss() {
             </p>
             
             <p className="text-lg">
-              Derfor startet vi Klikk&Send — en lokal leveringstjeneste som gjør det enkelt å få ting fraktet fra A til B på kort tid. Vi håndterer leveringene selv og jobber for å gjøre tjenesten trygg, rask og enkel å bruke.
+              Derfor startet vi Klikk&Send. En lokal leveringstjeneste som gjør det enkelt å få ting fraktet fra A til B på kort tid. Vi håndterer leveringene selv og jobber for å gjøre tjenesten trygg, rask og enkel å bruke.
             </p>
             
             <p className="text-lg">

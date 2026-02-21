@@ -15,6 +15,8 @@ interface PackageOption {
   id: PackageSize;
   title: string;
   text: string;
+  maxWeight: string;
+  maxDimensions: string;
   examples: string;
   icon: React.ComponentType<{ className?: string }>;
 }
@@ -23,22 +25,28 @@ const packageOptions: PackageOption[] = [
   {
     id: "liten",
     title: "Liten",
-    text: "Får plass i en sekk eller pose.",
-    examples: "nøkler, klær, bok, liten elektronikk.",
+    text: "Passer for små gjenstander som dokumenter, nøkler, små pakker, vesker eller en liten pose.",
+    maxWeight: "Maks 10 kg",
+    maxDimensions: "Maks 40 × 40 × 40 cm",
+    examples: "Dokumenter, nøkler, små pakker, vesker, liten pose",
     icon: Package,
   },
   {
     id: "medium",
-    title: "Medium",
-    text: "Kan bæres av én person.",
-    examples: "koffert, stol, esker, mikrobølgeovn.",
+    title: "Mellomstor",
+    text: "Passer for flere esker, ryggsekk, PC eller mindre kjøkkenutstyr.",
+    maxWeight: "Maks 20 kg",
+    maxDimensions: "Maks 60 × 50 × 50 cm",
+    examples: "Flere esker, ryggsekk, PC, mindre kjøkkenutstyr",
     icon: Box,
   },
   {
     id: "stor",
     title: "Stor",
-    text: "Kan bæres av 1-2 personer.",
-    examples: "lite bord, større koffert, flere esker.",
+    text: "Passer for koffert, mikrobølgeovn, større esker eller lignende.",
+    maxWeight: "Maks 35 kg",
+    maxDimensions: "Maks 80 × 60 × 60 cm",
+    examples: "Koffert, mikrobølgeovn, større esker",
     icon: Archive,
   },
 ];
@@ -64,7 +72,6 @@ export default function Bestill() {
   });
   const [isSending, setIsSending] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
-
 
   // Combine address fields into full address string
   const combineAddress = (street: string, postalCode: string, city: string): string => {
@@ -130,6 +137,14 @@ export default function Bestill() {
     // Only allow numbers for postal code fields
     if (e.target.name === "pickupPostalCode" || e.target.name === "deliveryPostalCode") {
       value = value.replace(/\D/g, ""); // Remove non-numeric characters
+    }
+    
+    // Only allow numbers for phone fields and limit to 9 digits
+    if (e.target.name === "pickupPhone" || e.target.name === "deliveryPhone") {
+      value = value.replace(/\D/g, ""); // Remove non-numeric characters
+      if (value.length > 9) {
+        value = value.slice(0, 9); // Limit to 9 digits
+      }
     }
     
     setFormData({
@@ -243,11 +258,6 @@ export default function Bestill() {
                 </div>
               ))}
             </div>
-            <div className="text-center text-gray-600">
-              {step === 1 && "Velg størrelse på levering"}
-              {step === 2 && "Hvor skal vi hente og levere?"}
-              {step === 3 && "Avstand og pris"}
-            </div>
           </div>
 
           {/* STEP 1: Choose package size */}
@@ -256,7 +266,7 @@ export default function Bestill() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 text-center">
                 Velg størrelse på levering
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {packageOptions.map((option) => {
                   const Icon = option.icon;
                   const isSelected = selectedSize === option.id;
@@ -264,27 +274,32 @@ export default function Bestill() {
                     <button
                       key={option.id}
                       onClick={() => setSelectedSize(option.id)}
-                      className={`p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
+                      className={`p-8 rounded-2xl border-2 transition-all duration-200 text-left ${
                         isSelected
-                          ? "border-orange-600 bg-orange-50 shadow-md"
-                          : "border-gray-200 bg-white hover:border-orange-300 hover:shadow-sm"
+                          ? "border-orange-200 bg-orange-50 shadow-sm"
+                          : "border-orange-200 bg-orange-50 hover:border-orange-300 hover:shadow-md"
                       }`}
                     >
                       <div className="flex items-center gap-4 mb-4">
                         <div
                           className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                            isSelected ? "bg-orange-600" : "bg-gray-100"
+                            isSelected ? "bg-orange-600" : "bg-orange-200"
                           }`}
                         >
                           <Icon
                             className={`w-6 h-6 ${
-                              isSelected ? "text-white" : "text-gray-600"
+                              isSelected ? "text-white" : "text-orange-600"
                             }`}
                           />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900">{option.title}</h3>
+                        <h3 className={`text-2xl md:text-3xl font-bold ${
+                          isSelected ? "text-orange-600" : "text-gray-900"
+                        }`}>{option.title}</h3>
                       </div>
-                      <p className="text-gray-700 mb-2">{option.text}</p>
+                      <div className="space-y-2 mb-3">
+                        <p className="font-semibold text-gray-700">{option.maxWeight}</p>
+                        <p className="font-semibold text-gray-700">{option.maxDimensions}</p>
+                      </div>
                       <p className="text-sm text-gray-500">Eksempler: {option.examples}</p>
                     </button>
                   );
@@ -361,6 +376,7 @@ export default function Bestill() {
                           name="pickupPhone"
                           value={formData.pickupPhone}
                           onChange={handleInputChange}
+                          maxLength={9}
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
                         />
@@ -460,6 +476,7 @@ export default function Bestill() {
                           name="deliveryPhone"
                           value={formData.deliveryPhone}
                           onChange={handleInputChange}
+                          maxLength={9}
                           required
                           className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
                         />
@@ -644,9 +661,9 @@ export default function Bestill() {
                 <div className="rounded-2xl p-6" style={{ background: '#eef6ef', border: '1px solid #d1e5d4' }}>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Prisguide</h3>
                   <div className="space-y-2 text-sm text-gray-700 mb-4">
-                    <div>Kort levering (0–3 km) – fra 90 kr</div>
-                    <div>Medium levering (3–7 km) – fra 110 kr</div>
-                    <div>Lengre levering (7–12 km) – fra 129 kr</div>
+                    <div>Kort levering (0–3 km) – 119 kr</div>
+                    <div>Medium levering (3–6 km) – 169 kr</div>
+                    <div>Lengre levering (6–20 km) – 219 kr</div>
                   </div>
                   <p className="text-base font-bold text-gray-900">
                     Endelig pris bekreftes på SMS før henting.

@@ -40,8 +40,14 @@ export default function TrygghetOgSikkerhet() {
               Vi håndterer alle leveringer med stor forsiktighet og ansvar.
             </p>
             
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-8 mb-4">
+              Ansvar og erstatning
+            </h2>
             <p className="text-lg">
-              Dersom en gjenstand skulle bli skadet eller mistet under transport, tar vi ansvar og finner en løsning med kunden, inkludert erstatning ved behov.
+              Dersom en gjenstand skulle bli skadet eller mistet under transport, tar vi fullt ansvar.
+            </p>
+            <p className="text-lg">
+              Vi erstatter tap eller skade i dialog med kunden.
             </p>
             
             <p className="text-lg">

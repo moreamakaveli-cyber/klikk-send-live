@@ -17,11 +17,11 @@ export default function Takk() {
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Takk for din bestilling.
+            Takk for din bestilling!
           </h1>
           
           <p className="text-lg text-gray-700 mb-12">
-            Du får straks en SMS med bekreftelse fra budet vårt.
+            Du får snart en SMS med bekreftelse på pris og tidspunkt for henting fra budet vårt.
           </p>
 
           <div className="flex justify-center gap-4">

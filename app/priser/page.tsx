@@ -22,25 +22,25 @@ export default function Priser() {
                   Kort levering (0–3 km)
                 </h3>
               </div>
-              <p className="text-xl font-semibold text-orange-600">fra 90 kr</p>
+              <p className="text-xl font-semibold text-orange-600">119 kr</p>
             </div>
             
             <div className="flex items-center justify-between py-6 border-b border-gray-200">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  Medium levering (3–7 km)
+                  Medium levering (3–6 km)
                 </h3>
               </div>
-              <p className="text-xl font-semibold text-orange-600">fra 110 kr</p>
+              <p className="text-xl font-semibold text-orange-600">169 kr</p>
             </div>
             
             <div className="flex items-center justify-between py-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  Lengre levering (7–12 km)
+                  Lengre levering (6–20 km)
                 </h3>
               </div>
-              <p className="text-xl font-semibold text-orange-600">fra 129 kr</p>
+              <p className="text-xl font-semibold text-orange-600">219 kr</p>
             </div>
           </div>
             

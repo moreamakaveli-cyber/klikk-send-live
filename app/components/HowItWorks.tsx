@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Search, Hand, Package, CheckCircle } from "lucide-react";
 
 const steps = [
@@ -106,19 +107,11 @@ export default function HowItWorks() {
             <ul className="space-y-3 text-gray-700 mb-6">
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold mt-1">•</span>
-                <span>Planer om å kjøpe noe på finn eller tise som du trenger idag?</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-orange-500 font-bold mt-1">•</span>
                 <span>Glemt AirPods eller nøkler hos en venn?</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold mt-1">•</span>
-                <span>Glemt noe hos bestemor?</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-orange-500 font-bold mt-1">•</span>
-                <span>Trenger du å få levert en koffert eller esker?</span>
+                <span>Har du glemt dokumenter som må frem før møtet starter?</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold mt-1">•</span>
@@ -126,34 +119,48 @@ export default function HowItWorks() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-orange-500 font-bold mt-1">•</span>
+                <span>Planer om å kjøpe noe på finn eller tise som du trenger idag?</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="text-orange-500 font-bold mt-1">•</span>
                 <span>Er du rett og slett bare litt for lat?</span>
               </li>
             </ul>
             <p className="text-gray-700 mb-4">
-              Spiller ingen rolle hva du trenger levert.
-            </p>
-            <p className="text-gray-700 mb-4">
-              Vi frakter små og mellomstore ting i byen, direkte fra A til B på 123.
-            </p>
-            <p className="text-gray-700 font-medium">
-              Med Klikk&Send slipper du å vente.
+              Spiller ingen rolle hva du trenger levert. Vi frakter små og mellomstore ting i byen, direkte fra A til B på 123.
             </p>
           </div>
 
-          {/* Sustainability */}
-          <div id="sustainability" className="bg-green-50 rounded-2xl p-8 border border-green-100 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
+          {/* Priser og betaling */}
+          <div id="prices" className="bg-green-50 rounded-2xl p-8 border border-green-100 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-              Bærekraft
+              Priser og betaling
             </h3>
-            <p className="text-gray-700 mb-4">
-              Levering trenger ikke bety mer trafikk.
-            </p>
-            <p className="text-gray-700 mb-4">
-              Vi fokuserer på korte leveranser i byen.
-            </p>
-            <p className="text-gray-700">
-              Det gir rask levering og lavere utslipp.
-            </p>
+            <div className="space-y-3 text-gray-700">
+              <div className="flex items-center justify-between">
+                <span>Kort levering (0–3 km)</span>
+                <span className="font-bold text-orange-600">119 kr</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Medium levering (3–6 km)</span>
+                <span className="font-bold text-orange-600">169 kr</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Lengre levering (6–20 km)</span>
+                <span className="font-bold text-orange-600">219 kr</span>
+              </div>
+            </div>
+            <div className="text-gray-700 mt-6 space-y-3">
+              <p>Prisen beregnes etter at vi har mottatt bestillingen din.</p>
+              <p>Du får en SMS med bekreftet pris før oppdraget gjennomføres.</p>
+              <p>Du betaler med Vipps når pakken er levert.</p>
+              <p className="mt-8 font-bold">
+                Din trygghet er viktig for oss. Les mer om trygghet og sikkerhet{" "}
+                <Link href="/trygghet-og-sikkerhet" className="text-green-600 hover:text-green-700 underline">
+                  her
+                </Link>.
+              </p>
+            </div>
           </div>
         </div>
       </div>

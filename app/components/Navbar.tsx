@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle } from "lucide-react";
+import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,8 +18,10 @@ export default function Navbar() {
   const menuItems = [
     { href: "/", label: "Hjem", icon: Home },
     { href: "/om-oss", label: "Om oss", icon: Users },
+    { href: "/apningstider", label: "Åpningstider", icon: Clock },
     { href: "/trygghet-og-sikkerhet", label: "Trygghet og sikkerhet", icon: Shield },
     { href: "/dette-lurer-mange-pa", label: "Ofte stilte spørsmål", icon: HelpCircle },
+    { href: "/pakkeinnhold", label: "Pakkeinnhold", icon: Package },
     { href: "/#how-it-works", label: "Slik fungerer det", icon: Info },
     { href: "/#why-choose", label: "Hvorfor velge Klikk&Send", icon: Star },
     { href: "/#how-to-use", label: "Hvordan kan du bruke oss", icon: Lightbulb },
@@ -59,6 +61,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           <Link href="/om-oss" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
             Om oss
+          </Link>
+          <Link href="/apningstider" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
+            Åpningstider
           </Link>
           <Link href="/priser" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
             Priser

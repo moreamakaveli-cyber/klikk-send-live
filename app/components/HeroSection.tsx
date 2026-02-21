@@ -18,12 +18,12 @@ export default function HeroSection() {
         </h1>
         
         {/* Subtitle */}
-        <p className="text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-8 font-bold">
+        <p className="text-2xl md:text-3xl lg:text-4xl text-gray-900 mb-8 font-bold">
           Billig, raskt, trygt og enkelt.
         </p>
 
         {/* Description */}
-        <p className="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto font-medium leading-relaxed">
+        <p className="text-xl md:text-2xl text-gray-700 mb-10 max-w-3xl mx-auto font-bold leading-relaxed">
           Vi henter og leverer smått og stort. Alt fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.
         </p>
 
@@ -39,24 +39,14 @@ export default function HeroSection() {
 
         {/* Pricing text and button */}
         <div className="text-center mb-12">
-          <p className="text-lg md:text-xl text-gray-700 mb-2 font-bold">
-            Gode priser. Ingen overraskelser.
-          </p>
           <p className="text-base text-gray-600 mb-4">
-            Vi har faste priser basert på avstand.
+            Vi har alltid lave priser basert på avstand.
           </p>
-          <Link href="/priser" className="text-green-600 hover:text-green-700 font-bold text-base md:text-lg transition-colors">
-            Sjekk våre priser
+          <Link href="/priser" className="text-green-600 hover:text-green-700 font-bold text-lg md:text-xl lg:text-2xl transition-colors">
+            Sjekk våre priser her
           </Link>
         </div>
 
-        {/* Feature highlights */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-gray-700">
-          <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-orange-500" />
-            <span className="font-medium">Levering samme dag</span>
-          </div>
-        </div>
       </div>
     </section>
   );

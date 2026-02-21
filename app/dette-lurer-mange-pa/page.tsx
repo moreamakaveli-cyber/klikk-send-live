@@ -22,10 +22,10 @@ const faqItems = [
   {
     id: 3,
     title: "Hva kan vi levere?",
-    question: "Hva kan dere levere?",
+    question: "Vi leverer små og mellomstore gjenstander",
     text: "Vi hjelper deg med levering av små og mellomstore ting, alltid raskt og trygt. Dette kan for eksempel være pakker, dokumenter, mindre esker og andre hverdagslige leveranser.",
     linkText: "Les mer",
-    linkHref: "/#how-to-use",
+    linkHref: "/pakkeinnhold",
   },
   {
     id: 4,

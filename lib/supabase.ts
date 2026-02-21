@@ -1,18 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Get Supabase URL and Anon Key from environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Function to get Supabase client
+function getSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local');
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Supabase environment variables are not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY');
+  }
+
+  return createClient(supabaseUrl, supabaseAnonKey);
 }
-
-// Create Supabase client
-export const supabase = createClient(
-  supabaseUrl || '',
-  supabaseAnonKey || ''
-);
 
 // Function to save order to Supabase
 export async function saveOrder(orderData: {
@@ -22,9 +20,7 @@ export async function saveOrder(orderData: {
   delivery_address: string;
   package_size: string;
 }) {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Supabase environment variables are not configured');
-  }
+  const supabase = getSupabaseClient();
 
   const { data, error } = await supabase
     .from('orders')
