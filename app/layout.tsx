@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Klikk&Send - Umiddelbar henting og levering",
   description: "Billig, raskt og enkelt. Vi henter og leverer smått og stort - fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.",
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+  },
 };
 
 export default function RootLayout({
