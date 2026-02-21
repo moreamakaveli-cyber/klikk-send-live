@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Clock, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Button from "./ui/button";
 
 export default function HeroSection() {

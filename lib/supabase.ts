@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Function to get Supabase client
-function getSupabaseClient() {
+export function getSupabaseClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -11,6 +11,12 @@ function getSupabaseClient() {
 
   return createClient(supabaseUrl, supabaseAnonKey);
 }
+
+// Export supabase client for use in API routes
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Function to save order to Supabase
 export async function saveOrder(orderData: {
