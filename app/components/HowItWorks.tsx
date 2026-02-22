@@ -115,6 +115,10 @@ export default function HowItWorks() {
                 <span className="text-orange-500 font-bold mt-1">•</span>
                 <span>Planer om å kjøpe noe på finn eller tise som du trenger idag?</span>
               </li>
+              <li className="flex items-start gap-3">
+                <span className="text-orange-500 font-bold mt-1">•</span>
+                <span>Bestilt noe med Klikk&Hent? Vi henter det for deg!</span>
+              </li>
             </ul>
           </div>
 
