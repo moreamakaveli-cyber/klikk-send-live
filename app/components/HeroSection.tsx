@@ -7,10 +7,7 @@ import Button from "./ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[600px] flex items-center justify-center px-6 py-20 bg-[#FAF9F6] overflow-hidden">
-      {/* Background decorative circles */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-50 translate-y-1/2 -translate-x-1/2"></div>
+    <section className="relative min-h-[600px] flex items-center justify-center px-6 py-20 bg-white overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -26,9 +23,14 @@ export default function HeroSection() {
               Billig, raskt, trygt og enkelt.
             </p>
 
-            {/* Description */}
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed">
+            {/* Description - Desktop */}
+            <p className="hidden md:block text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed">
               Vi henter og leverer smått og stort. Alt fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.
+            </p>
+
+            {/* Description - Mobile */}
+            <p className="md:hidden text-base text-gray-700 mb-8 font-medium leading-relaxed">
+              Vi henter og leverer mellom privatpersoner og bedrifter. Små og mellomstore leveranser – direkte fra A til B.
             </p>
 
             {/* CTA Button */}
@@ -43,7 +45,7 @@ export default function HeroSection() {
 
             {/* Pricing text and button */}
             <div className="space-y-3">
-              <p className="text-base text-gray-600">
+              <p className="hidden md:block text-base text-gray-600">
                 Prisen beregnes etter avstand - alltid til en lav pris
               </p>
               <Link href="/priser" className="inline-block text-green-600 hover:text-green-700 font-bold text-lg md:text-xl transition-colors">

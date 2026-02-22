@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full bg-[#FAF9F6] border-b border-gray-200">
+      <nav className="w-full bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex items-center justify-between">
           {/* Left side: Menu button and Logo */}
           <div className="flex items-center gap-3">
@@ -58,8 +58,18 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Right side: Icon Navigation */}
-        <div className="flex items-center gap-4 md:gap-6">
+        {/* Mobile: Contact icon - top right */}
+        <div className="flex md:hidden items-center">
+          <Link href="/kontakt-oss" className="flex flex-col items-center gap-1 group">
+            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Phone className="w-4 h-4 text-orange-600" />
+            </div>
+            <span className="text-xs font-medium text-gray-900">Kontakt oss</span>
+          </Link>
+        </div>
+
+        {/* Right side: Icon Navigation - Hidden on mobile, shown on desktop */}
+        <div className="hidden md:flex items-center gap-4 md:gap-6">
           {/* Om oss */}
           <Link href="/om-oss" className="flex flex-col items-center gap-1 group">
             <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
