@@ -59,35 +59,35 @@ export default function Navbar() {
         </div>
 
         {/* Right side: Icon Navigation */}
-        <div className="flex items-center gap-6 md:gap-8">
+        <div className="flex items-center gap-4 md:gap-6">
           {/* Om oss */}
           <Link href="/om-oss" className="flex flex-col items-center gap-1 group">
-            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Users className="w-5 h-5 text-orange-600" />
+            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Users className="w-4 h-4 text-orange-600" />
             </div>
             <span className="text-xs font-medium text-gray-900">Om oss</span>
           </Link>
 
           {/* Åpningstider */}
           <Link href="/apningstider" className="flex flex-col items-center gap-1 group">
-            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Clock className="w-5 h-5 text-orange-600" />
+            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Clock className="w-4 h-4 text-orange-600" />
             </div>
             <span className="text-xs font-medium text-gray-900">Åpningstider</span>
           </Link>
 
           {/* Sende pakke - Highlighted */}
           <Link href="/bestill" className="flex flex-col items-center gap-1 group">
-            <div className="w-12 h-12 rounded-full bg-orange-600 flex items-center justify-center group-hover:bg-orange-700 transition-colors shadow-md">
-              <Package className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center group-hover:bg-orange-700 transition-colors shadow-md">
+              <Package className="w-4 h-4 text-white" />
             </div>
             <span className="text-xs font-medium text-gray-900">Sende pakke</span>
           </Link>
 
           {/* Kontakt oss */}
           <Link href="/kontakt-oss" className="flex flex-col items-center gap-1 group">
-            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Phone className="w-5 h-5 text-orange-600" />
+            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Phone className="w-4 h-4 text-orange-600" />
             </div>
             <span className="text-xs font-medium text-gray-900">Kontakt oss</span>
           </Link>
