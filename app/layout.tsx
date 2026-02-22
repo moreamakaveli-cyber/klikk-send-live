@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Klikk&Send - Umiddelbar henting og levering",
   description: "Billig, raskt og enkelt. Vi henter og leverer smått og stort - fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.",
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Klikk&Send',
+  },
 };
 
 export default function RootLayout({

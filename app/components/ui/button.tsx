@@ -16,18 +16,18 @@ export default function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'px-6 py-3 rounded-2xl font-semibold transition-all duration-200 flex items-center justify-center gap-3';
+  const baseStyles = 'px-6 py-3 rounded-2xl font-semibold transition-all duration-200 flex items-center justify-center gap-2';
   
   const variants = {
     'hero-primary': disabled 
-      ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-      : 'bg-orange-600 text-white hover:bg-orange-700 shadow-lg hover:shadow-xl',
+      ? 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed' 
+      : 'bg-orange-600 text-white hover:bg-orange-700 border-0',
     'hero-secondary': disabled
-      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-      : 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl',
+      ? 'bg-[#D1D5DB] text-[#9CA3AF] cursor-not-allowed'
+      : 'bg-[#1F2937] text-white hover:bg-[#111827] border-0',
     'default': disabled
-      ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-      : 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+      ? 'bg-[#F3F4F6] text-[#9CA3AF] cursor-not-allowed'
+      : 'bg-[#F3F4F6] text-[#1F2937] hover:bg-[#E5E7EB] border border-[#E5E7EB]',
   };
 
   return (

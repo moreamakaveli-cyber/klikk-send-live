@@ -32,9 +32,10 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full px-6 md:px-8 py-5 flex items-center justify-between max-w-7xl mx-auto border-b border-gray-100">
-        {/* Left side: Menu button and Logo */}
-        <div className="flex items-center gap-3">
+      <nav className="w-full bg-[#FAF9F6] border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex items-center justify-between">
+          {/* Left side: Menu button and Logo */}
+          <div className="flex items-center gap-3">
           {/* Menu Button */}
           <button 
             onClick={toggleMenu}
@@ -50,27 +51,47 @@ export default function Navbar() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-              <Package className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+              <Package className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold text-gray-900">Klikk&Send</span>
           </Link>
         </div>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link href="/om-oss" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
-            Om oss
+        {/* Right side: Icon Navigation */}
+        <div className="flex items-center gap-6 md:gap-8">
+          {/* Om oss */}
+          <Link href="/om-oss" className="flex flex-col items-center gap-1 group">
+            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Users className="w-5 h-5 text-orange-600" />
+            </div>
+            <span className="text-xs font-medium text-gray-900">Om oss</span>
           </Link>
-          <Link href="/apningstider" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
-            Åpningstider
+
+          {/* Åpningstider */}
+          <Link href="/apningstider" className="flex flex-col items-center gap-1 group">
+            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Clock className="w-5 h-5 text-orange-600" />
+            </div>
+            <span className="text-xs font-medium text-gray-900">Åpningstider</span>
           </Link>
-          <Link href="/priser" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
-            Priser
+
+          {/* Sende pakke - Highlighted */}
+          <Link href="/bestill" className="flex flex-col items-center gap-1 group">
+            <div className="w-12 h-12 rounded-full bg-orange-600 flex items-center justify-center group-hover:bg-orange-700 transition-colors shadow-md">
+              <Package className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xs font-medium text-gray-900">Sende pakke</span>
           </Link>
-          <Link href="/kontakt-oss" className="text-gray-700 hover:text-orange-600 transition-colors font-medium text-sm">
-            Kontakt oss
+
+          {/* Kontakt oss */}
+          <Link href="/kontakt-oss" className="flex flex-col items-center gap-1 group">
+            <div className="w-12 h-12 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
+              <Phone className="w-5 h-5 text-orange-600" />
+            </div>
+            <span className="text-xs font-medium text-gray-900">Kontakt oss</span>
           </Link>
+        </div>
         </div>
       </nav>
 

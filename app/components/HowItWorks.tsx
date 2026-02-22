@@ -75,7 +75,7 @@ export default function HowItWorks() {
         {/* Why Choose & How to Use & Sustainability Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-20">
           {/* Why Choose Klikk&Send */}
-          <div id="why-choose" className="bg-orange-50 rounded-2xl p-8 border border-orange-100 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
+          <div id="why-choose" className="bg-gray-50 rounded-2xl p-8 border border-gray-200 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
               Hvorfor velge Klikk&Send?
             </h3>
@@ -102,7 +102,7 @@ export default function HowItWorks() {
           {/* How to Use */}
           <div id="how-to-use" className="bg-gray-50 rounded-2xl p-8 border border-gray-200 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-              Hvordan kan du bruke oss?
+              Slik kan du bruke Klikk&Send
             </h3>
             <ul className="space-y-3 text-gray-700 mb-6">
               <li className="flex items-start gap-3">
@@ -125,6 +125,10 @@ export default function HowItWorks() {
                 <span className="text-orange-500 font-bold mt-1">•</span>
                 <span>Er du rett og slett bare litt for lat?</span>
               </li>
+              <li className="flex items-start gap-3">
+                <span className="text-orange-500 font-bold mt-1">•</span>
+                <span>Vi leverer både for bedrifter og mellom privatpersoner.</span>
+              </li>
             </ul>
             <p className="text-gray-700 mb-4">
               Spiller ingen rolle hva du trenger levert. Vi frakter små og mellomstore ting i byen, direkte fra A til B på 123.
@@ -132,7 +136,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Priser og betaling */}
-          <div id="prices" className="bg-green-50 rounded-2xl p-8 border border-green-100 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
+          <div id="prices" className="bg-gray-50 rounded-2xl p-8 border border-gray-200 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
               Priser og betaling
             </h3>
@@ -156,7 +160,7 @@ export default function HowItWorks() {
               <p>Du betaler med Vipps når pakken er levert.</p>
               <p className="mt-8 font-bold">
                 Din trygghet er viktig for oss. Les mer om trygghet og sikkerhet{" "}
-                <Link href="/trygghet-og-sikkerhet" className="text-green-600 hover:text-green-700 underline">
+                <Link href="/trygghet-og-sikkerhet" className="text-orange-600 hover:text-orange-700 underline">
                   her
                 </Link>.
               </p>

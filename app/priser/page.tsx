@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 export default function Priser() {
   return (
@@ -8,14 +9,10 @@ export default function Priser() {
       <section className="py-24 px-6">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 text-center">
-            Priser
+            Priser og betaling
           </h1>
-          
-          <p className="text-xl text-gray-900 text-center mb-16 max-w-xl mx-auto font-medium">
-            Vi ønsker at levering skal være enkelt og billig. Derfor har vi faste, lave priser basert på distanse.
-          </p>
             
-          <div className="space-y-4 mb-16">
+          <div className="space-y-4 mb-12">
             <div className="flex items-center justify-between py-6 border-b border-gray-200">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
@@ -44,12 +41,15 @@ export default function Priser() {
             </div>
           </div>
             
-          <div className="text-center space-y-3 pt-8 border-t border-gray-200">
-            <p className="text-lg text-gray-900 font-medium">
-              Skriv inn adressen din for å se riktig pris.
-            </p>
-            <p className="text-lg text-gray-900 font-medium">
-              Vi fokuserer på rask levering og lave kostnader.
+          <div className="space-y-4 text-gray-700 pt-8 border-t border-gray-200">
+            <p>Prisen beregnes etter at vi har mottatt bestillingen din.</p>
+            <p>Du får en SMS med bekreftet pris før oppdraget gjennomføres.</p>
+            <p>Du betaler med Vipps når pakken er levert.</p>
+            <p className="mt-8 font-bold">
+              Din trygghet er viktig for oss. Les mer om trygghet og sikkerhet{" "}
+              <Link href="/trygghet-og-sikkerhet" className="text-orange-600 hover:text-orange-700 underline">
+                her
+              </Link>.
             </p>
           </div>
         </div>
