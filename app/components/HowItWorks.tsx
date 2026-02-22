@@ -136,29 +136,29 @@ export default function HowItWorks() {
           </div>
 
           {/* Priser og betaling */}
-          <div id="prices" className="bg-gray-50 rounded-2xl p-8 border border-gray-200 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          <div id="prices" className="bg-gray-50 rounded-2xl p-4 md:p-8 border border-gray-200 scroll-mt-20 transition-transform duration-300 hover:scale-105 cursor-pointer">
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 md:mb-6">
               Priser og betaling
             </h3>
-            <div className="space-y-3 text-gray-700">
-              <div className="flex items-center justify-between">
-                <span>Kort levering (0–3 km)</span>
-                <span className="font-bold text-orange-600">119 kr</span>
+            <div className="space-y-3 text-gray-700 text-sm md:text-base">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
+                <span className="flex-1">Kort levering (0–3 km)</span>
+                <span className="font-bold text-orange-600 sm:ml-4">119 kr</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Medium levering (3–6 km)</span>
-                <span className="font-bold text-orange-600">169 kr</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
+                <span className="flex-1">Medium levering (3–6 km)</span>
+                <span className="font-bold text-orange-600 sm:ml-4">169 kr</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span>Lengre levering (6–20 km)</span>
-                <span className="font-bold text-orange-600">219 kr</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
+                <span className="flex-1">Lengre levering (6–20 km)</span>
+                <span className="font-bold text-orange-600 sm:ml-4">219 kr</span>
               </div>
             </div>
-            <div className="text-gray-700 mt-6 space-y-3">
+            <div className="text-gray-700 mt-4 md:mt-6 space-y-2 md:space-y-3 text-sm md:text-base">
               <p>Prisen beregnes etter at vi har mottatt bestillingen din.</p>
               <p>Du får en SMS med bekreftet pris før oppdraget gjennomføres.</p>
               <p>Du betaler med Vipps når pakken er levert.</p>
-              <p className="mt-8 font-bold">
+              <p className="mt-6 md:mt-8 font-bold text-base md:text-lg">
                 Din trygghet er viktig for oss. Les mer om trygghet og sikkerhet{" "}
                 <Link href="/trygghet-og-sikkerhet" className="text-orange-600 hover:text-orange-700 underline">
                   her
