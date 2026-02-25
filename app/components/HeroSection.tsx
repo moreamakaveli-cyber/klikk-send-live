@@ -40,11 +40,11 @@ export default function HeroSection() {
 
             {/* Pricing text and button */}
             <div className="space-y-3">
-              <p className="hidden md:block text-base text-gray-600">
-                Prisen beregnes etter avstand - alltid til en lav pris
+              <p className="text-base text-gray-600">
+                Faste og rimelige priser - beregnet etter avstand.
               </p>
               <Link href="/priser" className="inline-block text-green-600 hover:text-green-700 font-bold text-lg md:text-xl transition-colors">
-                Sjekk våre priser her
+                Se våre priser her
               </Link>
             </div>
           </div>
