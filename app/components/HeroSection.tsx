@@ -17,11 +17,6 @@ export default function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 text-orange-600 leading-tight" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
               Umiddelbar henting og levering.
             </h1>
-            
-            {/* Subtitle */}
-            <p className="text-2xl md:text-3xl lg:text-4xl text-gray-900 mb-6 font-bold">
-              Billig, raskt, trygt og enkelt.
-            </p>
 
             {/* Description - Desktop */}
             <p className="hidden md:block text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed">
