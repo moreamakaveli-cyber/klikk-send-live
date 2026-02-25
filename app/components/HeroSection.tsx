@@ -19,9 +19,11 @@ export default function HeroSection() {
             </h1>
 
             {/* Description - Desktop */}
-            <p className="hidden md:block text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed">
-              Vi henter og leverer smått og stort. Alt fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.
-            </p>
+            <div className="hidden md:block text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed space-y-2">
+              <p>Kjøpt noe på en markedsplass?</p>
+              <p>Bestilt med klikk & hent?</p>
+              <p>Skal noe leveres til en venn?</p>
+            </div>
 
             {/* Description - Mobile */}
             <p className="md:hidden text-base text-gray-700 mb-8 font-medium leading-relaxed">
