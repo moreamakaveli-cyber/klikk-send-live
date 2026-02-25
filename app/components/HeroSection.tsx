@@ -23,6 +23,7 @@ export default function HeroSection() {
               <p>Kjøpt noe på en markedsplass?</p>
               <p>Bestilt med klikk & hent?</p>
               <p>Skal noe leveres til en venn?</p>
+              <p>Vi henter og leverer for deg!</p>
             </div>
 
             {/* Description - Mobile */}
