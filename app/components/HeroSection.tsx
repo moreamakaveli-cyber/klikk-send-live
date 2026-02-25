@@ -25,7 +25,7 @@ export default function HeroSection() {
 
             {/* Description - Mobile */}
             <p className="md:hidden text-base text-gray-700 mb-8 font-medium leading-relaxed">
-              Vi henter og leverer mellom privatpersoner og bedrifter. Små og mellomstore leveranser – direkte fra A til B.
+              Vi henter og leverer mellom privatpersoner og bedrifter. Små og mellomstore leveranser direkte til deg.
             </p>
 
             {/* CTA Button */}
