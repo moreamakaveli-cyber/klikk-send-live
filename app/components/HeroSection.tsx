@@ -18,6 +18,11 @@ export default function HeroSection() {
               Umiddelbar henting og levering.
             </h1>
 
+            {/* Subtitle - Desktop */}
+            <p className="hidden md:block text-xl md:text-2xl text-gray-700 mb-6 font-medium leading-relaxed">
+              Vi henter og leverer mellom privatpersoner og bedrifter. Små og mellomstore leveranser direkte til deg.
+            </p>
+
             {/* Description - Desktop */}
             <div className="hidden md:block text-xl md:text-2xl text-gray-700 mb-8 font-medium leading-relaxed space-y-2">
               <p>Kjøpt noe på en markedsplass?</p>
