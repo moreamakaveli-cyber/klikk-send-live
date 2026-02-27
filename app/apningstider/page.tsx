@@ -13,7 +13,7 @@ export default function Apningstider() {
           
           <div className="text-center">
             <p className="text-2xl md:text-3xl text-gray-700 font-medium">
-              08:00 til 21:00 mandag til søndag
+              08:00 til 23:00 mandag til søndag
             </p>
           </div>
         </div>

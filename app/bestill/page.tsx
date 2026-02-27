@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { saveOrder } from "@/lib/supabase";
 import Navbar from "../components/Navbar";
@@ -53,9 +53,13 @@ const packageOptions: PackageOption[] = [
 
 export default function Bestill() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isKlikkHent = searchParams.get('type') === 'klikk-hent';
   const [step, setStep] = useState(1);
   const [selectedSize, setSelectedSize] = useState<PackageSize>(null);
   const [formData, setFormData] = useState({
+    pickupBusinessName: "",
+    pickupPickupCode: "",
     pickupFirstName: "",
     pickupLastName: "",
     pickupPhone: "",
@@ -107,10 +111,15 @@ export default function Bestill() {
         formData.deliveryCity
       );
 
+      const pickupNameValid = isKlikkHent 
+        ? formData.pickupBusinessName.trim() 
+        : formData.pickupFirstName && formData.pickupLastName;
+      
+      const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
+
       if (
-        formData.pickupFirstName &&
-        formData.pickupLastName &&
-        formData.pickupPhone &&
+        pickupNameValid &&
+        pickupPhoneValid &&
         isPickupValid &&
         formData.deliveryFirstName &&
         formData.deliveryLastName &&
@@ -330,63 +339,110 @@ export default function Bestill() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   {/* Left column: Henting */}
                   <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">Henting</h2>
-                    <p className="text-gray-600 mb-6">Hvem henter vi fra?</p>
+                    <h2 className="text-xl font-bold text-gray-900 mb-2">
+                      {isKlikkHent ? "Navn på butikk" : "Henting"}
+                    </h2>
+                    {!isKlikkHent && (
+                      <p className="text-gray-600 mb-6">Hvem henter vi fra?</p>
+                    )}
                     <div className="space-y-4">
-                      <div>
-                        <label
-                          htmlFor="pickupFirstName"
-                          className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                          Navn (person vi henter fra) *
-                        </label>
-                        <div className="grid grid-cols-2 gap-3">
-                          <input
-                            type="text"
-                            id="pickupFirstName"
-                            name="pickupFirstName"
-                            placeholder="Fornavn"
-                            value={formData.pickupFirstName}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
-                          />
-                          <input
-                            type="text"
-                            id="pickupLastName"
-                            name="pickupLastName"
-                            placeholder="Etternavn"
-                            value={formData.pickupLastName}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="pickupPhone"
-                          className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                          Telefonnummer *
-                        </label>
-                        <input
-                          type="tel"
-                          id="pickupPhone"
-                          name="pickupPhone"
-                          value={formData.pickupPhone}
-                          onChange={handleInputChange}
-                          maxLength={9}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
-                        />
-                      </div>
+                      {isKlikkHent && (
+                        <>
+                          <div>
+                            <label
+                              htmlFor="pickupBusinessName"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              Navn på bedrift.
+                            </label>
+                            <input
+                              type="text"
+                              id="pickupBusinessName"
+                              name="pickupBusinessName"
+                              placeholder="F.eks. Power, Elkjøp"
+                              value={formData.pickupBusinessName}
+                              onChange={handleInputChange}
+                              required
+                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="pickupPickupCode"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              Hentekode
+                            </label>
+                            <input
+                              type="text"
+                              id="pickupPickupCode"
+                              name="pickupPickupCode"
+                              placeholder="Hentekode hvis tilgjengelig"
+                              value={formData.pickupPickupCode}
+                              onChange={handleInputChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            />
+                          </div>
+                        </>
+                      )}
+                      {!isKlikkHent && (
+                        <>
+                          <div>
+                            <label
+                              htmlFor="pickupFirstName"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              Navn (person vi henter fra) *
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                              <input
+                                type="text"
+                                id="pickupFirstName"
+                                name="pickupFirstName"
+                                placeholder="Fornavn"
+                                value={formData.pickupFirstName}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              />
+                              <input
+                                type="text"
+                                id="pickupLastName"
+                                name="pickupLastName"
+                                placeholder="Etternavn"
+                                value={formData.pickupLastName}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="pickupPhone"
+                              className="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                              Telefonnummer *
+                            </label>
+                            <input
+                              type="tel"
+                              id="pickupPhone"
+                              name="pickupPhone"
+                              value={formData.pickupPhone}
+                              onChange={handleInputChange}
+                              maxLength={9}
+                              required
+                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            />
+                          </div>
+                        </>
+                      )}
                       <div>
                         <label
                           htmlFor="pickupStreet"
                           className="block text-sm font-medium text-gray-700 mb-2"
                         >
-                          Henteadresse *
+                          {isKlikkHent ? "Adresse" : "Henteadresse *"}
                         </label>
                         <div className="space-y-3">
                           <input

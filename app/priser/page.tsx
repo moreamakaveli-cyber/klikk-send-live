@@ -42,11 +42,10 @@ export default function Priser() {
           </div>
             
           <div className="space-y-4 text-gray-700 pt-8 border-t border-gray-200">
-            <p>Prisen beregnes etter at vi har mottatt bestillingen din.</p>
-            <p>Du får en SMS med bekreftet pris før oppdraget gjennomføres.</p>
-            <p>Du betaler med Vipps når pakken er levert.</p>
+            <p>Vi følger faste satser. Prisen beregnes ut fra avstand etter at vi har mottatt bestillingen din. Du får en SMS med bekreftet pris før oppdraget utføres.</p>
+            <p>Betaling skjer med Vipps når pakken er levert.</p>
             <p className="mt-8 font-bold">
-              Din trygghet er viktig for oss. Les mer om trygghet og sikkerhet{" "}
+              Les mer om trygghet og sikkerhet{" "}
               <Link href="/trygghet-og-sikkerhet" className="text-orange-600 hover:text-orange-700 underline">
                 her
               </Link>.
