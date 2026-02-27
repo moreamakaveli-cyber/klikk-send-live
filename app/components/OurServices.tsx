@@ -3,7 +3,16 @@
 import Link from "next/link";
 import { Shirt, Package, MapPin, Check } from "lucide-react";
 
-const services = [
+interface Service {
+  icon: React.ComponentType<{ className?: string }>;
+  iconColor: string;
+  title: string;
+  description: string;
+  features?: string[];
+  feature?: string;
+}
+
+const services: Service[] = [
   {
     icon: Shirt,
     iconColor: "oklch(64.6% 0.222 41.116)",
