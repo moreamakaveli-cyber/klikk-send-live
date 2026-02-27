@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { saveOrder } from "@/lib/supabase";
@@ -51,7 +51,7 @@ const packageOptions: PackageOption[] = [
   },
 ];
 
-export default function Bestill() {
+function BestillContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isKlikkHent = searchParams.get('type') === 'klikk-hent';
@@ -751,5 +751,13 @@ export default function Bestill() {
       </section>
       <Footer />
     </main>
+  );
+}
+
+export default function Bestill() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BestillContent />
+    </Suspense>
   );
 }
