@@ -18,19 +18,19 @@ const services: Service[] = [
     iconColor: "oklch(64.6% 0.222 41.116)",
     title: "Markedsplass-levering",
     description: "Kjøpt noe på Finn, Tise eller andre markedsplasser? Vi henter fra selger og leverer direkte til deg.",
-  },
+  } as Service,
   {
     icon: Package,
     iconColor: "oklch(64.6% 0.222 41.116)",
     title: "Klikk&hent",
     description: "Bestilt med klikk&hent? Vi henter i butikken og leverer rett hjem til deg.",
-  },
+  } as Service,
   {
     icon: MapPin,
     iconColor: "oklch(64.6% 0.222 41.116)",
     title: "Personlige ærender",
     description: "Skal noe leveres til en venn? Glemt nøkler et sted? Vi ordner det for deg.",
-  },
+  } as Service,
 ];
 
 const bottomPoints = [
@@ -67,7 +67,7 @@ export default function OurServices() {
                 <p className="text-sm md:text-base text-gray-700 mb-6 flex-grow leading-relaxed">
                   {service.description}
                 </p>
-                {service.features ? (
+                {'features' in service && service.features ? (
                   <div className="mb-6 space-y-2">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2">
@@ -78,11 +78,11 @@ export default function OurServices() {
                       </div>
                     ))}
                   </div>
-                ) : service.feature && (
+                ) : 'feature' in service && service.feature ? (
                   <div className="mb-6">
                     <p className="text-gray-700 font-medium">{service.feature}</p>
                   </div>
-                )}
+                ) : null}
                 <Link href="/bestill">
                   <button className="w-full bg-white hover:bg-gray-100 text-gray-900 font-semibold py-2 px-4 rounded-lg border border-gray-300 transition-all duration-200 flex items-center justify-center gap-2 text-sm">
                     Bestill nå
