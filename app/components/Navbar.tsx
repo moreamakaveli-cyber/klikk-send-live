@@ -52,8 +52,8 @@ export default function Navbar() {
             
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 md:gap-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
-                <Package className="w-8 h-8 md:w-10 md:h-10" style={{ color: 'hsl(24, 85%, 50%)' }} strokeWidth={2} fill="none" />
+              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+                <Package className="w-6 h-6 md:w-8 md:h-10 text-white" />
               </div>
               <span className="text-xl md:text-2xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Klikk og Send</span>
             </Link>

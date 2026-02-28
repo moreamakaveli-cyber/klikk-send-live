@@ -13,7 +13,9 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <Package className="w-6 h-6" style={{ color: 'hsl(24, 85%, 50%)' }} strokeWidth={2} fill="none" />
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+                    <Package className="w-5 h-5 text-white" />
+                  </div>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
                   Klikk og Send
