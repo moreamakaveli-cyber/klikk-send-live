@@ -61,7 +61,7 @@ export default function OurServices() {
               >
                 {/* Ikon-badge */}
                 <div className="rounded-2xl p-3" style={{ backgroundColor: 'hsl(36, 30%, 90%)' }}>
-                  <Icon className="w-7 h-7" style={{ color: service.iconColor, strokeWidth: 2 }} />
+                  <Icon className="w-7 h-7" style={{ color: service.iconColor }} strokeWidth={2} />
                 </div>
 
                 {/* Tittel */}
