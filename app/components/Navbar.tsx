@@ -75,7 +75,7 @@ export default function Navbar() {
           {/* Right side: Bestill nå button - Desktop only */}
           <div className="hidden md:block">
             <Link href="/bestill">
-              <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(150, 50%, 35%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+              <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå
               </button>
             </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
           {/* Mobile: Bestill nå button */}
           <div className="md:hidden">
             <Link href="/bestill">
-              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(150, 50%, 35%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå
               </button>
             </Link>

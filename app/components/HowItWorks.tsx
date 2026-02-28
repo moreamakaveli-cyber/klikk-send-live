@@ -235,7 +235,7 @@ export default function HowItWorks() {
                 <div key={step.number} className="flex flex-col items-center md:items-start">
                   {/* Icon with colored background circle */}
                   <div className="mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: index === 0 ? 'hsl(220, 70%, 55%)' : index === 1 ? 'oklch(70.5% 0.213 47.604)' : 'hsl(16, 85%, 55%)' }}>
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: index === 0 ? 'hsl(150, 50%, 35%)' : index === 1 ? 'oklch(70.5% 0.213 47.604)' : 'hsl(16, 85%, 55%)' }}>
                       <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2} />
                     </div>
                   </div>
