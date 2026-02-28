@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ShoppingBag, Package, Heart } from "lucide-react";
 
 interface Service {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   iconColor: string;
   title: string;
   description: string;
@@ -61,7 +61,7 @@ export default function OurServices() {
               >
                 {/* Ikon-badge */}
                 <div className="rounded-2xl p-3" style={{ backgroundColor: 'hsl(36, 30%, 90%)' }}>
-                  <div style={{ color: service.iconColor }}>
+                  <div style={{ color: service.iconColor, display: 'inline-block' }}>
                     <Icon className="w-7 h-7" strokeWidth={2} />
                   </div>
                 </div>
