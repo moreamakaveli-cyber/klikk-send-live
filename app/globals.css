@@ -1,28 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* HSL Colors */
+  --background: hsl(36, 50%, 95%);
+  --foreground: hsl(150, 30%, 15%);
+  --primary: hsl(24, 85%, 50%);
+  --secondary: hsl(140, 25%, 82%);
+  --accent: hsl(16, 85%, 55%);
+  --muted: hsl(36, 30%, 90%);
+  --muted-foreground: hsl(150, 10%, 40%);
+  --highlight: hsl(220, 70%, 55%);
+  --card: hsl(36, 40%, 97%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-highlight: var(--highlight);
+  --color-card: var(--card);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,4 +47,26 @@ body {
 .animate-scroll {
   animation: scroll 30s linear infinite;
   display: flex;
+}
+
+@keyframes scroll-questions {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-questions {
+  animation: scroll-questions 60s linear infinite;
+  display: flex;
+}
+
+.service-link:hover {
+  color: hsl(16, 85%, 55%) !important;
+}
+
+.service-link:hover .service-arrow {
+  color: hsl(16, 85%, 55%) !important;
 }

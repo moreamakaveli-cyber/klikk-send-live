@@ -32,76 +32,63 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex items-center justify-between">
-          {/* Left side: Menu button and Logo */}
-          <div className="flex items-center gap-3">
-          {/* Menu Button */}
-          <button 
-            onClick={toggleMenu}
-            className="w-8 h-8 flex items-center justify-center text-gray-900"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-          
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-              <Package className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">Klikk&Send</span>
-          </Link>
-        </div>
+      <nav className="w-full" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-4 md:py-5 flex items-center justify-between">
+          {/* Left side: Menu button (mobile) and Logo */}
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* Menu Button - Mobile only */}
+            <button 
+              onClick={toggleMenu}
+              className="md:hidden w-8 h-8 flex items-center justify-center"
+              style={{ color: 'hsl(150, 30%, 15%)' }}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+            
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 md:gap-3">
+              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                <Package className="w-8 h-8 md:w-10 md:h-10" style={{ color: 'hsl(24, 85%, 50%)', strokeWidth: 2, fill: 'none' }} />
+              </div>
+              <span className="text-xl md:text-2xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Klikk og Send</span>
+            </Link>
+          </div>
 
-        {/* Mobile: Contact icon - top right */}
-        <div className="flex md:hidden items-center">
-          <Link href="/kontakt-oss" className="flex flex-col items-center gap-1 group">
-            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Phone className="w-4 h-4 text-orange-600" />
-            </div>
-            <span className="text-xs font-medium text-gray-900">Kontakt oss</span>
-          </Link>
-        </div>
+          {/* Center: Navigation Links - Desktop only */}
+          <div className="hidden md:flex items-center gap-6 md:gap-8">
+            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              Tjenester
+            </Link>
+            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              Slik fungerer det
+            </Link>
+            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              Priser
+            </Link>
+          </div>
 
-        {/* Right side: Icon Navigation - Hidden on mobile, shown on desktop */}
-        <div className="hidden md:flex items-center gap-4 md:gap-6">
-          {/* Om oss */}
-          <Link href="/om-oss" className="flex flex-col items-center gap-1 group">
-            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Users className="w-4 h-4 text-orange-600" />
-            </div>
-            <span className="text-xs font-medium text-gray-900">Om oss</span>
-          </Link>
+          {/* Right side: Bestill nå button - Desktop only */}
+          <div className="hidden md:block">
+            <Link href="/bestill">
+              <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(24, 85%, 50%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+                Bestill nå
+              </button>
+            </Link>
+          </div>
 
-          {/* Åpningstider */}
-          <Link href="/apningstider" className="flex flex-col items-center gap-1 group">
-            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Clock className="w-4 h-4 text-orange-600" />
-            </div>
-            <span className="text-xs font-medium text-gray-900">Åpningstider</span>
-          </Link>
-
-          {/* Sende pakke - Highlighted */}
-          <Link href="/bestill" className="flex flex-col items-center gap-1 group">
-            <div className="w-10 h-10 rounded-full bg-orange-600 flex items-center justify-center group-hover:bg-orange-700 transition-colors shadow-md">
-              <Package className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-xs font-medium text-gray-900">Sende pakke</span>
-          </Link>
-
-          {/* Kontakt oss */}
-          <Link href="/kontakt-oss" className="flex flex-col items-center gap-1 group">
-            <div className="w-10 h-10 rounded-full border-2 border-orange-600 flex items-center justify-center bg-white group-hover:bg-orange-50 transition-colors">
-              <Phone className="w-4 h-4 text-orange-600" />
-            </div>
-            <span className="text-xs font-medium text-gray-900">Kontakt oss</span>
-          </Link>
-        </div>
+          {/* Mobile: Bestill nå button */}
+          <div className="md:hidden">
+            <Link href="/bestill">
+              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(24, 85%, 50%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+                Bestill nå
+              </button>
+            </Link>
+          </div>
         </div>
       </nav>
 

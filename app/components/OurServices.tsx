@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Shirt, Package, MapPin, Check } from "lucide-react";
+import { ShoppingBag, Package, Heart } from "lucide-react";
 
 interface Service {
   icon: React.ComponentType<{ className?: string }>;
@@ -14,20 +14,20 @@ interface Service {
 
 const services: Service[] = [
   {
-    icon: Shirt,
-    iconColor: "oklch(64.6% 0.222 41.116)",
+    icon: ShoppingBag,
+    iconColor: "hsl(16, 85%, 55%)", // accent (korall)
     title: "Markedsplass-levering",
     description: "Kjøpt noe på Finn, Tise eller andre markedsplasser? Vi henter fra selger og leverer direkte til deg.",
   } as Service,
   {
     icon: Package,
-    iconColor: "oklch(64.6% 0.222 41.116)",
+    iconColor: "hsl(24, 85%, 50%)", // primary (oransje)
     title: "Klikk&hent",
     description: "Bestilt med klikk&hent? Vi henter i butikken og leverer rett hjem til deg.",
   } as Service,
   {
-    icon: MapPin,
-    iconColor: "oklch(64.6% 0.222 41.116)",
+    icon: Heart,
+    iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
     title: "Personlige ærender",
     description: "Skal noe leveres til en venn? Glemt nøkler et sted? Vi ordner det for deg.",
   } as Service,
@@ -41,53 +41,47 @@ const bottomPoints = [
 
 export default function OurServices() {
   return (
-    <div className="pt-0 pb-16 md:pb-20">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-6 md:mb-8">
+    <div className="py-16 md:py-24" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        <h2 className="text-3xl md:text-4xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
           Våre tjenester
         </h2>
-        <p className="text-base md:text-lg text-gray-700 text-center mb-16 md:mb-20 max-w-3xl mx-auto font-semibold">
+        <p className="text-center mb-12 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
           Vi leverer alt fra personlige ærender til klikk&hent og kjøp fra markedsplasser – raskt og enkelt.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="bg-gray-50 rounded-xl p-6 md:p-8 border border-gray-200 flex flex-col"
+                className="rounded-3xl p-8 flex flex-col items-start gap-4 hover:shadow-lg transition-shadow"
+                style={{ backgroundColor: 'hsl(36, 40%, 97%)' }}
               >
-                <div className="rounded-lg p-2 w-fit mb-4" style={{ backgroundColor: service.iconColor }}>
-                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                {/* Ikon-badge */}
+                <div className="rounded-2xl p-3" style={{ backgroundColor: 'hsl(36, 30%, 90%)' }}>
+                  <Icon className="w-7 h-7" style={{ color: service.iconColor, strokeWidth: 2 }} />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
+
+                {/* Tittel */}
+                <h3 className="text-xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                   {service.title}
                 </h3>
-                <p className="text-sm md:text-base text-gray-700 mb-6 flex-grow leading-relaxed">
+
+                {/* Beskrivelse */}
+                <p className="text-sm leading-relaxed flex-grow" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
                   {service.description}
                 </p>
-                {'features' in service && service.features ? (
-                  <div className="mb-6 space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <div className="w-5 h-5 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                        </div>
-                        <p className="text-gray-700 font-medium">{feature}</p>
-                      </div>
-                    ))}
-                  </div>
-                ) : 'feature' in service && service.feature ? (
-                  <div className="mb-6">
-                    <p className="text-gray-700 font-medium">{service.feature}</p>
-                  </div>
-                ) : null}
-                <Link href="/bestill">
-                  <button className="w-full bg-white hover:bg-gray-100 text-gray-900 font-semibold py-2 px-4 rounded-lg border border-gray-300 transition-all duration-200 flex items-center justify-center gap-2 text-sm">
-                    Bestill nå
-                    <span className="text-gray-900">→</span>
-                  </button>
+
+                {/* Lenke */}
+                <Link 
+                  href="/bestill" 
+                  className="text-sm font-semibold flex items-center gap-1 transition-colors service-link" 
+                  style={{ color: 'hsl(150, 30%, 15%)' }}
+                >
+                  Bestill nå
+                  <span className="service-arrow">→</span>
                 </Link>
               </div>
             );

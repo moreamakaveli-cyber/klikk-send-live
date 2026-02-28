@@ -4,110 +4,123 @@ import { Package, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-                <Package className="w-5 h-5 text-white" />
+    <footer className="pt-16 w-full">
+      {/* Main orange section - full width */}
+      <div className="rounded-t-3xl p-8 md:p-12 text-white w-full" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+            {/* Left Column: Brand */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                  <Package className="w-6 h-6" style={{ color: 'hsl(24, 85%, 50%)' }} strokeWidth={2} />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                  Klikk og Send
+                </h2>
               </div>
-              <span className="text-xl font-bold">Klikk&Send</span>
-            </Link>
-          </div>
+              <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                Vi leverer rask og pålitelig henting og levering i hele Oslo-området. Din tid er verdifull - la oss ta oss av leveransen.
+              </p>
+            </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="font-semibold mb-4">Tjenester</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <Link href="/bestill" className="hover:text-orange-500 transition-colors">
-                  Bestill levering
-                </Link>
-              </li>
-              <li>
-                <Link href="/#how-it-works" className="hover:text-orange-500 transition-colors">
-                  Slik fungerer det
-                </Link>
-              </li>
-              <li>
-                <Link href="/priser" className="hover:text-orange-500 transition-colors">
-                  Priser
-                </Link>
-              </li>
-              <li>
-                <Link href="/dette-lurer-mange-pa" className="hover:text-orange-500 transition-colors">
-                  Ofte stilte spørsmål
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {/* Second Column: Links */}
+            <div>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                Lenker
+              </h3>
+              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                <li>
+                  <Link href="/#how-it-works" className="hover:opacity-80 transition-opacity">
+                    Tjenester
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#how-it-works" className="hover:opacity-80 transition-opacity">
+                    Slik fungerer det
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/om-oss" className="hover:opacity-80 transition-opacity">
+                    Om oss
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Company */}
-          <div>
-            <h3 className="font-semibold mb-4">Bedrift</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <Link href="/om-oss" className="hover:text-orange-500 transition-colors">
-                  Om oss
-                </Link>
-              </li>
-              <li>
-                <Link href="/trygghet-og-sikkerhet" className="hover:text-orange-500 transition-colors">
-                  Trygghet og sikkerhet
-                </Link>
-              </li>
-              <li>
-                <Link href="/kontakt-oss" className="hover:text-orange-500 transition-colors">
-                  Kontakt oss
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {/* Third Column: Bedrift */}
+            <div>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                Bedrift
+              </h3>
+              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                <li>
+                  <Link href="/om-oss" className="hover:opacity-80 transition-opacity">
+                    Om oss
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/trygghet-og-sikkerhet" className="hover:opacity-80 transition-opacity">
+                    Trygghet og sikkerhet
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity">
+                    Kontakt oss
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold mb-4">Kontakt</h3>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-orange-500" />
-                <a href="mailto:oslo@klikkogsend.no" className="hover:text-orange-500 transition-colors">
-                  oslo@klikkogsend.no
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-orange-500" />
-                <a href="tel:+4797940097" className="hover:text-orange-500 transition-colors">
-                  +47 979 40 097
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-orange-500" />
-                <a href="tel:+4792117289" className="hover:text-orange-500 transition-colors">
-                  +47 921 17 289
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-orange-500 mt-0.5" />
-                <span>Oslo, Norge</span>
-              </li>
-            </ul>
+            {/* Right Column: Contact */}
+            <div>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                Kontakt
+              </h3>
+              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+                <li className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 flex-shrink-0" strokeWidth={2} />
+                  <a href="mailto:oslo@klikkogsend.no" className="hover:opacity-80 transition-opacity">
+                    oslo@klikkogsend.no
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} />
+                  <a href="tel:+4797940097" className="hover:opacity-80 transition-opacity">
+                    +47 979 40 097
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} />
+                  <a href="tel:+4792117289" className="hover:opacity-80 transition-opacity">
+                    +47 921 17 289
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 flex-shrink-0" strokeWidth={2} />
+                  <span>Oslo, Norge</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-end items-center gap-4 text-sm text-gray-400">
-          <div className="flex gap-6">
-            <Link href="#privacy" className="hover:text-orange-500 transition-colors">
-              Personvern
-            </Link>
-            <Link href="#terms" className="hover:text-orange-500 transition-colors">
-              Vilkår
-            </Link>
-            <Link href="#cookies" className="hover:text-orange-500 transition-colors">
-              Informasjonskapsler
-            </Link>
+        {/* Bottom section with copyright and legal links */}
+        <div className="border-t border-white/20 mt-8 pt-6">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+              <div>
+                © 2026 Klikk og Send. Alle rettigheter reservert.
+              </div>
+              <div className="flex gap-6">
+                <Link href="#privacy" className="hover:opacity-80 transition-opacity">
+                  Personvern
+                </Link>
+                <Link href="#terms" className="hover:opacity-80 transition-opacity">
+                  Vilkår
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

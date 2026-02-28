@@ -7,11 +7,13 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen flex flex-col" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
       <Navbar />
       <HeroSection />
       <HowItWorks />
-      <Footer />
+      <div className="mt-auto">
+        <Footer />
+      </div>
     </main>
   );
 }

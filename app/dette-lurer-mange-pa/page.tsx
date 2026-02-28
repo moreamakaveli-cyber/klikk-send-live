@@ -47,32 +47,33 @@ const faqItems = [
 
 export default function DetteLurerMangePa() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
       <Navbar />
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12 text-center">
+      <section className="py-16 md:py-24 px-6 md:px-8">
+        <div className="max-w-[1400px] mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-12 md:mb-16 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
             Ofte stilte spørsmål
           </h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {faqItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
+                className="bg-white rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
               >
-                <h2 className="text-xl font-bold text-gray-900 mb-2">
+                <h2 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                   {item.title}
                 </h2>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                <h3 className="text-lg md:text-xl font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                   {item.question}
                 </h3>
-                <p className="text-gray-700 mb-6 flex-grow leading-relaxed">
+                <p className="mb-6 flex-grow leading-relaxed text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                   {item.text}
                 </p>
                 <Link
                   href={item.linkHref}
-                  className="text-orange-600 font-medium hover:text-orange-700 transition-colors text-sm"
+                  className="font-semibold transition-opacity hover:opacity-80 text-sm md:text-base"
+                  style={{ color: 'hsl(24, 85%, 50%)' }}
                 >
                   {item.linkText} →
                 </Link>
