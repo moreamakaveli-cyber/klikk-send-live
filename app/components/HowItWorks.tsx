@@ -118,6 +118,8 @@ export default function HowItWorks() {
           left: '50%',
           transform: 'translateX(-50%)',
           WebkitOverflowScrolling: 'touch',
+          pointerEvents: 'none',
+          userSelect: 'none',
         }}
       >
         {/* Line 1: Large - responsive font sizes */}
@@ -142,6 +144,9 @@ export default function HowItWorks() {
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
                 marginRight: 'clamp(0.5rem, 2vw, 1.5rem)',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                cursor: 'default',
               }}
             >
               {item.text}
@@ -171,6 +176,9 @@ export default function HowItWorks() {
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
                 marginRight: 'clamp(0.5rem, 1.5vw, 1.2rem)',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                cursor: 'default',
               }}
             >
               {item.text}
@@ -200,6 +208,9 @@ export default function HowItWorks() {
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
                 marginRight: 'clamp(0.5rem, 1vw, 1rem)',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                cursor: 'default',
               }}
             >
               {item.text}
@@ -224,7 +235,7 @@ export default function HowItWorks() {
                 <div key={step.number} className="flex flex-col items-center md:items-start">
                   {/* Icon with colored background circle */}
                   <div className="mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: index === 0 ? 'hsl(220, 70%, 55%)' : index === 1 ? 'hsl(24, 85%, 50%)' : 'hsl(16, 85%, 55%)' }}>
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: index === 0 ? 'hsl(220, 70%, 55%)' : index === 1 ? 'oklch(70.5% 0.213 47.604)' : 'hsl(16, 85%, 55%)' }}>
                       <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2} />
                     </div>
                   </div>
@@ -254,19 +265,19 @@ export default function HowItWorks() {
             </h3>
             <ul className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>God pris. Rask henting og levering. Ingen ventetid.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Vi frakter små og mellomstore gjenstander — fra nøkler og klær til møbler og elektronikk.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Vi leverer mellom bedrifter og privatpersoner.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Billigere enn taxi. Raskere enn posten.</span>
               </li>
             </ul>
@@ -279,23 +290,23 @@ export default function HowItWorks() {
             </h3>
             <ul className="space-y-3 md:space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Glemt AirPods eller nøkler hos en venn?</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Har du glemt dokumenter som må frem før møtet starter?</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Skal du sende noe til en venn i byen?</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Planer om å kjøpe noe på finn eller tise som du trenger idag?</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'hsl(24, 85%, 50%)' }}>•</span>
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Bestilt noe med Klikk&Hent? Vi henter det for deg!</span>
               </li>
             </ul>
@@ -309,15 +320,15 @@ export default function HowItWorks() {
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <div className="flex items-center justify-between">
                 <span>Kort levering (0–3 km)</span>
-                <span className="font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>119 kr</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Medium levering (3–6 km)</span>
-                <span className="font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>169 kr</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Lengre levering (6–20 km)</span>
-                <span className="font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>219 kr</span>
+                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Medium levering (3–6 km)</span>
+                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>169 kr</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Lengre levering (6–20 km)</span>
+                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>219 kr</span>
               </div>
             </div>
             <div className="text-sm md:text-base mt-6 md:mt-8 space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
@@ -326,7 +337,7 @@ export default function HowItWorks() {
               <p className="max-w-md">Du betaler med Vipps når pakken er levert.</p>
               <p className="mt-8 font-semibold text-base md:text-lg">
                 Les mer om trygghet og sikkerhet{" "}
-                <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80" style={{ color: 'hsl(24, 85%, 50%)' }}>
+                    <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
                   her
                 </Link>.
               </p>

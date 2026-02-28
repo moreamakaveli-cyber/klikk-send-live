@@ -6,19 +6,19 @@ export default function Footer() {
   return (
     <footer className="pt-16 w-full">
       {/* Main orange section - full width */}
-      <div className="rounded-t-3xl p-8 md:p-12 text-white w-full" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+      <div className="rounded-t-3xl p-8 md:p-12 text-white w-full" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
             {/* Left Column: Brand */}
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
                     <Package className="w-5 h-5 text-white" />
                   </div>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-                  Klikk og Send
+                  Klikk&Send
                 </h2>
               </div>
               <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
@@ -112,7 +112,7 @@ export default function Footer() {
           <div className="max-w-[1400px] mx-auto px-6 md:px-12">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
               <div>
-                © 2026 Klikk og Send. Alle rettigheter reservert.
+                © 2026 Klikk&Send. Alle rettigheter reservert.
               </div>
               <div className="flex gap-6">
                 <Link href="#privacy" className="hover:opacity-80 transition-opacity">

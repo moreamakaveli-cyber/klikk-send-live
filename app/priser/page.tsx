@@ -20,7 +20,7 @@ export default function Priser() {
                     Kort levering (0–3 km)
                   </h3>
                 </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>119 kr</p>
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</p>
               </div>
               
               <div className="flex items-center justify-between py-6 border-b" style={{ borderColor: 'hsl(36, 30%, 90%)' }}>
@@ -29,7 +29,7 @@ export default function Priser() {
                     Medium levering (3–6 km)
                   </h3>
                 </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>169 kr</p>
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>169 kr</p>
               </div>
               
               <div className="flex items-center justify-between py-6">
@@ -38,7 +38,7 @@ export default function Priser() {
                     Lengre levering (6–20 km)
                   </h3>
                 </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'hsl(24, 85%, 50%)' }}>219 kr</p>
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>219 kr</p>
               </div>
             </div>
               
@@ -47,7 +47,7 @@ export default function Priser() {
               <p className="text-base md:text-lg">Betaling skjer med Vipps når pakken er levert.</p>
               <p className="mt-8 font-semibold text-base md:text-lg">
                 Les mer om trygghet og sikkerhet{" "}
-                <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80 transition-opacity" style={{ color: 'hsl(24, 85%, 50%)' }}>
+                  <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80 transition-opacity" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
                   her
                 </Link>.
               </p>

@@ -21,24 +21,34 @@ export default function HeroSection() {
 
             {/* Subtitle - Desktop */}
             <div className="hidden md:block text-lg md:text-xl mb-10 leading-relaxed space-y-4" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">Har du bestilt via klikk&hent og ønsker levering hjem?</p>
-              <p className="font-medium">Har du kjøpt noe på en markedsplass og ønsker umiddelbar levering?</p>
+              <p className="font-medium">Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker levering hjem umiddelbart?</p>
               <p className="font-semibold">Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.</p>
             </div>
 
             {/* Description - Mobile */}
             <div className="md:hidden text-sm mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">Har du bestilt via klikk&hent og ønsker levering hjem?</p>
-              <p className="font-medium">Har du kjøpt noe på en markedsplass og ønsker umiddelbar levering?</p>
+              <p className="font-medium">Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker levering hjem umiddelbart?</p>
               <p className="font-semibold">Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.</p>
             </div>
 
-            {/* CTA Button */}
-            <div className="flex gap-4 mb-6 md:mb-10 flex-wrap">
-              <Link href="/bestill">
-                <button className="rounded-full px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold text-white flex items-center gap-2 transition-all duration-200 hover:opacity-90" style={{ backgroundColor: 'hsl(24, 85%, 50%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-                  Bestill levering
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-white" />
+            {/* CTA Buttons */}
+            <div className="flex flex-row gap-2 md:gap-3 mb-6 md:mb-10 flex-nowrap overflow-x-auto">
+              <Link href="/bestill?type=klikk-hent" className="flex-shrink-0">
+                <button className="rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium flex items-center gap-1.5 transition-all duration-200 hover:opacity-90 whitespace-nowrap" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', color: '#ffffff', fontFamily: 'var(--font-sans), sans-serif' }}>
+                  Klikk&hent
+                  <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
+                </button>
+              </Link>
+              <Link href="/bestill" className="flex-shrink-0">
+                <button className="rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium flex items-center gap-1.5 transition-all duration-200 hover:opacity-90 whitespace-nowrap" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', color: '#ffffff', fontFamily: 'var(--font-sans), sans-serif' }}>
+                  Markedsplass-levering
+                  <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
+                </button>
+              </Link>
+              <Link href="/bestill" className="flex-shrink-0">
+                <button className="rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium flex items-center gap-1.5 transition-all duration-200 hover:opacity-90 whitespace-nowrap" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', color: '#ffffff', fontFamily: 'var(--font-sans), sans-serif' }}>
+                  Personlige ærender
+                  <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
                 </button>
               </Link>
             </div>

@@ -10,8 +10,8 @@ export default function KontaktOss() {
         <div className="max-w-[1400px] mx-auto">
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm">
             <div className="flex flex-col items-center mb-8 md:mb-12">
-              <div className="w-20 h-20 rounded-full border-4 flex items-center justify-center mb-6" style={{ borderColor: 'hsl(24, 85%, 50%)' }}>
-                <Phone className="w-10 h-10" style={{ color: 'hsl(24, 85%, 50%)' }} />
+              <div className="w-20 h-20 rounded-full border-4 flex items-center justify-center mb-6" style={{ borderColor: 'oklch(70.5% 0.213 47.604)' }}>
+                <Phone className="w-10 h-10" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                 Kontakt oss
@@ -30,13 +30,13 @@ export default function KontaktOss() {
                 {/* E-post */}
                 <div>
                   <div className="flex items-center justify-center gap-3 mb-2">
-                    <Mail className="w-6 h-6" style={{ color: 'hsl(24, 85%, 50%)' }} />
+                    <Mail className="w-6 h-6" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
                     <span className="text-lg font-semibold">E-post:</span>
                   </div>
                   <a
                     href="mailto:oslo@klikkogsend.no"
                     className="text-xl font-semibold transition-opacity hover:opacity-80"
-                    style={{ color: 'hsl(24, 85%, 50%)' }}
+                          style={{ color: 'oklch(70.5% 0.213 47.604)' }}
                   >
                     oslo@klikkogsend.no
                   </a>
@@ -55,14 +55,14 @@ export default function KontaktOss() {
                     <a
                       href="tel:+4797940097"
                       className="block text-xl font-semibold transition-opacity hover:opacity-80"
-                      style={{ color: 'hsl(24, 85%, 50%)' }}
+                          style={{ color: 'oklch(70.5% 0.213 47.604)' }}
                     >
                       +47 979 40 097
                     </a>
                     <a
                       href="tel:+4792117289"
                       className="block text-xl font-semibold transition-opacity hover:opacity-80"
-                      style={{ color: 'hsl(24, 85%, 50%)' }}
+                          style={{ color: 'oklch(70.5% 0.213 47.604)' }}
                     >
                       +47 921 17 289
                     </a>

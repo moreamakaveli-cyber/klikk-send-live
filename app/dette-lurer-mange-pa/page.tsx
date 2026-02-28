@@ -73,7 +73,7 @@ export default function DetteLurerMangePa() {
                 <Link
                   href={item.linkHref}
                   className="font-semibold transition-opacity hover:opacity-80 text-sm md:text-base"
-                  style={{ color: 'hsl(24, 85%, 50%)' }}
+                      style={{ color: 'oklch(70.5% 0.213 47.604)' }}
                 >
                   {item.linkText} →
                 </Link>

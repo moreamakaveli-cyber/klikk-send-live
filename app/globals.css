@@ -4,7 +4,7 @@
   /* HSL Colors */
   --background: hsl(36, 50%, 95%);
   --foreground: hsl(150, 30%, 15%);
-  --primary: hsl(24, 85%, 50%);
+  --primary: oklch(70.5% 0.213 47.604);
   --secondary: hsl(140, 25%, 82%);
   --accent: hsl(16, 85%, 55%);
   --muted: hsl(36, 30%, 90%);

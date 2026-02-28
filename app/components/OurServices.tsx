@@ -21,7 +21,7 @@ const services: Service[] = [
   } as Service,
   {
     icon: ShoppingBag,
-    iconColor: "hsl(24, 85%, 50%)", // primary (oransje)
+    iconColor: "oklch(70.5% 0.213 47.604)", // primary (oransje)
     title: "Klikk&hent",
     description: "Bestilt med klikk&hent? Vi henter i butikken og leverer rett hjem til deg.",
   } as Service,

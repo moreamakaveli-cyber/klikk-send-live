@@ -36,10 +36,10 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-4 md:py-5 flex items-center justify-between">
           {/* Left side: Menu button (mobile) and Logo */}
           <div className="flex items-center gap-3 md:gap-4">
-            {/* Menu Button - Mobile only */}
+            {/* Menu Button - Always visible */}
             <button 
               onClick={toggleMenu}
-              className="md:hidden w-8 h-8 flex items-center justify-center"
+              className="w-8 h-8 flex items-center justify-center"
               style={{ color: 'hsl(150, 30%, 15%)' }}
               aria-label="Toggle menu"
             >
@@ -52,10 +52,10 @@ export default function Navbar() {
             
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 md:gap-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg" style={{ backgroundColor: 'hsl(24, 85%, 50%)' }}>
+              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
                 <Package className="w-6 h-6 md:w-8 md:h-10 text-white" />
               </div>
-              <span className="text-xl md:text-2xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Klikk og Send</span>
+              <span className="text-xl md:text-2xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Klikk&Send</span>
             </Link>
           </div>
 
@@ -75,7 +75,7 @@ export default function Navbar() {
           {/* Right side: Bestill nå button - Desktop only */}
           <div className="hidden md:block">
             <Link href="/bestill">
-              <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(24, 85%, 50%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+              <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(150, 50%, 35%)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå
               </button>
             </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
           {/* Mobile: Bestill nå button */}
           <div className="md:hidden">
             <Link href="/bestill">
-              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(24, 85%, 50%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'hsl(150, 50%, 35%)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå
               </button>
             </Link>
