@@ -27,7 +27,7 @@ export default function HeroSection() {
             </div>
 
             {/* Description - Mobile */}
-            <div className="md:hidden text-sm mb-6 leading-relaxed space-y-2" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
+            <div className="md:hidden text-sm mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
               <p className="font-medium">Har du bestilt via klikk&hent og ønsker levering hjem?</p>
               <p className="font-medium">Har du kjøpt noe på en markedsplass og ønsker umiddelbar levering?</p>
               <p className="font-semibold">Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.</p>
@@ -45,7 +45,7 @@ export default function HeroSection() {
 
             {/* Pricing text and button */}
             <div className="space-y-2 md:space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="text-sm md:text-base" style={{ color: 'hsl(150, 30%, 15%)' }}>
+              <p className="hidden md:block text-base" style={{ color: 'hsl(150, 30%, 15%)' }}>
                 Faste og rimelige priser - beregnet etter avstand.
               </p>
               <Link href="/priser" className="inline-block font-semibold text-base md:text-lg lg:text-xl transition-colors hover:opacity-80" style={{ color: 'hsl(150, 50%, 45%)' }}>

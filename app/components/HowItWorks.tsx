@@ -112,13 +112,15 @@ export default function HowItWorks() {
           width: '100vw',
           margin: '0',
           padding: '0',
-          overflow: 'hidden',
+          overflowX: 'auto',
+          overflowY: 'hidden',
           position: 'relative',
           left: '50%',
           transform: 'translateX(-50%)',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
-        {/* Line 1: Large - 56px */}
+        {/* Line 1: Large - responsive font sizes */}
         <div 
           className="line line-1"
           style={{
@@ -129,7 +131,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: '56px',
+            fontSize: 'clamp(20px, 4vw, 56px)',
           }}
         >
           {line1Questions.map((item, idx) => (
@@ -139,7 +141,7 @@ export default function HowItWorks() {
               style={{
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
-                marginRight: '1.5rem',
+                marginRight: 'clamp(0.5rem, 2vw, 1.5rem)',
               }}
             >
               {item.text}
@@ -147,7 +149,7 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Line 2: Medium - 42px */}
+        {/* Line 2: Medium - responsive font sizes */}
         <div 
           className="line line-2"
           style={{
@@ -158,7 +160,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: '42px',
+            fontSize: 'clamp(18px, 3.5vw, 42px)',
           }}
         >
           {line2Questions.map((item, idx) => (
@@ -168,7 +170,7 @@ export default function HowItWorks() {
               style={{
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
-                marginRight: '1.2rem',
+                marginRight: 'clamp(0.5rem, 1.5vw, 1.2rem)',
               }}
             >
               {item.text}
@@ -176,7 +178,7 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Line 3: Smaller - 32px */}
+        {/* Line 3: Smaller - responsive font sizes */}
         <div 
           className="line line-3"
           style={{
@@ -187,7 +189,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: '32px',
+            fontSize: 'clamp(16px, 3vw, 32px)',
           }}
         >
           {line3Questions.map((item, idx) => (
@@ -197,7 +199,7 @@ export default function HowItWorks() {
               style={{
                 fontFamily: 'var(--font-serif), serif',
                 color: item.color,
-                marginRight: '1rem',
+                marginRight: 'clamp(0.5rem, 1vw, 1rem)',
               }}
             >
               {item.text}
