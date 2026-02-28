@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ShoppingBag, Package, Heart } from "lucide-react";
 
 interface Service {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number; color?: string }>;
   iconColor: string;
   title: string;
   description: string;
