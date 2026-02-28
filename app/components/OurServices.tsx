@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+// VERIFIED: No Icon components - using simple colored divs instead
+
 interface Service {
   iconColor: string;
   title: string;
