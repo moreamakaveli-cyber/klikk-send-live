@@ -219,7 +219,7 @@ export default function HowItWorks() {
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div key={step.number} className="flex flex-col items-start">
+                <div key={step.number} className="flex flex-col items-center md:items-start">
                   {/* Icon with colored background circle */}
                   <div className="mb-4">
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: index === 0 ? 'hsl(220, 70%, 55%)' : index === 1 ? 'hsl(24, 85%, 50%)' : 'hsl(16, 85%, 55%)' }}>
@@ -228,13 +228,13 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Title with number */}
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 flex items-baseline gap-2" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 flex items-baseline gap-2 text-center md:text-left" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                     <span className="text-lg md:text-xl font-bold">{index + 1}.</span>
                     <span>{step.title}</span>
                   </h3>
 
                   {/* Description */}
-                  <p className="text-base md:text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                  <p className="text-base md:text-lg leading-relaxed text-center md:text-left" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                     {step.description}
                   </p>
                 </div>
