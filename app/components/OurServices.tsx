@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-
-// VERIFIED: No Icon components - using simple colored divs instead
+import { Shirt, ShoppingBag, Heart } from "lucide-react";
 
 interface Service {
+  icon: React.ComponentType<{ className?: string; color?: string; strokeWidth?: number }>;
   iconColor: string;
   title: string;
   description: string;
@@ -14,16 +14,19 @@ interface Service {
 
 const services: Service[] = [
   {
+    icon: Shirt,
     iconColor: "hsl(16, 85%, 55%)", // accent (korall)
     title: "Markedsplass-levering",
     description: "Kjøpt noe på Finn, Tise eller andre markedsplasser? Vi henter fra selger og leverer direkte til deg.",
   } as Service,
   {
+    icon: ShoppingBag,
     iconColor: "hsl(24, 85%, 50%)", // primary (oransje)
     title: "Klikk&hent",
     description: "Bestilt med klikk&hent? Vi henter i butikken og leverer rett hjem til deg.",
   } as Service,
   {
+    icon: Heart,
     iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
     title: "Personlige ærender",
     description: "Skal noe leveres til en venn? Glemt nøkler et sted? Vi ordner det for deg.",
@@ -49,6 +52,7 @@ export default function OurServices() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => {
+            const Icon = service.icon;
             return (
               <div
                 key={index}
@@ -57,7 +61,7 @@ export default function OurServices() {
               >
                 {/* Ikon-badge */}
                 <div className="rounded-2xl p-3" style={{ backgroundColor: 'hsl(36, 30%, 90%)' }}>
-                  <div className="w-7 h-7 rounded-lg" style={{ backgroundColor: service.iconColor }} />
+                  <Icon className="w-7 h-7" color={service.iconColor} strokeWidth={2} />
                 </div>
 
                 {/* Tittel */}
