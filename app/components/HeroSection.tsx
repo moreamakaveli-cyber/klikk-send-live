@@ -48,7 +48,7 @@ export default function HeroSection() {
               <p className="text-base" style={{ color: 'hsl(150, 30%, 15%)' }}>
                 Faste og rimelige priser - beregnet etter avstand.
               </p>
-              <Link href="/priser" className="inline-block font-semibold text-lg md:text-xl transition-colors hover:opacity-80" style={{ color: 'hsl(150, 30%, 15%)' }}>
+              <Link href="/priser" className="inline-block font-semibold text-lg md:text-xl transition-colors hover:opacity-80" style={{ color: 'hsl(150, 50%, 45%)' }}>
                 Se våre priser her
               </Link>
             </div>
