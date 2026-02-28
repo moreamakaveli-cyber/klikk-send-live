@@ -43,7 +43,7 @@ export default function OurServices() {
   return (
     <div className="py-16 md:py-24" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
           Våre tjenester
         </h2>
         <p className="text-center mb-12 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
