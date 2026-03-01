@@ -266,19 +266,23 @@ export default function HowItWorks() {
             <ul className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>God pris. Rask henting og levering. Ingen ventetid.</span>
+                <span>Umiddelbar henting og levering. Ingen ventetid.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Vi frakter små og mellomstore gjenstander — fra nøkler og klær til møbler og elektronikk.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Vi leverer mellom bedrifter og privatpersoner.</span>
+                <span>Vi henter fra alle butikker som tilbyr klikk og hent eller click and collect.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Billigere enn taxi. Raskere enn posten.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
+                <span>Faste, lave priser.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
+                <span>Direkte levering der du ønsker.</span>
               </li>
             </ul>
           </div>
@@ -295,19 +299,23 @@ export default function HowItWorks() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Har du glemt dokumenter som må frem før møtet starter?</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
                 <span>Skal du sende noe til en venn i byen?</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Planer om å kjøpe noe på finn eller tise som du trenger idag?</span>
+                <span>Bestilt en kaffemaskin på elkjøp? Vi leverer til deg.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Bestilt noe med Klikk&Hent? Vi henter det for deg!</span>
+                <span>Har du noe klart til henting? Vi plukker det opp og leverer det hjem til deg.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
+                <span>Privat eller bedrift – vi leverer fra A til B.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
+                <span>Din tid er verdifull, la oss ta oss av leveransen.</span>
               </li>
             </ul>
           </div>
