@@ -120,7 +120,7 @@ export default function HowItWorks() {
             <ul className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Umiddelbar henting og levering. Ingen ventetid.</span>
+                <span>Umiddelbar henting og levering.</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
