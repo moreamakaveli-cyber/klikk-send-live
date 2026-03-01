@@ -51,8 +51,7 @@ export default function HowItWorks() {
           <div
             className="rounded-2xl p-6 md:p-8"
             style={{
-              backgroundColor: '#F7F7F7',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+              backgroundColor: 'transparent',
             }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
