@@ -318,10 +318,10 @@ function BestillContent() {
                       onClick={() => setSelectedSize(option.id)}
                       className={`p-5 md:p-6 rounded-lg border transition-all duration-200 text-left ${
                         isSelected
-                          ? "border-orange-600 bg-white shadow-sm"
-                          : "border-gray-200 bg-white hover:border-gray-300"
+                          ? "border-orange-600 shadow-sm"
+                          : "border-orange-300 hover:border-orange-400"
                       }`}
-                      style={{ backgroundColor: isSelected ? 'hsl(36, 40%, 97%)' : '#ffffff' }}
+                      style={{ backgroundColor: isSelected ? 'rgba(249, 115, 22, 0.25)' : 'rgba(251, 146, 60, 0.18)' }}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div

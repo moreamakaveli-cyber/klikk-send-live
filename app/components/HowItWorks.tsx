@@ -133,7 +133,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: 'clamp(20px, 4vw, 56px)',
+            fontSize: 'clamp(14px, 2.8vw, 38px)',
           }}
         >
           {line1Questions.map((item, idx) => (
@@ -165,7 +165,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: 'clamp(18px, 3.5vw, 42px)',
+            fontSize: 'clamp(12px, 2.4vw, 28px)',
           }}
         >
           {line2Questions.map((item, idx) => (
@@ -197,7 +197,7 @@ export default function HowItWorks() {
             lineHeight: '1',
             margin: '0',
             padding: '0',
-            fontSize: 'clamp(16px, 3vw, 32px)',
+            fontSize: 'clamp(11px, 2vw, 24px)',
           }}
         >
           {line3Questions.map((item, idx) => (
