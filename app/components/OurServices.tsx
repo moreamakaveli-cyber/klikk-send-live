@@ -41,7 +41,7 @@ const bottomPoints = [
 
 export default function OurServices() {
   return (
-    <div className="py-20 md:py-32" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="py-8 md:py-12" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
           Våre tjenester
