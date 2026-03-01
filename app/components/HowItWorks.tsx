@@ -44,7 +44,10 @@ export default function HowItWorks() {
         <OurServices />
 
         {/* Use cases - under Våre tjenester */}
-        <div className="mb-8 md:mb-12 mt-8 md:mt-12">
+        <div className="mb-8 md:mb-12 mt-4 md:mt-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+            Når passer Klikk&Send?
+          </h2>
           <div
             className="rounded-2xl p-6 md:p-8"
             style={{
@@ -52,9 +55,6 @@ export default function HowItWorks() {
               boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
             }}
           >
-            <p className="text-center text-lg md:text-xl mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 25%)' }}>
-              Når passer Klikk&Send?
-            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
               {useCases.map((item, i) => {
                 const Icon = item.icon;
