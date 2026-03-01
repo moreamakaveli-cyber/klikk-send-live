@@ -337,14 +337,14 @@ function BestillContent() {
                           />
                         </div>
                         <h3 className={`text-lg md:text-xl font-normal ${
-                          isSelected ? "text-white" : "text-gray-900"
-                        }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? '#FFFFFF' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
+                          isSelected ? "text-orange-600" : "text-gray-900"
+                        }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? 'oklch(70.5% 0.213 47.604)' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
                       </div>
                         <div className="space-y-1 mb-2">
-                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'hsl(150, 10%, 40%)' }}>{option.maxWeight}</p>
-                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'hsl(150, 10%, 40%)' }}>{option.maxDimensions}</p>
+                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxWeight}</p>
+                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxDimensions}</p>
                         </div>
-                        <p className="text-xs" style={{ fontFamily: 'var(--font-sans), sans-serif', color: isSelected ? 'rgba(255, 255, 255, 0.8)' : 'hsl(150, 10%, 40%)' }}>Eksempler: {option.examples}</p>
+                        <p className="text-xs" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>Eksempler: {option.examples}</p>
                     </button>
                   );
                 })}
