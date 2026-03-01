@@ -60,8 +60,8 @@ export default function HowItWorks() {
                 return (
                   <div
                     key={i}
-                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/80 hover:bg-white transition-colors"
-                    style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}
+                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-colors"
+                    style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}
                   >
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100">
                       <Icon className="w-5 h-5 text-orange-600" strokeWidth={2} />
