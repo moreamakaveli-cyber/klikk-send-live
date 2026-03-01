@@ -27,14 +27,15 @@ const HandHeart = ({ className, style }: { className?: string; style?: React.CSS
 );
 
 const useCases = [
-  { icon: ShoppingBag, text: "Kjøpt noe på Elkjøp og vil ha det levert i dag?" },
-  { icon: Shirt, text: "Jakken ble igjen på nach – vi henter den." },
-  { icon: Heart, text: "Skal noe leveres til en venn eller kjæreste?" },
+  { icon: ShoppingBag, text: "Kjøpte en kaffemaskin på Elkjøp og vil ha det levert idag?" },
+  { icon: Shirt, text: "Ble jakken lagt igjen på nach? Vi henter den." },
+  { icon: ShoppingBag, text: "Kjøpt noe på nett som har en fysisk butikk? Vi henter og leverer umiddelbart." },
   { icon: Cake, text: "Kake som skal til familien – samme dag." },
-  { icon: Wallet, text: "Lommeboken ligger hos en venn? Vi ordner det." },
-  { icon: KeyRound, text: "Nøklene henger hjemme – vi henter og leverer." },
-  { icon: BookOpen, text: "Bok som må til en medstudent? Ingen stress." },
-  { icon: ShoppingBag, text: "Kjøpt på Finn og vil ha den levert nå?" },
+  { icon: Wallet, text: "Ligger lommeboken hos en venn? Vi ordner det!" },
+  { icon: Shirt, text: "Ble klærne hos skredderen klare? Vi henter og leverer!" },
+  { icon: BookOpen, text: "Bok som må leveres til en medstudent? Ingen stress." },
+  { icon: ShoppingBag, text: "Kjøpt på Finn eller Tise og vil ha den levert nå?" },
+  { icon: ShoppingBag, text: "Har barnet glemt gymsekken hjemme? Vi henter og leverer!" },
 ];
 
 const steps = [
