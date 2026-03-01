@@ -7,10 +7,10 @@ import Button from "./ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[400px] md:min-h-[600px] flex items-center justify-center px-4 py-8 md:px-8 md:py-16 lg:py-24" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+    <section className="relative min-h-[400px] md:min-h-[600px] flex items-center justify-center px-4 py-8 md:px-8 md:py-12 lg:py-16" style={{ backgroundColor: '#FFFFFF' }}>
 
       <div className="max-w-[1400px] mx-auto w-full px-4 md:px-8">
-        <div className="bg-white rounded-3xl p-6 md:p-12 lg:p-16 shadow-sm">
+        <div className="rounded-3xl p-6 md:p-12 lg:p-16" style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Left side: Text content */}
             <div>

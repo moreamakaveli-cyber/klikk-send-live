@@ -2,15 +2,15 @@
 
 :root {
   /* HSL Colors */
-  --background: hsl(36, 50%, 95%);
+  --background: #FFFFFF;
   --foreground: hsl(150, 30%, 15%);
   --primary: oklch(70.5% 0.213 47.604);
   --secondary: hsl(140, 25%, 82%);
   --accent: hsl(16, 85%, 55%);
-  --muted: hsl(36, 30%, 90%);
+  --muted: #F7F7F7;
   --muted-foreground: hsl(150, 10%, 40%);
   --highlight: hsl(220, 70%, 55%);
-  --card: hsl(36, 40%, 97%);
+  --card: #F7F7F7;
 }
 
 @theme inline {

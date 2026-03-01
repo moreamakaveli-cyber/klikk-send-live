@@ -32,9 +32,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+      <nav className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-4 md:py-5 flex items-center justify-between">
-          {/* Left side: Menu button (mobile) and Logo */}
+          {/* Left side: Menu button and Logo text */}
           <div className="flex items-center gap-3 md:gap-4">
             {/* Menu Button - Always visible */}
             <button 
@@ -50,12 +50,9 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 md:gap-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
-                <Package className="w-6 h-6 md:w-8 md:h-10 text-white" />
-              </div>
-              <span className="text-xl md:text-2xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Klikk&Send</span>
+            {/* Logo text - no box */}
+            <Link href="/" className="flex items-center">
+              <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
             </Link>
           </div>
 

@@ -41,7 +41,7 @@ const bottomPoints = [
 
 export default function OurServices() {
   return (
-    <div className="py-16 md:py-24" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+    <div className="py-20 md:py-32" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
           Våre tjenester
@@ -56,11 +56,15 @@ export default function OurServices() {
             return (
               <div
                 key={index}
-                className="rounded-3xl p-8 flex flex-col items-start gap-4 hover:shadow-lg transition-shadow"
-                style={{ backgroundColor: 'hsl(36, 40%, 97%)' }}
+                className="p-8 flex flex-col items-start gap-4 transition-shadow"
+                style={{ 
+                  backgroundColor: '#FFFFFF', 
+                  borderRadius: '20px',
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                }}
               >
                 {/* Ikon-badge */}
-                <div className="rounded-2xl p-3" style={{ backgroundColor: 'hsl(36, 30%, 90%)' }}>
+                <div className="rounded-2xl p-3" style={{ backgroundColor: '#F7F7F7' }}>
                   <Icon className="w-7 h-7" color={service.iconColor} strokeWidth={2} />
                 </div>
 

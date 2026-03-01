@@ -171,20 +171,35 @@ function BestillContent() {
     setIsSending(true);
     
     try {
-      // Validate input
+      // Validate input based on order type
+      const isPickupValid = validateAddress(
+        formData.pickupStreet,
+        formData.pickupPostalCode,
+        formData.pickupCity
+      );
+      const isDeliveryValid = validateAddress(
+        formData.deliveryStreet,
+        formData.deliveryPostalCode,
+        formData.deliveryCity
+      );
+
+      const pickupNameValid = isKlikkHent
+        ? formData.pickupBusinessName?.trim()
+        : formData.pickupFirstName && formData.pickupLastName;
+
+      const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
+
       if (
-        !formData.pickupFirstName ||
-        !formData.pickupLastName ||
-        !formData.pickupPhone ||
-        !formData.pickupStreet ||
-        !formData.pickupPostalCode ||
-        !formData.pickupCity ||
-        !formData.deliveryStreet ||
-        !formData.deliveryPostalCode ||
-        !formData.deliveryCity ||
+        !pickupNameValid ||
+        !pickupPhoneValid ||
+        !isPickupValid ||
+        !formData.deliveryFirstName ||
+        !formData.deliveryLastName ||
+        !formData.deliveryPhone ||
+        !isDeliveryValid ||
         !selectedSize
       ) {
-        alert("Vennligst fyll ut alle felter.");
+        alert("Vennligst fyll ut alle obligatoriske felt.");
         setIsSending(false);
         return;
       }
@@ -201,38 +216,56 @@ function BestillContent() {
         formData.deliveryCity
       );
 
-      // Save order to Supabase
-      const fullName = `${formData.pickupFirstName} ${formData.pickupLastName}`;
+      // Prepare data based on order type
+      const pickupName = isKlikkHent
+        ? formData.pickupBusinessName
+        : `${formData.pickupFirstName} ${formData.pickupLastName}`;
+      const pickupPhone = isKlikkHent ? "" : formData.pickupPhone;
       const packageSize = packageOptions.find((p) => p.id === selectedSize)?.title || "";
 
-      await saveOrder({
-        name: fullName,
-        phone: formData.pickupPhone,
-        pickup_address: pickupAddress,
-        delivery_address: deliveryAddress,
-        package_size: packageSize,
-      });
+      // Save order to Supabase (try, but don't fail if it errors)
+      try {
+        await saveOrder({
+          name: pickupName,
+          phone: pickupPhone,
+          pickup_address: pickupAddress,
+          delivery_address: deliveryAddress,
+          package_size: packageSize,
+        });
+      } catch (saveError) {
+        console.error("Failed to save to Supabase:", saveError);
+        // Continue anyway
+      }
 
-      // Send email via EmailJS
-      const templateParams = {
-        name: fullName,
-        phone: formData.pickupPhone,
-        package: packageSize,
-        pickup: pickupAddress,
-        delivery: deliveryAddress,
-      };
+      // Send email via EmailJS (try, but don't fail if it errors)
+      try {
+        const templateParams = {
+          name: pickupName,
+          phone: pickupPhone,
+          package: packageSize,
+          pickup: pickupAddress,
+          delivery: deliveryAddress,
+          isKlikkHent: isKlikkHent ? "Ja" : "Nei",
+          pickupCode: formData.pickupPickupCode || "",
+          deliveryName: `${formData.deliveryFirstName} ${formData.deliveryLastName}`,
+          deliveryPhone: formData.deliveryPhone,
+        };
 
-      await emailjs.send(
-        "service_476sm2p",
-        "template_xmmnr9c",
-        templateParams,
-        "HLFNfJ-HvjqeXLMXL"
-      );
+        await emailjs.send(
+          "service_476sm2p",
+          "template_xmmnr9c",
+          templateParams,
+          "HLFNfJ-HvjqeXLMXL"
+        );
+      } catch (emailError) {
+        console.error("Failed to send email:", emailError);
+        // Continue anyway
+      }
 
-      // Navigate to thank you page after successful save and email send
+      // Navigate to thank you page after successful validation
       router.push("/takk");
     } catch (error: any) {
-      console.error("Failed to save order or send email:", error);
+      console.error("Unexpected error:", error);
       alert(`Det oppstod en feil: ${error.message || "Vennligst prøv igjen."}`);
       setIsSending(false);
     }
@@ -272,10 +305,10 @@ function BestillContent() {
           {/* STEP 1: Choose package size */}
           {step === 1 && (
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                 Velg størrelse på levering
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
                 {packageOptions.map((option) => {
                   const Icon = option.icon;
                   const isSelected = selectedSize === option.id;
@@ -283,33 +316,35 @@ function BestillContent() {
                     <button
                       key={option.id}
                       onClick={() => setSelectedSize(option.id)}
-                      className={`p-8 rounded-2xl border-2 transition-all duration-200 text-left ${
+                      className={`p-5 md:p-6 rounded-lg border transition-all duration-200 text-left ${
                         isSelected
-                          ? "border-orange-200 bg-orange-50 shadow-sm"
-                          : "border-orange-200 bg-orange-50 hover:border-orange-300 hover:shadow-md"
+                          ? "border-orange-600 bg-white shadow-sm"
+                          : "border-gray-200 bg-white hover:border-gray-300"
                       }`}
+                      style={{ backgroundColor: isSelected ? 'hsl(36, 40%, 97%)' : '#ffffff' }}
                     >
-                      <div className="flex items-center gap-4 mb-4">
+                      <div className="flex items-center gap-3 mb-3">
                         <div
-                          className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                            isSelected ? "bg-orange-600" : "bg-orange-200"
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                            isSelected ? "bg-orange-600" : "bg-gray-100"
                           }`}
+                          style={isSelected ? { backgroundColor: 'oklch(70.5% 0.213 47.604)' } : {}}
                         >
                           <Icon
-                            className={`w-6 h-6 ${
-                              isSelected ? "text-white" : "text-orange-600"
+                            className={`w-5 h-5 ${
+                              isSelected ? "text-white" : "text-gray-600"
                             }`}
                           />
                         </div>
-                        <h3 className={`text-2xl md:text-3xl font-bold ${
+                        <h3 className={`text-lg md:text-xl font-normal ${
                           isSelected ? "text-orange-600" : "text-gray-900"
-                        }`}>{option.title}</h3>
+                        }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? 'oklch(70.5% 0.213 47.604)' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
                       </div>
-                      <div className="space-y-2 mb-3">
-                        <p className="font-semibold text-gray-700">{option.maxWeight}</p>
-                        <p className="font-semibold text-gray-700">{option.maxDimensions}</p>
+                      <div className="space-y-1 mb-2">
+                        <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>{option.maxWeight}</p>
+                        <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>{option.maxDimensions}</p>
                       </div>
-                      <p className="text-sm text-gray-500">Eksempler: {option.examples}</p>
+                      <p className="text-xs text-gray-500" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>Eksempler: {option.examples}</p>
                     </button>
                   );
                 })}
@@ -331,30 +366,21 @@ function BestillContent() {
           {/* STEP 2: Contact and addresses */}
           {step === 2 && (
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                 Hvor skal vi hente og levere?
               </h1>
               <div className="max-w-6xl mx-auto">
                 {/* Two-column layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 items-stretch">
                   {/* Left column: Henting */}
-                  <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">
-                      {isKlikkHent ? "Navn på butikk" : "Henting"}
+                  <div className="p-4 md:p-5 flex flex-col h-full">
+                    <h2 className="text-lg md:text-xl font-normal mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+                      {isKlikkHent ? "Navn på butikk" : "Hvem henter vi fra?"}
                     </h2>
-                    {!isKlikkHent && (
-                      <p className="text-gray-600 mb-6">Hvem henter vi fra?</p>
-                    )}
-                    <div className="space-y-4">
+                    <div className="space-y-4 flex-grow">
                       {isKlikkHent && (
                         <>
                           <div>
-                            <label
-                              htmlFor="pickupBusinessName"
-                              className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                              Navn på bedrift.
-                            </label>
                             <input
                               type="text"
                               id="pickupBusinessName"
@@ -363,13 +389,15 @@ function BestillContent() {
                               value={formData.pickupBusinessName}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
                           <div>
                             <label
                               htmlFor="pickupPickupCode"
-                              className="block text-sm font-medium text-gray-700 mb-2"
+                              className="block text-sm font-medium mb-2"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                             >
                               Hentekode
                             </label>
@@ -380,7 +408,8 @@ function BestillContent() {
                               placeholder="Hentekode hvis tilgjengelig"
                               value={formData.pickupPickupCode}
                               onChange={handleInputChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
                         </>
@@ -388,12 +417,6 @@ function BestillContent() {
                       {!isKlikkHent && (
                         <>
                           <div>
-                            <label
-                              htmlFor="pickupFirstName"
-                              className="block text-sm font-medium text-gray-700 mb-2"
-                            >
-                              Navn (person vi henter fra) *
-                            </label>
                             <div className="grid grid-cols-2 gap-3">
                               <input
                                 type="text"
@@ -403,7 +426,8 @@ function BestillContent() {
                                 value={formData.pickupFirstName}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                                style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                               />
                               <input
                                 type="text"
@@ -413,14 +437,16 @@ function BestillContent() {
                                 value={formData.pickupLastName}
                                 onChange={handleInputChange}
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                                style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                               />
                             </div>
                           </div>
                           <div>
                             <label
                               htmlFor="pickupPhone"
-                              className="block text-sm font-medium text-gray-700 mb-2"
+                              className="block text-sm font-medium mb-2"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                             >
                               Telefonnummer *
                             </label>
@@ -432,7 +458,8 @@ function BestillContent() {
                               onChange={handleInputChange}
                               maxLength={9}
                               required
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
                         </>
@@ -440,9 +467,10 @@ function BestillContent() {
                       <div>
                         <label
                           htmlFor="pickupStreet"
-                          className="block text-sm font-medium text-gray-700 mb-2"
+                          className="block text-sm font-medium mb-2"
+                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                         >
-                          {isKlikkHent ? "Adresse" : "Henteadresse *"}
+                          Henteadresse *
                         </label>
                         <div className="space-y-3">
                           <input
@@ -453,7 +481,8 @@ function BestillContent() {
                             value={formData.pickupStreet}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                           />
                           <div className="grid grid-cols-2 gap-3">
                             <input
@@ -466,7 +495,8 @@ function BestillContent() {
                               required
                               maxLength={4}
                               pattern="[0-9]{4}"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                             <input
                               type="text"
@@ -476,7 +506,8 @@ function BestillContent() {
                               value={formData.pickupCity}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
                         </div>
@@ -485,17 +516,10 @@ function BestillContent() {
                   </div>
 
                   {/* Right column: Levering */}
-                  <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">Levering</h2>
-                    <p className="text-gray-600 mb-6">Hvem leverer vi til?</p>
-                    <div className="space-y-4">
+                  <div className="p-4 md:p-5 flex flex-col h-full">
+                    <h2 className="text-lg md:text-xl font-normal mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Levering til</h2>
+                    <div className="space-y-4 flex-grow">
                       <div>
-                        <label
-                          htmlFor="deliveryFirstName"
-                          className="block text-sm font-medium text-gray-700 mb-2"
-                        >
-                          Navn (mottaker) *
-                        </label>
                         <div className="grid grid-cols-2 gap-3">
                           <input
                             type="text"
@@ -505,7 +529,8 @@ function BestillContent() {
                             value={formData.deliveryFirstName}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                           />
                           <input
                             type="text"
@@ -515,14 +540,16 @@ function BestillContent() {
                             value={formData.deliveryLastName}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                           />
                         </div>
                       </div>
                       <div>
                         <label
                           htmlFor="deliveryPhone"
-                          className="block text-sm font-medium text-gray-700 mb-2"
+                          className="block text-sm font-medium mb-2"
+                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                         >
                           Telefonnummer *
                         </label>
@@ -534,13 +561,15 @@ function BestillContent() {
                           onChange={handleInputChange}
                           maxLength={9}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                          style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                         />
                       </div>
                       <div>
                         <label
                           htmlFor="deliveryStreet"
-                          className="block text-sm font-medium text-gray-700 mb-2"
+                          className="block text-sm font-medium mb-2"
+                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                         >
                           Leveringsadresse *
                         </label>
@@ -553,7 +582,8 @@ function BestillContent() {
                             value={formData.deliveryStreet}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                           />
                           <div className="grid grid-cols-2 gap-3">
                             <input
@@ -566,7 +596,8 @@ function BestillContent() {
                               required
                               maxLength={4}
                               pattern="[0-9]{4}"
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                             <input
                               type="text"
@@ -576,7 +607,8 @@ function BestillContent() {
                               value={formData.deliveryCity}
                               onChange={handleInputChange}
                               required
-                              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900"
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
+                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
                         </div>
@@ -586,10 +618,11 @@ function BestillContent() {
                 </div>
 
                 {/* Comment textarea below both columns */}
-                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 mb-6">
+                <div className="mb-6">
                   <label
                     htmlFor="comment"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    className="block text-sm font-medium mb-2"
+                    style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
                   >
                     Beskjed til budet (valgfritt)
                   </label>
@@ -600,7 +633,8 @@ function BestillContent() {
                     onChange={handleInputChange}
                     rows={5}
                     placeholder="For eksempel: etasje, ringeklokke, portkode, hvor pakken står, eller andre leveringsinstrukser."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none resize-none bg-white text-gray-900 placeholder:text-gray-400"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none resize-none bg-white text-gray-900 placeholder:text-gray-400 text-sm"
+                    style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                   />
                 </div>
 
@@ -625,9 +659,9 @@ function BestillContent() {
                     variant="hero-primary"
                     onClick={handleNext}
                     disabled={
-                      !formData.pickupFirstName ||
-                      !formData.pickupLastName ||
-                      !formData.pickupPhone ||
+                      (isKlikkHent 
+                        ? !formData.pickupBusinessName?.trim()
+                        : !formData.pickupFirstName || !formData.pickupLastName || !formData.pickupPhone) ||
                       !formData.pickupStreet ||
                       !formData.pickupPostalCode ||
                       !formData.pickupCity ||
@@ -651,98 +685,88 @@ function BestillContent() {
           {/* STEP 3: Price confirmation */}
           {step === 3 && (
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 text-center">
+              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                 Bekreft bestilling
               </h1>
-              <div className="max-w-4xl mx-auto space-y-6">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Bestillingsdetaljer</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Henting boks */}
-                    <div className="bg-gray-50 rounded-2xl p-6">
-                      <h4 className="text-base font-semibold text-gray-900 mb-3">Vi henter fra</h4>
-                      <div className="space-y-2 text-gray-700">
-                        <div>
-                          <span className="font-medium">Navn:</span>{" "}
-                          {formData.pickupFirstName} {formData.pickupLastName}
-                        </div>
-                        <div>
-                          <span className="font-medium">Telefonnummer:</span>{" "}
-                          {formData.pickupPhone}
-                        </div>
-                        <div>
-                          <span className="font-medium">Adresse:</span>{" "}
-                          {combineAddress(
-                            formData.pickupStreet,
-                            formData.pickupPostalCode,
-                            formData.pickupCity
-                          )}
-                        </div>
-                      </div>
+              <div className="max-w-3xl mx-auto space-y-4">
+                {/* Henting og levering side-by-side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Henting */}
+                  <div className="bg-white rounded-lg p-4 border border-gray-200">
+                    <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Vi henter fra</h4>
+                    <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                      {isKlikkHent ? (
+                        <>
+                          <div><span className="font-medium">Butikk:</span> {formData.pickupBusinessName}</div>
+                          {formData.pickupPickupCode && <div><span className="font-medium">Hentekode:</span> {formData.pickupPickupCode}</div>}
+                        </>
+                      ) : (
+                        <>
+                          <div><span className="font-medium">Navn:</span> {formData.pickupFirstName} {formData.pickupLastName}</div>
+                          <div><span className="font-medium">Telefon:</span> {formData.pickupPhone}</div>
+                        </>
+                      )}
+                      <div><span className="font-medium">Adresse:</span> {combineAddress(formData.pickupStreet, formData.pickupPostalCode, formData.pickupCity)}</div>
                     </div>
+                  </div>
 
-                    {/* Levering boks */}
-                    <div className="bg-gray-50 rounded-2xl p-6">
-                      <h4 className="text-base font-semibold text-gray-900 mb-3">Vi leverer til</h4>
-                      <div className="space-y-2 text-gray-700">
-                        <div>
-                          <span className="font-medium">Navn:</span>{" "}
-                          {formData.deliveryFirstName} {formData.deliveryLastName}
-                        </div>
-                        <div>
-                          <span className="font-medium">Telefonnummer:</span>{" "}
-                          {formData.deliveryPhone}
-                        </div>
-                        <div>
-                          <span className="font-medium">Adresse:</span>{" "}
-                          {combineAddress(
-                            formData.deliveryStreet,
-                            formData.deliveryPostalCode,
-                            formData.deliveryCity
-                          )}
-                        </div>
-                      </div>
+                  {/* Levering */}
+                  <div className="bg-white rounded-lg p-4 border border-gray-200">
+                    <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Vi leverer til</h4>
+                    <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                      <div><span className="font-medium">Navn:</span> {formData.deliveryFirstName} {formData.deliveryLastName}</div>
+                      <div><span className="font-medium">Telefon:</span> {formData.deliveryPhone}</div>
+                      <div><span className="font-medium">Adresse:</span> {combineAddress(formData.deliveryStreet, formData.deliveryPostalCode, formData.deliveryCity)}</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Pakkestørrelse */}
-                <div className="bg-gray-50 rounded-2xl p-6">
-                  <div className="text-gray-700">
-                    <span className="font-medium">Pakkestørrelse:</span>{" "}
-                    {packageOptions.find((p) => p.id === selectedSize)?.title}
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <div className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                    <span className="font-medium">Pakkestørrelse:</span> {packageOptions.find((p) => p.id === selectedSize)?.title}
                   </div>
                 </div>
-                {/* Pricing guide */}
-                <div className="rounded-2xl p-6" style={{ background: '#eef6ef', border: '1px solid #d1e5d4' }}>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Prisguide</h3>
-                  <div className="space-y-2 text-sm text-gray-700 mb-4">
-                    <div>Kort levering (0–3 km) – 119 kr</div>
-                    <div>Medium levering (3–6 km) – 169 kr</div>
-                    <div>Lengre levering (6–20 km) – 219 kr</div>
+
+                {/* Prisoppsummering */}
+                <div className="bg-white rounded-lg p-4 border border-gray-200">
+                  <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Pris</h4>
+                  <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                    <div className="flex justify-between">
+                      <span>Kort levering (0–3 km):</span>
+                      <span className="font-semibold">119 kr</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Medium levering (3–6 km):</span>
+                      <span className="font-semibold">169 kr</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Lengre levering (6–20 km):</span>
+                      <span className="font-semibold">219 kr</span>
+                    </div>
                   </div>
-                  <p className="text-base font-bold text-gray-900">
-                    Endelig pris bekreftes på SMS før henting.
-                  </p>
                 </div>
               </div>
-              <div className="flex justify-between mt-8 max-w-2xl mx-auto">
+              <div className="flex justify-between mt-6 max-w-2xl mx-auto">
                 <Button
                   variant="hero-secondary"
                   onClick={handleBack}
-                  className="px-8 py-3"
+                  className="px-6 py-2.5"
                 >
-                  <ArrowLeft className="w-5 h-5" />
+                  <ArrowLeft className="w-4 h-4" />
                   Tilbake
                 </Button>
                 <Button
                   variant="hero-primary"
-                  onClick={handleConfirm}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleConfirm();
+                  }}
                   disabled={isSending}
-                  className="px-8 py-3"
+                  className="px-6 py-2.5"
                 >
                   {isSending ? "Sender..." : "Bekreft bestilling"}
-                  {!isSending && <Check className="w-5 h-5" />}
+                  {!isSending && <Check className="w-4 h-4" />}
                 </Button>
               </div>
             </div>

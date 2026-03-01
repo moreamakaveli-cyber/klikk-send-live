@@ -104,7 +104,7 @@ const line3Questions = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="pt-0 pb-16 md:pb-24" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+    <section id="how-it-works" className="pt-0 pb-20 md:pb-32" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Questions section - full width */}
       <section 
         className="mb-8 md:mb-12 question-wall"
@@ -227,7 +227,7 @@ export default function HowItWorks() {
         </h2>
 
         {/* Large rounded container with secondary background */}
-        <div className="rounded-3xl p-6 md:p-8 lg:p-10 mb-16 md:mb-24" style={{ backgroundColor: 'hsl(140, 25%, 82%)' }}>
+        <div className="rounded-3xl p-6 md:p-8 lg:p-10 mb-16 md:mb-24" style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -241,8 +241,8 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Title with number */}
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 flex items-baseline gap-2 text-center md:text-left" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                    <span className="text-lg md:text-xl font-bold">{index + 1}.</span>
+                  <h3 className="text-xl md:text-2xl font-normal mb-3 flex items-baseline gap-2 text-center md:text-left" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+                    <span className="text-lg md:text-xl font-normal">{index + 1}.</span>
                     <span>{step.title}</span>
                   </h3>
 
@@ -259,8 +259,8 @@ export default function HowItWorks() {
         {/* Why Choose & How to Use & Sustainability Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mt-16 md:mt-24">
           {/* Why Choose Klikk&Send */}
-          <div id="why-choose" className="bg-white rounded-3xl p-6 md:p-8 shadow-sm scroll-mt-20">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 md:mb-8" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+          <div id="why-choose" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Hvorfor velge Klikk&Send?
             </h3>
             <ul className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
@@ -284,8 +284,8 @@ export default function HowItWorks() {
           </div>
 
           {/* How to Use */}
-          <div id="how-to-use" className="bg-white rounded-3xl p-6 md:p-8 shadow-sm scroll-mt-20">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 md:mb-8" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+          <div id="how-to-use" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Slik kan du bruke Klikk&Send
             </h3>
             <ul className="space-y-3 md:space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
@@ -313,8 +313,8 @@ export default function HowItWorks() {
           </div>
 
           {/* Priser og betaling */}
-          <div id="prices" className="bg-white rounded-3xl p-6 md:p-8 shadow-sm scroll-mt-20">
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 md:mb-8" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+          <div id="prices" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Priser og betaling
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
