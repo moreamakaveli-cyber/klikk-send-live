@@ -272,7 +272,7 @@ function BestillContent() {
   };
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
+    <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
