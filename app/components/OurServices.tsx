@@ -3,25 +3,6 @@
 import Link from "next/link";
 import { Shirt, ShoppingBag, Heart } from "lucide-react";
 
-// Custom HeartHandshake icon component
-const HeartHandshake = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
-    className={className}
-    style={style}
-  >
-    <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"/>
-  </svg>
-);
-
 interface Service {
   icon: React.ComponentType<{ className?: string; color?: string; strokeWidth?: number }>;
   iconColor: string;
@@ -62,11 +43,6 @@ export default function OurServices() {
   return (
     <div className="pt-4 pb-12 md:pt-6 md:pb-16" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'hsl(16, 85%, 55%)' }}>
-            <HeartHandshake className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2} />
-          </div>
-        </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-3" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
           Våre tjenester
         </h2>
