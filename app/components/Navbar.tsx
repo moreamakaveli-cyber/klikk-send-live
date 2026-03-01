@@ -50,13 +50,8 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo + text - samme som i footer */}
+            {/* Logo text */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
-                <div className="w-6 h-6 md:w-7 md:h-7 rounded-lg flex items-center justify-center bg-white" style={{ border: '2px solid oklch(70.5% 0.213 47.604)' }}>
-                  <Package className="w-3 h-3 md:w-4 md:h-4" style={{ color: 'oklch(70.5% 0.213 47.604)' }} strokeWidth={2} />
-                </div>
-              </div>
               <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
             </Link>
           </div>
@@ -110,11 +105,6 @@ export default function Navbar() {
         {/* Drawer Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
-              <div className="w-6 h-6 rounded-lg flex items-center justify-center bg-white" style={{ border: '2px solid oklch(70.5% 0.213 47.604)' }}>
-                <Package className="w-3 h-3" style={{ color: 'oklch(70.5% 0.213 47.604)' }} strokeWidth={2} />
-              </div>
-            </div>
             <span className="text-xl font-bold text-gray-900">Klikk&Send</span>
           </Link>
           <button
