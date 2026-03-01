@@ -70,14 +70,9 @@ export default function HowItWorks() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
             Når passer Klikk&Send?
           </h2>
-          <div className="mb-6 md:mb-8 text-center space-y-2">
-            <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              Uansett hva som skal leveres – vi frakter det fra A til B.
-            </p>
-            <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              Tiden din er verdifull. La oss ta leveringen.
-            </p>
-          </div>
+          <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
+            Uansett hva som skal leveres – vi frakter det fra A til B. Tiden din er verdifull. La oss ta leveringen.
+          </p>
           <div
             className="rounded-2xl p-6 md:p-8"
             style={{
