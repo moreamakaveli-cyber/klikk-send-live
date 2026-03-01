@@ -30,7 +30,6 @@ const useCases = [
   { icon: ShoppingBag, text: "Kjøpte en kaffemaskin på Elkjøp og vil ha det levert idag?" },
   { icon: Shirt, text: "Ble jakken lagt igjen på nach? Vi henter den." },
   { icon: ShoppingBag, text: "Kjøpt noe på nett som har en fysisk butikk? Vi henter og leverer umiddelbart." },
-  { icon: Cake, text: "Kake som skal til familien – samme dag." },
   { icon: Wallet, text: "Ligger lommeboken hos en venn? Vi ordner det!" },
   { icon: Shirt, text: "Ble klærne hos skredderen klare? Vi henter og leverer!" },
   { icon: BookOpen, text: "Bok som må leveres til en medstudent? Ingen stress." },
