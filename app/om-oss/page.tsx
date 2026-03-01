@@ -18,7 +18,7 @@ export default function OmOss() {
               </p>
               
               <p className="text-base md:text-lg">
-                Behovet oppstod fordi vi selv erfarte hvor upraktisk det er når man glemmer noe hjemme, skal sende noe til en venn, eller trenger rask levering av et kjøp fra en nettbutikk.
+                Behovet oppstod fordi vi selv erfarte hvor upraktisk det er når man glemmer noe hjemme, skal sende noe til en venn, eller trenger rask levering av et kjøp.
               </p>
               
               <p className="text-base md:text-lg">
