@@ -1,8 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Hand, Package } from "lucide-react";
+import { Search, Hand, Package, ShoppingBag, Shirt, Heart, Cake, KeyRound, BookOpen, Wallet } from "lucide-react";
 import OurServices from "./OurServices";
+
+const useCases = [
+  { icon: ShoppingBag, text: "Kjøpt noe på Elkjøp og vil ha det levert i dag?" },
+  { icon: Shirt, text: "Jakken ble igjen på nach – vi henter den." },
+  { icon: Heart, text: "Skal noe leveres til en venn eller kjæreste?" },
+  { icon: Cake, text: "Kake som skal til familien – samme dag." },
+  { icon: Wallet, text: "Lommeboken ligger hos en venn? Vi ordner det." },
+  { icon: KeyRound, text: "Nøklene henger hjemme – vi henter og leverer." },
+  { icon: BookOpen, text: "Bok som må til en medstudent? Ingen stress." },
+  { icon: ShoppingBag, text: "Kjøpt på Finn og vil ha den levert nå?" },
+];
 
 const steps = [
   {
@@ -25,203 +36,46 @@ const steps = [
   },
 ];
 
-const questions = [
-  "Skal du levere noe til en venn?",
-  "Har du glemt nøkler hjemme?",
-  "Ligger lommeboken igjen hos en venn?",
-  "Må du levere en bok til en medstudent?",
-  "Skal du sende noe til kjæresten på jobb?",
-  "Har du glemt laderen hos en kompis?",
-  "Må en jakke tilbake til en venn?",
-  "Har du solgt noe som må overleveres?",
-  "Har du lånt bort AirPods som må hentes?",
-  "Skal en pakke sendes til søsteren din?",
-  "Har du glemt PC-en hos en studiepartner?",
-  "Skal en kake leveres til familien?",
-  "Har du lånt bort en kjole som må tilbake?",
-  "Har du glemt jakken på nach?",
-  "Skal noe raskt fra deg til en venn?",
-];
-
-// Generate random colors for each question with opacity
-const getRandomColor = (index: number) => {
-  const colors = [
-    'hsla(0, 0%, 60%, 0.4)',      // lys grå med opacity
-    'hsla(0, 0%, 55%, 0.5)',      // litt mørkere grå
-    'hsla(36, 20%, 65%, 0.4)',    // lys beige/brun
-    'hsla(36, 15%, 60%, 0.5)',    // litt mørkere beige
-    'hsla(0, 0%, 65%, 0.3)',      // lysere grå
-    'hsla(36, 25%, 70%, 0.4)',    // lys beige
-    'hsla(0, 0%, 58%, 0.45)',     // mellom grå
-    'hsla(36, 18%, 62%, 0.4)',    // beige tone
-    'hsla(150, 25%, 65%, 0.4)',   // lys grønn
-    'hsla(150, 20%, 70%, 0.4)',   // lysere grønn
-    'hsla(150, 30%, 60%, 0.5)',   // litt mørkere grønn
-    'hsla(24, 60%, 70%, 0.4)',    // lys orange
-    'hsla(24, 55%, 75%, 0.4)',    // lysere orange
-    'hsla(24, 65%, 65%, 0.5)',    // litt mørkere orange
-  ];
-  // Use index to create pseudo-random but consistent colors
-  return colors[(index * 7 + 13) % colors.length];
-};
-
-// Generate random font size between 16px and 28px
-const getRandomFontSize = (index: number) => {
-  // Use index to create pseudo-random but consistent sizes
-  const baseSize = 16;
-  const maxSize = 28;
-  const variation = (index * 7 + 13) % (maxSize - baseSize + 1);
-  return baseSize + variation;
-};
-
-// Base color: light gray
-const baseColor = 'hsla(0, 0%, 65%, 0.4)';
-// Highlight colors
-const highlightOrange = 'hsla(24, 60%, 70%, 0.6)';
-const highlightGreen = 'hsla(150, 25%, 65%, 0.6)';
-
-// Fixed structure for each line
-const line1Questions = [
-  { text: "Kjøpt noe på Elkjøp og vil ha det levert i dag?", color: highlightOrange, isHighlight: true },
-  { text: "Har du glemt jakken på nach?", color: baseColor },
-  { text: "Skal du levere noe til en venn?", color: highlightGreen, isHighlight: true },
-  { text: "Skal en kake leveres til familien?", color: baseColor },
-  { text: "Skal du sende noe til kjæresten på jobb?", color: baseColor },
-];
-
-const line2Questions = [
-  { text: "Ligger lommeboken igjen hos en venn?", color: baseColor },
-  { text: "Har du glemt nøkler hjemme?", color: highlightOrange, isHighlight: true },
-  { text: "Må du levere en bok til en medstudent?", color: baseColor },
-];
-
-const line3Questions = [
-  { text: "Skal du sende noe til kjæresten på jobb?", color: baseColor },
-  { text: "Kjøpt noe på finn og vil ha den levert nå?", color: highlightGreen, isHighlight: true },
-  { text: "Har du glemt jakken på nach?", color: baseColor },
-  { text: "Må du levere en bok til en medstudent?", color: baseColor },
-];
-
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="pt-0 pb-20 md:pb-32" style={{ backgroundColor: '#FFFFFF' }}>
-      {/* Questions section - full width */}
-      <section 
-        className="mb-8 md:mb-12 question-wall"
-        style={{ 
-          width: '100vw',
-          margin: '0',
-          padding: '0',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          position: 'relative',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          WebkitOverflowScrolling: 'touch',
-          pointerEvents: 'none',
-          userSelect: 'none',
-        }}
-      >
-        {/* Line 1: Large - responsive font sizes */}
-        <div 
-          className="line line-1"
-          style={{
-            whiteSpace: 'nowrap',
-            display: 'block',
-            width: '100vw',
-            textAlign: 'left',
-            lineHeight: '1',
-            margin: '0',
-            padding: '0',
-            fontSize: 'clamp(14px, 2.8vw, 38px)',
-          }}
-        >
-          {line1Questions.map((item, idx) => (
-            <span
-              key={`line1-${idx}`}
-              className="font-semibold"
-              style={{
-                fontFamily: 'var(--font-serif), serif',
-                color: item.color,
-                marginRight: 'clamp(0.5rem, 2vw, 1.5rem)',
-                pointerEvents: 'none',
-                userSelect: 'none',
-                cursor: 'default',
-              }}
-            >
-              {item.text}
-            </span>
-          ))}
-        </div>
-
-        {/* Line 2: Medium - responsive font sizes */}
-        <div 
-          className="line line-2"
-          style={{
-            whiteSpace: 'nowrap',
-            display: 'block',
-            width: '100vw',
-            textAlign: 'left',
-            lineHeight: '1',
-            margin: '0',
-            padding: '0',
-            fontSize: 'clamp(12px, 2.4vw, 28px)',
-          }}
-        >
-          {line2Questions.map((item, idx) => (
-            <span
-              key={`line2-${idx}`}
-              className="font-semibold"
-              style={{
-                fontFamily: 'var(--font-serif), serif',
-                color: item.color,
-                marginRight: 'clamp(0.5rem, 1.5vw, 1.2rem)',
-                pointerEvents: 'none',
-                userSelect: 'none',
-                cursor: 'default',
-              }}
-            >
-              {item.text}
-            </span>
-          ))}
-        </div>
-
-        {/* Line 3: Smaller - responsive font sizes */}
-        <div 
-          className="line line-3"
-          style={{
-            whiteSpace: 'nowrap',
-            display: 'block',
-            width: '100vw',
-            textAlign: 'left',
-            lineHeight: '1',
-            margin: '0',
-            padding: '0',
-            fontSize: 'clamp(11px, 2vw, 24px)',
-          }}
-        >
-          {line3Questions.map((item, idx) => (
-            <span
-              key={`line3-${idx}`}
-              className="font-semibold"
-              style={{
-                fontFamily: 'var(--font-serif), serif',
-                color: item.color,
-                marginRight: 'clamp(0.5rem, 1vw, 1rem)',
-                pointerEvents: 'none',
-                userSelect: 'none',
-                cursor: 'default',
-              }}
-            >
-              {item.text}
-            </span>
-          ))}
-        </div>
-      </section>
-
       <div className="max-w-[1400px] mx-auto px-8">
 
         <OurServices />
+
+        {/* Use cases - under Våre tjenester */}
+        <div className="mb-8 md:mb-12 mt-8 md:mt-12">
+          <div
+            className="rounded-2xl p-6 md:p-8"
+            style={{
+              backgroundColor: '#F7F7F7',
+              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+            }}
+          >
+            <p className="text-center text-lg md:text-xl mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 25%)' }}>
+              Når passer Klikk&Send?
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              {useCases.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl bg-white/80 hover:bg-white transition-colors"
+                    style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}
+                  >
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100">
+                      <Icon className="w-5 h-5 text-orange-600" strokeWidth={2} />
+                    </div>
+                    <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+                      {item.text}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-12 md:mb-16 mt-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
           Slik fungerer Klikk&Send
         </h2>

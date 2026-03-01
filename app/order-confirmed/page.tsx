@@ -6,7 +6,7 @@ import Button from "../components/ui/button";
 
 export default function OrderConfirmed() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">

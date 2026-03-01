@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock } from "lucide-react";
+import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock, Tag } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,27 +50,29 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo text - no box */}
-            <Link href="/" className="flex items-center">
+            {/* Logo + text - samme som i footer */}
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
+                <Package className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={2} />
+              </div>
               <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
             </Link>
           </div>
 
-          {/* Center: Navigation Links - Desktop only */}
-          <div className="hidden md:flex items-center gap-6 md:gap-8">
-            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+          {/* Right side: Nav links + Bestill nå - Desktop only */}
+          <div className="hidden md:flex items-center gap-6 md:gap-8 ml-auto">
+            <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              <Package className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Tjenester
             </Link>
-            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+            <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              <Info className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Slik fungerer det
             </Link>
-            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+            <Link href="/priser" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              <Tag className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Priser
             </Link>
-          </div>
-
-          {/* Right side: Bestill nå button - Desktop only */}
-          <div className="hidden md:block">
             <Link href="/bestill">
               <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå

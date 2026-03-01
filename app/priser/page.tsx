@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Priser() {
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'hsl(36, 50%, 95%)' }}>
+    <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
       <Navbar />
       <section className="py-16 md:py-24 px-6 md:px-8">
         <div className="max-w-[1400px] mx-auto">

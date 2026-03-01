@@ -2,7 +2,7 @@
 
 :root {
   /* HSL Colors */
-  --background: #FFFFFF;
+  --background: #F0E9E0;
   --foreground: hsl(150, 30%, 15%);
   --primary: oklch(70.5% 0.213 47.604);
   --secondary: hsl(140, 25%, 82%);
