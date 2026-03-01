@@ -67,7 +67,7 @@ export default function HowItWorks() {
 
         {/* Use cases - under Våre tjenester */}
         <div className="mb-6 md:mb-8 mt-2 md:mt-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
             Når passer Klikk&Send?
           </h2>
           <div className="mb-6 md:mb-8 text-center space-y-2">
@@ -105,7 +105,7 @@ export default function HowItWorks() {
             </div>
           </div>
         </div>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
           Slik fungerer Klikk&Send
         </h2>
 
