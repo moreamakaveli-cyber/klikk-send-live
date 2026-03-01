@@ -95,6 +95,14 @@ export default function HowItWorks() {
                 );
               })}
             </div>
+            <div className="mt-6 md:mt-8 text-center space-y-2">
+              <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                Uansett hva som skal leveres – vi frakter det fra A til B.
+              </p>
+              <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                Tiden din er verdifull. La oss ta leveringen.
+              </p>
+            </div>
           </div>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
