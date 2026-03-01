@@ -22,7 +22,7 @@ export default function Footer() {
                 </h2>
               </div>
               <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
-                Vi leverer rask og pålitelig henting og levering i hele Oslo-området. Din tid er verdifull - la oss ta oss av leveransen.
+                Vi leverer rask og pålitelig henting og levering i hele Oslo. Din tid er verdifull - la oss ta oss av leveransen.
               </p>
             </div>
 

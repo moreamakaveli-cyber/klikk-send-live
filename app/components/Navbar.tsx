@@ -132,7 +132,7 @@ export default function Navbar() {
                     onClick={closeMenu}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors group"
                   >
-                    <Icon className="w-5 h-5 text-gray-500 group-hover:text-orange-600 transition-colors" />
+                    <Icon className="w-5 h-5 text-orange-600 group-hover:text-orange-700 transition-colors" />
                     <span className="font-medium">{item.label}</span>
                   </Link>
                 </li>
