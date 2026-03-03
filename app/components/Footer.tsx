@@ -71,6 +71,11 @@ export default function Footer() {
                     Kontakt oss
                   </Link>
                 </li>
+                <li>
+                  <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                    Jobb i Klikk&Send
+                  </Link>
+                </li>
               </ul>
             </div>
 
