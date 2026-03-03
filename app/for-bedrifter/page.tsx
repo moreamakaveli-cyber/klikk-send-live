@@ -7,33 +7,28 @@ export default function ForBedrifter() {
     <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-8 md:py-12">
-        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 lg:gap-10 mb-6 md:mb-8">
-          <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0">
+        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 lg:gap-10 mb-6 md:mb-8 mt-12 md:mt-16 lg:mt-20">
+          <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] flex-shrink-0">
             <Image
               src="/collaboration-icon-3.svg"
               alt="Bli kunde"
-              width={384}
-              height={384}
+              width={448}
+              height={448}
               className="w-full h-full"
             />
           </div>
-          <div className="flex-grow">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+          <div className="flex-grow mt-8 md:mt-12 lg:mt-16">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 md:mb-8 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
               Bli kunde
             </h1>
-            <div className="space-y-4 md:space-y-6">
-              <p className="text-lg md:text-xl leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                Få virksomheten din til å vokse med Klikk&Send. Nå flere kunder, øk salget og tilby umiddelbar levering fra butikk.
-              </p>
-              <p className="text-base md:text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                Ønsker du å sende pakker eller post med oss? Fyll ut skjemaet, så kontakter vi deg med et uforpliktende tilbud tilpasset ditt behov.
-              </p>
-            </div>
+            <p className="text-lg md:text-xl leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+              Få virksomheten din til å vokse med Klikk&Send. Nå flere kunder, øk salget og tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering fra butikk.
+            </p>
           </div>
         </div>
 
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-          Hvorfor du bør samarbeide med oss
+          Hvorfor du bør samarbeide med <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
         </h2>
 
         <div className="space-y-8 md:space-y-12">
