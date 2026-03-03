@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState<"banner" | "settings">("banner");
   const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
   const [personalizationEnabled, setPersonalizationEnabled] = useState(true);
+  const [showLesMerModal, setShowLesMerModal] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -21,8 +21,12 @@ export default function CookieBanner() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handler = () => {
-      setVisible(true);
-      setMode("settings");
+      try {
+        setVisible(true);
+        setMode("settings");
+      } catch (_) {
+        // avoid unhandled rejection in dev
+      }
     };
     window.addEventListener("open-cookie-settings", handler);
     return () => {
@@ -64,6 +68,57 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50">
+      {/* Les mer-modal */}
+      {showLesMerModal && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 z-50"
+            onClick={() => setShowLesMerModal(false)}
+            aria-hidden="true"
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowLesMerModal(false)}>
+            <div
+              className="rounded-2xl bg-white shadow-xl border border-gray-200 p-5 md:p-6 max-w-lg max-h-[85vh] overflow-y-auto"
+              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-start gap-4 mb-4">
+                <h3 className="text-base md:text-lg font-semibold text-gray-900">
+                  Om informasjonskapsler
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowLesMerModal(false)}
+                  className="text-gray-500 hover:text-gray-700 text-xl leading-none"
+                  aria-label="Lukk"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="text-sm text-gray-700 space-y-3">
+                <p>
+                  Vi bruker informasjonskapsler (cookies) for å sikre at nettsiden fungerer som den skal og for å gi deg en god brukeropplevelse. Cookies hjelper oss med å huske dine valg, forbedre innholdet vårt og analysere hvordan siden brukes.
+                </p>
+                <p>
+                  Noen cookies er nødvendige for grunnleggende funksjoner, mens andre brukes til statistikk og forbedring av våre tjenester. Du kan når som helst administrere eller endre dine cookie-innstillinger.
+                </p>
+                <p>
+                  Ved å bruke nettsiden vår samtykker du til vår bruk av cookies i henhold til våre retningslinjer.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowLesMerModal(false)}
+                className="mt-4 rounded-full px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}
+              >
+                Lukk
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
       <div className="mx-auto max-w-[1400px] px-4 pb-4">
         <div
           className="rounded-2xl bg-white/95 shadow-lg border border-gray-200 p-4 md:p-5 flex flex-col gap-4"
@@ -180,13 +235,14 @@ export default function CookieBanner() {
           </div>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
             <div className="flex items-center gap-3">
-              <Link
-                href="/personvern"
-                className="text-xs md:text-sm underline hover:opacity-80"
+              <button
+                type="button"
+                onClick={() => setShowLesMerModal(true)}
+                className="text-xs md:text-sm underline hover:opacity-80 text-left"
                 style={{ fontFamily: 'var(--font-sans), sans-serif', color: '#111827' }}
               >
                 Les mer
-              </Link>
+              </button>
               {!isSettings && (
                 <button
                   type="button"

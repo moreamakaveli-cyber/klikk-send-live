@@ -119,8 +119,12 @@ export default function Footer() {
                 className="mt-1 text-xs md:text-sm underline hover:opacity-80"
                 style={{ color: 'rgba(255,255,255,0.92)', background: 'transparent' }}
                 onClick={() => {
-                  if (typeof window !== "undefined") {
-                    window.dispatchEvent(new CustomEvent("open-cookie-settings"));
+                  try {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(new CustomEvent("open-cookie-settings"));
+                    }
+                  } catch (_) {
+                    // avoid unhandled rejection
                   }
                 }}
               >

@@ -264,9 +264,10 @@ function BestillContent() {
 
       // Navigate to thank you page after successful validation
       router.push("/takk");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Unexpected error:", error);
-      alert(`Det oppstod en feil: ${error.message || "Vennligst prøv igjen."}`);
+      const message = error instanceof Error ? error.message : "Vennligst prøv igjen.";
+      alert(`Det oppstod en feil: ${message}`);
       setIsSending(false);
     }
   };

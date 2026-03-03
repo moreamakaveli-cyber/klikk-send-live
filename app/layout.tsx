@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
-import CookieBanner from "./components/CookieBanner";
+import CookieBannerBoundary from "./components/CookieBannerBoundary";
 
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-serif",
@@ -18,16 +18,17 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Klikk&Send - Umiddelbar henting og levering",
-  description: "Billig, raskt og enkelt. Vi henter og leverer smått og stort - fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.",
+  title: "Hentit - Umiddelbar henting og levering",
+  description:
+    "Billig, raskt og enkelt. Vi henter og leverer smått og stort - fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.",
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-icon.svg',
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
-    title: 'Klikk&Send',
+    statusBarStyle: "default",
+    title: "Hentit",
   },
 };
 
@@ -42,7 +43,7 @@ export default function RootLayout({
         className={`${dmSerifDisplay.variable} ${dmSans.variable} antialiased`}
       >
         {children}
-        <CookieBanner />
+        <CookieBannerBoundary />
       </body>
     </html>
   );
