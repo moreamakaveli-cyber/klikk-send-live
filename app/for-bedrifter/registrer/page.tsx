@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -17,6 +18,7 @@ export default function BedriftRegistrer() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -101,13 +103,53 @@ export default function BedriftRegistrer() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Handle form submission here
-      console.log("Form submitted:", formData);
-      // You can add API call here
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      // Send email via EmailJS - using same template as bestill page
+      const templateParams = {
+        name: `${formData.fornavn} ${formData.etternavn}`,
+        phone: formData.mobiltelefon,
+        package: "Bedriftsforespørsel",
+        pickup: `Bedrift: ${formData.bedriftsnavn}\nBedriftstype: ${formData.bedriftstype}\nE-post: ${formData.forretningsmail}`,
+        delivery: `Bedriftstelefon: ${formData.bedriftstelefon}`,
+        isKlikkHent: "Bedriftsforespørsel",
+        pickupCode: "",
+        deliveryName: formData.bedriftsnavn,
+        deliveryPhone: formData.bedriftstelefon,
+      };
+
+      await emailjs.send(
+        "service_476sm2p",
+        "template_xmmnr9c",
+        templateParams,
+        "HLFNfJ-HvjqeXLMXL"
+      );
+
       alert("Takk for din registrering! Vi kontakter deg snart.");
+      
+      // Reset form
+      setFormData({
+        bedriftsnavn: "",
+        fornavn: "",
+        etternavn: "",
+        forretningsmail: "",
+        bedriftstype: "",
+        mobiltelefon: "+47",
+        bedriftstelefon: "+47",
+        akseptert: false,
+      });
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Det oppstod en feil ved sending av forespørselen. Vennligst prøv igjen eller kontakt oss direkte.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -124,7 +166,7 @@ export default function BedriftRegistrer() {
             </h1>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-2xl p-6 md:p-8">
               {/* Bedriftsnavn */}
               <div>
                 <label htmlFor="bedriftsnavn" className="block text-sm font-medium mb-2" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
@@ -321,13 +363,14 @@ export default function BedriftRegistrer() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 px-6 rounded-lg font-semibold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                disabled={isSending}
+                className="w-full py-4 px-6 rounded-lg font-semibold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   backgroundColor: 'oklch(70.5% 0.213 47.604)',
                   fontFamily: 'var(--font-sans), sans-serif',
                 }}
               >
-                Send forespørsel
+                {isSending ? "Sender..." : "Send forespørsel"}
               </button>
             </form>
           </div>
