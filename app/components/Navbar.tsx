@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock, Tag } from "lucide-react";
+import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock, Tag, Building } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +17,7 @@ export default function Navbar() {
 
   const menuItems = [
     { href: "/", label: "Hjem", icon: Home },
+    { href: "/for-bedrifter", label: "For bedrifter", icon: Building },
     { href: "/om-oss", label: "Om oss", icon: Users },
     { href: "/apningstider", label: "Åpningstider", icon: Clock },
     { href: "/trygghet-og-sikkerhet", label: "Trygghet og sikkerhet", icon: Shield },
@@ -60,6 +61,9 @@ export default function Navbar() {
 
           {/* Right side: Nav links + Bestill nå - Desktop only */}
           <div className="hidden md:flex items-center gap-6 md:gap-8 ml-auto">
+            <Link href="/for-bedrifter" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              For bedrifter
+            </Link>
             <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               <Package className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Tjenester
