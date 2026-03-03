@@ -107,16 +107,33 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom section with copyright and legal links */}
+        {/* Bottom section with privacy heading and legal links */}
         <div className="border-t border-white/20 mt-8 pt-6">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 space-y-3" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+            <div>
+              <h3 className="text-sm md:text-base font-semibold" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                Personvern
+              </h3>
+              <button
+                type="button"
+                className="mt-1 text-xs md:text-sm underline hover:opacity-80"
+                style={{ color: 'rgba(255,255,255,0.92)', background: 'transparent' }}
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("open-cookie-settings"));
+                  }
+                }}
+              >
+                Cookieinnstillinger
+              </button>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base">
               <div style={{ color: 'rgba(255,255,255,0.92)' }}>
                 © 2026 Klikk&Send. Alle rettigheter reservert.
               </div>
               <div className="flex gap-6">
                 <Link href="#privacy" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                  Personvern
+                  Personvernserklæring
                 </Link>
                 <Link href="#terms" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
                   Vilkår
