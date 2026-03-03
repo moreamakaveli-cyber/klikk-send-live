@@ -6,7 +6,7 @@ import Button from "../components/ui/button";
 
 export default function Takk() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">

@@ -272,7 +272,7 @@ function BestillContent() {
   };
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
+    <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -319,9 +319,9 @@ function BestillContent() {
                       className={`p-5 md:p-6 rounded-lg border transition-all duration-200 text-left ${
                         isSelected
                           ? "border-orange-600 shadow-sm"
-                          : "border-orange-300 hover:border-orange-400"
+                          : "border-gray-200 hover:border-gray-300"
                       }`}
-                      style={{ backgroundColor: isSelected ? 'rgba(249, 115, 22, 0.25)' : 'rgba(251, 146, 60, 0.18)' }}
+                      style={{ backgroundColor: isSelected ? 'rgba(251, 146, 60, 0.15)' : '#FFFFFF' }}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div
@@ -340,11 +340,11 @@ function BestillContent() {
                           isSelected ? "text-orange-600" : "text-gray-900"
                         }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? 'oklch(70.5% 0.213 47.604)' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
                       </div>
-                      <div className="space-y-1 mb-2">
-                        <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>{option.maxWeight}</p>
-                        <p className="text-sm text-gray-600" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>{option.maxDimensions}</p>
-                      </div>
-                      <p className="text-xs text-gray-500" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>Eksempler: {option.examples}</p>
+                        <div className="space-y-1 mb-2">
+                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxWeight}</p>
+                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxDimensions}</p>
+                        </div>
+                        <p className="text-xs" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>Eksempler: {option.examples}</p>
                     </button>
                   );
                 })}

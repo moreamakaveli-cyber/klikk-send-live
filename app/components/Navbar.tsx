@@ -50,11 +50,8 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo + text - samme som i footer */}
+            {/* Logo text */}
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
-                <Package className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={2} />
-              </div>
               <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
             </Link>
           </div>
@@ -108,9 +105,6 @@ export default function Navbar() {
         {/* Drawer Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-            <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-              <Package className="w-5 h-5 text-white" />
-            </div>
             <span className="text-xl font-bold text-gray-900">Klikk&Send</span>
           </Link>
           <button

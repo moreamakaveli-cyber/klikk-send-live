@@ -47,7 +47,7 @@ const faqItems = [
 
 export default function DetteLurerMangePa() {
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
+    <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
       <section className="py-16 md:py-24 px-6 md:px-8">
         <div className="max-w-[1400px] mx-auto">

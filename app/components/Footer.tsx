@@ -11,12 +11,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
             {/* Left Column: Brand */}
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
-                    <Package className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.92)' }} />
-                  </div>
-                </div>
+              <div className="mb-4">
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
                   Klikk&Send
                 </h2>

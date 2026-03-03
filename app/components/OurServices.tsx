@@ -41,22 +41,22 @@ const bottomPoints = [
 
 export default function OurServices() {
   return (
-    <div className="pt-6 pb-20 md:pt-10 md:pb-32" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="pt-4 pb-12 md:pt-6 md:pb-16" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-3" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
           Våre tjenester
         </h2>
-        <p className="text-center mb-12 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
+        <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
           Vi leverer alt fra personlige ærender til klikk&hent og kjøp fra markedsplasser – raskt og enkelt.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="p-8 flex flex-col items-start gap-4 transition-shadow"
+                className="p-6 flex flex-col items-start gap-3 transition-shadow"
                 style={{ 
                   backgroundColor: '#FFFFFF', 
                   borderRadius: '20px',
