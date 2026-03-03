@@ -8,22 +8,30 @@ export default function ForBedrifter() {
       <Navbar />
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 lg:gap-10 mb-6 md:mb-8 mt-12 md:mt-16 lg:mt-20">
-          <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] flex-shrink-0">
+          <div className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 flex-shrink-0">
             <Image
-              src="/collaboration-icon-3.svg"
+              src="/team-goals.svg"
               alt="Bli kunde"
-              width={448}
-              height={448}
+              width={320}
+              height={320}
               className="w-full h-full"
             />
           </div>
-          <div className="flex-grow mt-8 md:mt-12 lg:mt-16">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 md:mb-8 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+          <div className="flex-grow mt-8 md:mt-12 lg:mt-16 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
               Bli kunde
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               Få virksomheten din til å vokse med Klikk&Send. Nå flere kunder, øk salget og tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering fra butikk.
             </p>
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0 mt-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+              Ønsker du å sende pakker eller varer med oss? Fyll ut skjemaet, så kontakter vi deg med et uforpliktende tilbud tilpasset ditt behov.
+            </p>
+            <div className="mt-4 text-center md:text-left">
+              <a href="/for-bedrifter/registrer" className="text-lg md:text-xl font-semibold underline" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+                Fyll ut skjema
+              </a>
+            </div>
           </div>
         </div>
 
