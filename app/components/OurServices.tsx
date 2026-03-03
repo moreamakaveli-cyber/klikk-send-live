@@ -47,7 +47,7 @@ export default function OurServices() {
           Våre tjenester
         </h2>
         <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
-          Vi leverer alt fra personlige ærender til klikk&hent og kjøp fra markedsplasser – raskt og enkelt.
+          Vi leverer alt fra personlige eiendeler til klikk&hent og kjøp fra markedsplasser – raskt og enkelt.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

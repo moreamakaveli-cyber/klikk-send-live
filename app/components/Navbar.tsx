@@ -51,8 +51,10 @@ export default function Navbar() {
             </button>
             
             {/* Logo text */}
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>Klikk&Send</span>
+            <Link href="/" className="flex items-center gap-1 md:gap-2">
+              <span className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+                Klikk&Send
+              </span>
             </Link>
           </div>
 

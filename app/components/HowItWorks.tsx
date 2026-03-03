@@ -27,9 +27,9 @@ const HandHeart = ({ className, style }: { className?: string; style?: React.CSS
 );
 
 const useCases = [
-  { icon: ShoppingBag, text: "Kjøpte en kaffemaskin på Elkjøp og vil ha det levert idag?" },
+  { icon: ShoppingBag, text: "Kjøpt ny kaffemaskin på Elkjøp og vil ha den levert i dag?" },
   { icon: Shirt, text: "Ble jakken lagt igjen på nach? Vi henter den." },
-  { icon: ShoppingBag, text: "Kjøpt noe på nett som har en fysisk butikk? Vi henter og leverer umiddelbart." },
+  { icon: ShoppingBag, text: "Kjøpt noe med klikk og hent? Vi henter og leverer umiddelbart." },
   { icon: Wallet, text: "Ligger lommeboken hos en venn? Vi ordner det!" },
   { icon: Shirt, text: "Ble klærne hos skredderen klare? Vi henter og leverer!" },
   { icon: BookOpen, text: "Bok som må leveres til en medstudent? Ingen stress." },

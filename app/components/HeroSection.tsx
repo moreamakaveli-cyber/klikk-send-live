@@ -21,14 +21,26 @@ export default function HeroSection() {
 
             {/* Subtitle - Desktop */}
             <div className="hidden md:block text-lg md:text-xl mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker levering hjem umiddelbart?</p>
-              <p className="font-semibold">Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.</p>
+              <p className="font-medium">
+                Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker{" "}
+                <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering hjem?
+              </p>
+              <p className="font-semibold">
+                Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.
+              </p>
+              <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>
 
             {/* Description - Mobile */}
             <div className="md:hidden text-sm mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker levering hjem umiddelbart?</p>
-              <p className="font-semibold">Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.</p>
+              <p className="font-medium">
+                Har du bestilt via klikk&hent eller kjøpt noe på en markedsplass og ønsker{" "}
+                <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering hjem?
+              </p>
+              <p className="font-semibold">
+                Vi henter og leverer små og store gjenstander mellom privatpersoner og bedrifter.
+              </p>
+              <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>
 
             {/* CTA Buttons */}
@@ -53,14 +65,11 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Pricing text and button */}
+            {/* Pricing text */}
             <div className="space-y-2 md:space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
               <p className="hidden md:block text-base" style={{ color: 'hsl(150, 30%, 15%)' }}>
                 Faste og rimelige priser - beregnet etter avstand.
               </p>
-              <Link href="/priser" className="inline-block font-semibold text-base md:text-lg lg:text-xl transition-colors hover:opacity-80" style={{ color: 'hsl(150, 50%, 45%)' }}>
-                Se våre priser her
-              </Link>
             </div>
           </div>
 
