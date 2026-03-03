@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Home, Info, Star, Lightbulb, Leaf, DollarSign, Phone, Users, Shield, HelpCircle, Clock, Tag, Building, Handshake } from "lucide-react";
+import { Package, Menu, X, Info, Star, Lightbulb, DollarSign, Phone, Users, Shield, HelpCircle, Clock, Tag, Building, Handshake } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,6 @@ export default function Navbar() {
   };
 
   const menuItems = [
-    { href: "/", label: "Hjem", icon: Home },
     { href: "/for-bedrifter", label: "For bedrifter", icon: Building },
     { href: "/om-oss", label: "Om oss", icon: Users },
     { href: "/apningstider", label: "Åpningstider", icon: Clock },
@@ -26,7 +25,6 @@ export default function Navbar() {
     { href: "/#how-it-works", label: "Slik fungerer det", icon: Info },
     { href: "/#why-choose", label: "Hvorfor velge Klikk&Send", icon: Star },
     { href: "/#how-to-use", label: "Hvordan kan du bruke oss", icon: Lightbulb },
-    { href: "/#sustainability", label: "Bærekraft", icon: Leaf },
     { href: "/priser", label: "Priser", icon: DollarSign },
     { href: "/kontakt-oss", label: "Kontakt oss", icon: Phone },
   ];
