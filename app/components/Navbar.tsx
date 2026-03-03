@@ -72,10 +72,6 @@ export default function Navbar() {
               <Package className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Tjenester
             </Link>
-            <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              <Info className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
-              Slik fungerer det
-            </Link>
             <Link href="/priser" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               <Tag className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Priser
