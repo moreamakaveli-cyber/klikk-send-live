@@ -170,32 +170,17 @@ export default function HowItWorks() {
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Slik kan du bruke Klikk&Send
             </h3>
-            <ul className="space-y-3 md:space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Glemt AirPods eller nøkler hos en venn?</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Skal du sende noe til en venn i byen?</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Bestilt en kaffemaskin på elkjøp? Vi leverer til deg.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Har du noe klart til henting? Vi plukker det opp og leverer det hjem til deg.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Privat eller bedrift – vi leverer fra A til B.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Din tid er verdifull, la oss ta oss av leveransen.</span>
-              </li>
-            </ul>
+            <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+              <p>
+                Klikk&Send leverer små og store gjenstander mellom privatpersoner. Vi henter der det passer deg og leverer direkte til ønsket adresse.
+              </p>
+              <p>
+                Vi henter også varer som er klare i butikk via klikk og hent eller click and collect, for eksempel hos Power, Elkjøp, KICKS og Blivakker.
+              </p>
+              <p>
+                Har du kjøpt via Finn.no eller Tise? Vi henter hos selger og leverer direkte til kjøper. Raskt, trygt og uten ventetid.
+              </p>
+            </div>
           </div>
 
           {/* Priser og betaling */}
