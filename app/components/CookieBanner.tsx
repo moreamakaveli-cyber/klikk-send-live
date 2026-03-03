@@ -26,7 +26,9 @@ export default function CookieBanner() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50">
       <div className="mx-auto max-w-[1400px] px-4 pb-4">
-        <div className="rounded-2xl bg-white/95 shadow-lg border border-gray-200 p-4 md:p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div
+          className="rounded-2xl bg-white/95 shadow-lg border border-gray-200 p-4 md:p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+        >
           <div className="flex items-start gap-3 md:gap-4">
             {/* Icon: open package with cookie */}
             <div className="hidden md:flex items-center justify-center">
@@ -65,7 +67,7 @@ export default function CookieBanner() {
               </svg>
             </div>
 
-            <div className="text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604 / 0.9)' }}>
+            <div className="text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: '#111827' }}>
             <p>
               Vi bruker informasjonskapsler (cookies) for å gi deg en bedre opplevelse
               på nettsiden.
@@ -79,7 +81,7 @@ export default function CookieBanner() {
             <Link
               href="/personvern"
               className="text-xs md:text-sm underline hover:opacity-80"
-              style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604 / 0.9)' }}
+              style={{ fontFamily: 'var(--font-sans), sans-serif', color: '#111827' }}
             >
               Les mer
             </Link>
