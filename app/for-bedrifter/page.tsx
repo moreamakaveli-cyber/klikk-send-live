@@ -78,12 +78,6 @@ export default function ForBedrifter() {
             </div>
           </div>
         </div>
-
-        <div className="mt-12 md:mt-16 pt-8 border-t" style={{ borderColor: '#E5E5E5' }}>
-          <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-            For english version click here
-          </p>
-        </div>
       </div>
       <Footer />
     </main>
