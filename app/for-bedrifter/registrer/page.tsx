@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 export default function BedriftRegistrer() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     bedriftsnavn: "",
     fornavn: "",
@@ -132,23 +134,11 @@ export default function BedriftRegistrer() {
         "HLFNfJ-HvjqeXLMXL"
       );
 
-      alert("Takk for din registrering! Vi kontakter deg snart.");
-      
-      // Reset form
-      setFormData({
-        bedriftsnavn: "",
-        fornavn: "",
-        etternavn: "",
-        forretningsmail: "",
-        bedriftstype: "",
-        mobiltelefon: "+47",
-        bedriftstelefon: "+47",
-        akseptert: false,
-      });
+      // Navigate to thank you page
+      router.push("/for-bedrifter/takk");
     } catch (error) {
       console.error("Failed to send email:", error);
       alert("Det oppstod en feil ved sending av forespørselen. Vennligst prøv igjen eller kontakt oss direkte.");
-    } finally {
       setIsSending(false);
     }
   };
