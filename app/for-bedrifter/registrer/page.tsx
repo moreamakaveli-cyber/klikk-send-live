@@ -134,8 +134,8 @@ export default function BedriftRegistrer() {
         "HLFNfJ-HvjqeXLMXL"
       );
 
-      // Navigate to thank you page
-      router.push("/for-bedrifter/takk");
+      // Navigate to thank you page - use window.location for more reliable navigation
+      window.location.href = "/for-bedrifter/takk";
     } catch (error) {
       console.error("Failed to send email:", error);
       alert("Det oppstod en feil ved sending av forespørselen. Vennligst prøv igjen eller kontakt oss direkte.");
