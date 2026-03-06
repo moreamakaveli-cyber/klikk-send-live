@@ -14,7 +14,7 @@ export default function OmOss() {
             
             <div className="space-y-6 leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p className="text-base md:text-lg">
-                Klikk&Send ble startet for å gjøre lokal levering enklere og raskere. Vi tilbyr en effektiv løsning for henting og levering av små og mellomstore gjenstander, uten at du må betale for en dyr drosjetur eller vente flere dager på tradisjonell frakt.
+                Hently ble startet for å gjøre lokal levering enklere og raskere. Vi tilbyr en effektiv løsning for henting og levering av små og mellomstore gjenstander, uten at du må betale for en dyr drosjetur eller vente flere dager på tradisjonell frakt.
               </p>
               
               <p className="text-base md:text-lg">
@@ -22,7 +22,7 @@ export default function OmOss() {
               </p>
               
               <p className="text-base md:text-lg">
-                Klikk&Send er en lokal leveringstjeneste som frakter ting fra A til B på kort tid. Vi jobber for å gjøre tjenesten trygg, rask og enkel å bruke.
+                Hently er en lokal leveringstjeneste som frakter ting fra A til B på kort tid. Vi jobber for å gjøre tjenesten trygg, rask og enkel å bruke.
               </p>
             </div>
           </div>

@@ -27,34 +27,34 @@ const HandHeart = ({ className, style }: { className?: string; style?: React.CSS
 );
 
 const useCases = [
-  { icon: ShoppingBag, text: "Kjøpt ny kaffemaskin på Elkjøp og vil ha den levert i dag?" },
-  { icon: Shirt, text: "Ble jakken lagt igjen på nach? Vi henter den." },
-  { icon: ShoppingBag, text: "Kjøpt noe med klikk og hent? Vi henter og leverer umiddelbart." },
-  { icon: Wallet, text: "Ligger lommeboken hos en venn? Vi ordner det!" },
   { icon: Shirt, text: "Ble klærne hos skredderen klare? Vi henter og leverer!" },
-  { icon: BookOpen, text: "Bok som må leveres til en medstudent? Ingen stress." },
-  { icon: ShoppingBag, text: "Kjøpt på Finn eller Tise og vil ha den levert nå?" },
-  { icon: ShoppingBag, text: "Har barnet glemt gymsekken hjemme? Vi henter og leverer!" },
+  { icon: ShoppingBag, text: "En kunde har ikke tid til å hente klærne? Vi ordner levering." },
+  { icon: Heart, text: "Kunden bor langt unna butikken? Vi leverer helt hjem." },
+  { icon: Package, text: "Flere plagg klare for henting? Vi leverer dem samlet til kunden." },
+  { icon: ShoppingBag, text: "Vil du tilby hjemlevering i butikken? Vi tar transporten." },
+  { icon: Shirt, text: "Kunden vil sende klær til skredderen? Vi kan hente hos kunden." },
+  { icon: Heart, text: "Trenger en kunde levering til jobb eller arrangement? Vi leverer direkte." },
+  { icon: Package, text: "Skredderiet vil spare tid i butikken? Vi håndterer leveringen." },
 ];
 
 const steps = [
   {
     number: 1,
     icon: Search,
-    title: "Bestill",
-    description: "Legg inn hente- og leveringsadresse.",
+    title: "Kunden får SMS om at plagget er klart.",
+    description: "Når klærne er klare får kunden tilbud om hjemmelevering med Hently",
   },
   {
     number: 2,
     icon: Hand,
-    title: "Vi henter",
-    description: "Henting på avtalt tidspunkt. Du får varsling når budet ankommer.",
+    title: "Vi henter hos skredderen",
+    description: "Hently henter plagget i butikken på avtalt tidspunkt.",
   },
   {
     number: 3,
     icon: HandHeart,
-    title: "Vi leverer",
-    description: "Leveres til mottaker. Du betaler når pakken er levert.",
+    title: "Kunden får leveringen",
+    description: "Vi leverer direkte til kundens ønsket adresse.",
   },
 ];
 
@@ -65,43 +65,9 @@ export default function HowItWorks() {
 
         <OurServices />
 
-        {/* Use cases - under Våre tjenester */}
-        <div className="mb-6 md:mb-8 mt-2 md:mt-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
-            Når passer Klikk&Send?
-          </h2>
-          <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
-            Uansett hva som skal leveres – vi frakter det fra A til B. Tiden din er verdifull. La oss ta leveringen.
-          </p>
-          <div
-            className="rounded-2xl p-6 md:p-8"
-            style={{
-              backgroundColor: 'transparent',
-            }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-              {useCases.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-colors"
-                    style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}
-                  >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100">
-                      <Icon className="w-5 h-5 text-orange-600" strokeWidth={2} />
-                    </div>
-                    <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-                      {item.text}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        {/* Slik fungerer Hently - først */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
-          Slik fungerer Klikk&Send
+          Slik fungerer Hently
         </h2>
 
         {/* Large rounded container with secondary background */}
@@ -134,52 +100,71 @@ export default function HowItWorks() {
           </div>
         </div>
 
+        {/* Use cases - Når passer Hently? */}
+        <div className="mb-6 md:mb-8 mt-2 md:mt-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+            Når passer Hently?
+          </h2>
+          <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
+            Vi frakter fra A til B. Tiden din er verdifull. La oss ta leveringen.
+          </p>
+          <div
+            className="rounded-2xl p-6 md:p-8"
+            style={{
+              backgroundColor: 'transparent',
+            }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              {useCases.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-colors"
+                    style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}
+                  >
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-gray-100">
+                      <Icon className="w-5 h-5 text-orange-600" strokeWidth={2} />
+                    </div>
+                    <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+                      {item.text}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
         {/* Why Choose & How to Use & Sustainability Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-12">
-          {/* Why Choose Klikk&Send */}
+          {/* Why Choose Hently */}
           <div id="why-choose" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Hvorfor velge Klikk&Send?
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+              Hvorfor velge Hently?
             </h3>
-            <ul className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Umiddelbar henting og levering.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Vi henter fra alle butikker som tilbyr klikk og hent eller click and collect.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Billigere enn taxi. Raskere enn posten.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Faste, lave priser.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="font-bold mt-1" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
-                <span>Direkte levering der du ønsker.</span>
-              </li>
-            </ul>
+            <p className="text-base md:text-lg mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+              Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> hjemlevering til kundene dine og styrk servicen i din bedrift.
+            </p>
+            <Link href="/hvorfor-velge-klikkogsend" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+              Les mer
+              <span>→</span>
+            </Link>
           </div>
 
           {/* How to Use */}
           <div id="how-to-use" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Slik kan du bruke Klikk&Send
+              Slik fungerer samarbeid
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p>
-                Klikk&Send leverer små og store gjenstander mellom privatpersoner. Vi henter der det passer deg og leverer direkte til ønsket adresse.
+                En enkel løsning for både bedrift og kunde.
               </p>
-              <p>
-                Vi henter også varer som er klare i butikk via klikk og hent eller click and collect, for eksempel hos Power, Elkjøp, KICKS og Blivakker.
-              </p>
-              <p>
-                Har du kjøpt via Finn.no eller Tise? Vi henter hos selger og leverer direkte til kjøper. Raskt, trygt og uten ventetid.
-              </p>
+              <Link href="/samarbeid" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+                Les mer
+                <span>→</span>
+              </Link>
             </div>
           </div>
 
@@ -189,29 +174,16 @@ export default function HowItWorks() {
               Priser og betaling
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              <div className="flex items-center justify-between">
-                <span>Kort levering (0–3 km)</span>
-                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Medium levering (3–6 km)</span>
-                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>169 kr</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Lengre levering (6–20 km)</span>
-                    <span className="font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>219 kr</span>
+              <div className="mb-4">
+                <p className="text-lg md:text-xl font-semibold mb-4">
+                  Fast pris per levering: <span className="text-base md:text-lg font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</span>
+                </p>
+                <p className="mb-6">En enkel og forutsigbar pris for både bedriften og kunden.</p>
               </div>
-            </div>
-            <div className="text-sm md:text-base mt-6 md:mt-8 space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              <p className="max-w-md">Prisen beregnes ut fra avstand.</p>
-              <p className="max-w-md">Du får en SMS med bekreftet pris før oppdraget gjennomføres.</p>
-              <p className="max-w-md">Du betaler med Vipps når pakken er levert.</p>
-              <p className="mt-8 font-semibold text-base md:text-lg">
-                Les mer om trygghet og sikkerhet{" "}
-                    <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
-                  her
-                </Link>.
-              </p>
+              <Link href="/betaling-og-oppgjor" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+                Les mer
+                <span>→</span>
+              </Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function FontTest() {
-  const [text, setText] = useState("Klikk&Send");
+  const [text, setText] = useState("Hently");
   const [fontSize, setFontSize] = useState(64);
   const [fontWeight, setFontWeight] = useState(400);
   const [letterSpacing, setLetterSpacing] = useState(0);

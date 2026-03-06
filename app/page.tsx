@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col" style={{ backgroundColor: '#FFFFFF' }}>
+    <main className="min-h-screen flex flex-col" style={{ backgroundColor: '#FFFFFF', margin: 0, padding: 0 }}>
       <Navbar />
       <HeroSection />
       <HowItWorks />

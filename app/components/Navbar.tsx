@@ -23,17 +23,17 @@ export default function Navbar() {
     { href: "/dette-lurer-mange-pa", label: "Ofte stilte spørsmål", icon: HelpCircle },
     { href: "/pakkeinnhold", label: "Pakkeinnhold", icon: Package },
     { href: "/#how-it-works", label: "Slik fungerer det", icon: Info },
-    { href: "/#why-choose", label: "Hvorfor velge Klikk&Send", icon: Star },
+    { href: "/#why-choose", label: "Hvorfor velge Hently", icon: Star },
     { href: "/#how-to-use", label: "Hvordan kan du bruke oss", icon: Lightbulb },
     { href: "/kontakt-oss", label: "Kontakt oss", icon: Phone },
   ];
 
   return (
     <>
-      <nav className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-4 md:py-5 flex items-center justify-between">
+      <nav className="w-full" style={{ backgroundColor: '#FFFFFF', marginTop: 0, paddingTop: 0 }}>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 pt-0 pb-2 md:pt-0 md:pb-3 flex items-center justify-between" style={{ minHeight: '160px' }}>
           {/* Left side: Menu button and Logo text */}
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center">
             {/* Menu Button - Always visible */}
             <button 
               onClick={toggleMenu}
@@ -48,14 +48,9 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo text */}
-            <Link href="/" className="flex items-center gap-1 md:gap-2">
-              <span
-                className="text-xl md:text-2xl font-bold"
-                style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}
-              >
-                Klikk&Send
-              </span>
+            {/* Logo */}
+            <Link href="/" className="flex items-center" style={{ marginLeft: "-19px" }}>
+              <img src="/logo.png" alt="Hently" style={{ height: "130px", width: "auto" }} />
             </Link>
           </div>
 
@@ -103,8 +98,8 @@ export default function Navbar() {
       >
         {/* Drawer Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-            <span className="text-xl font-bold text-gray-900">Klikk&Send</span>
+          <Link href="/" className="flex items-center" onClick={closeMenu}>
+            <img src="/logo.png" alt="Hently" style={{ height: "130px", width: "auto" }} />
           </Link>
           <button
             onClick={closeMenu}

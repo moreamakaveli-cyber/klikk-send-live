@@ -16,20 +16,20 @@ const services: Service[] = [
   {
     icon: Shirt,
     iconColor: "hsl(16, 85%, 55%)", // accent (korall)
-    title: "Markedsplass-levering",
-    description: "Kjøpt noe på Finn, Tise eller andre markedsplasser? Vi henter fra selger og leverer direkte til deg.",
+    title: "Lever ferdige klær til kunde",
+    description: "Når plagget er klart kan vi hente det hos deg og levere det direkte til kunden.",
   } as Service,
   {
     icon: ShoppingBag,
     iconColor: "oklch(70.5% 0.213 47.604)", // primary (oransje)
-    title: "Klikk&hent",
-    description: "Bestilt med klikk&hent? Vi henter i butikken og leverer rett hjem til deg.",
+    title: "Hent klær hos kunde",
+    description: "En kunde vil sende klær til skredderen? Vi kan hente hjemme hos kunden og levere til butikken.",
   } as Service,
   {
     icon: Heart,
     iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
-    title: "Personlige ærender",
-    description: "Skal noe leveres til en venn? Glemt nøkler et sted? Vi ordner det for deg.",
+    title: "Rask levering i Oslo",
+    description: "Vi leverer små pakker og klær raskt mellom skredder og kunde i Oslo.",
   } as Service,
 ];
 
@@ -41,13 +41,13 @@ const bottomPoints = [
 
 export default function OurServices() {
   return (
-    <div className="pt-4 pb-12 md:pt-6 md:pb-16" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="pt-0 pb-12 md:pt-2 md:pb-16" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-3" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
           Våre tjenester
         </h2>
         <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
-          Vi leverer alt fra personlige eiendeler til klikk&hent og kjøp fra markedsplasser – raskt og enkelt.
+          Vi hjelper bedrifter med å hente og levere varer direkte til kundene – raskt og enkelt.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -84,7 +84,7 @@ export default function OurServices() {
                   className="text-sm font-semibold flex items-center gap-1 transition-colors service-link" 
                   style={{ color: 'hsl(150, 30%, 15%)' }}
                 >
-                  Bestill nå
+                  {index === 0 ? "Bestill levering" : index === 1 ? "Bestill henting" : "Les mer"}
                   <span className="service-arrow">→</span>
                 </Link>
               </div>

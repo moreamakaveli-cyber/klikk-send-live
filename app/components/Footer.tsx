@@ -13,7 +13,7 @@ export default function Footer() {
             <div>
               <div className="mb-4">
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
-                  Klikk&Send
+                  Hently
                 </h2>
               </div>
               <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
@@ -68,7 +68,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    Jobb i Klikk&Send
+                    Jobb i Hently
                   </Link>
                 </li>
               </ul>
@@ -133,7 +133,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base">
               <div style={{ color: 'rgba(255,255,255,0.92)' }}>
-                © 2026 Klikk&Send. Alle rettigheter reservert.
+                © 2026 Hently. Alle rettigheter reservert.
               </div>
               <div className="flex gap-6">
                 <Link href="#privacy" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>

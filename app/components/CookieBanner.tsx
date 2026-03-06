@@ -186,7 +186,7 @@ export default function CookieBanner() {
                         <div>
                           <p className="font-semibold">Nødvendige cookies</p>
                           <p className="text-xs text-gray-600">
-                            Brukes for at nettsiden til Klikk&Send skal fungere, for eksempel for å huske valg du gjør.
+                            Brukes for at nettsiden til Hently skal fungere, for eksempel for å huske valg du gjør.
                           </p>
                         </div>
                       </div>
@@ -200,7 +200,7 @@ export default function CookieBanner() {
                         <div>
                           <p className="font-semibold">Analyse- og produktutviklings-cookies</p>
                           <p className="text-xs text-gray-600">
-                            Hjelper oss å forstå bruk av tjenesten, slik at vi kan forbedre Klikk&Send over tid.
+                            Hjelper oss å forstå bruk av tjenesten, slik at vi kan forbedre Hently over tid.
                           </p>
                         </div>
                       </div>

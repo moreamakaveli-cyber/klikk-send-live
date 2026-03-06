@@ -20,7 +20,7 @@ export default function KontaktOss() {
             
             <div className="space-y-8 leading-relaxed text-center" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p className="text-base md:text-lg">
-                Har du spørsmål om en levering eller trenger hjelp med en bestilling?
+                Har du spørsmål om tjenesten vår?
               </p>
               <p className="text-base md:text-lg font-semibold">
                 Vi svarer så raskt vi kan!
