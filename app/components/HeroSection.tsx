@@ -25,7 +25,7 @@ export default function HeroSection() {
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
-                Har du varer klare? Vi henter hos deg og leverer direkte til kunden.
+                Direkte levering fra bedrift til kunde.
               </p>
               <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>
@@ -36,7 +36,7 @@ export default function HeroSection() {
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
-                Har du varer klare? Vi henter hos deg og leverer direkte til kunden.
+                Direkte levering fra bedrift til kunde.
               </p>
               <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>
@@ -45,13 +45,13 @@ export default function HeroSection() {
             <div className="flex flex-row gap-2 md:gap-3 mb-4 md:mb-6 flex-nowrap overflow-x-auto">
               <Link href="/bestill" className="flex-shrink-0">
                 <button className="rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium flex items-center gap-1.5 transition-all duration-200 hover:opacity-90 whitespace-nowrap" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', color: '#ffffff', fontFamily: 'var(--font-sans), sans-serif' }}>
-                  Lever til kunde
+                  Levering
                   <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
                 </button>
               </Link>
               <Link href="/bestill" className="flex-shrink-0">
                 <button className="rounded-lg px-3 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium flex items-center gap-1.5 transition-all duration-200 hover:opacity-90 whitespace-nowrap" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', color: '#ffffff', fontFamily: 'var(--font-sans), sans-serif' }}>
-                  Hent fra kunde
+                  Henting
                   <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
                 </button>
               </Link>
