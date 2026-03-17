@@ -142,7 +142,7 @@ export default function HowItWorks() {
             <p className="text-base md:text-lg mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> hjemlevering til dine kunder og styrk servicen i din bedrift.
             </p>
-            <Link href="/hvorfor-velge-klikkogsend" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+            <Link href="/hvorfor-velge-hently" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
               Les mer
               <span>→</span>
             </Link>
