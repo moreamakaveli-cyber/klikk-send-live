@@ -165,10 +165,10 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Voks bedriften din med Hently */}
+          {/* Få bedriften din til å vokse */}
           <div id="grow-business" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Voks bedriften din med Hently
+              Få bedriften din til å vokse
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p>

@@ -17,7 +17,7 @@ export default function VoksBedriftenDin() {
       <Navbar />
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 py-12 md:py-16">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-8 md:mb-12" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-          Voks bedriften din med Hently
+          Få bedriften din til å vokse med Hently
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
@@ -33,7 +33,7 @@ export default function VoksBedriftenDin() {
               </p>
 
               <p>
-                I tillegg jobber vi aktivt med synlighet. Vi løfter frem bedriften din gjennom våre egne kanaler, inkludert sosiale medier og digitale flater der målgruppen din allerede er. Dette gir økt eksponering, styrker merkevaren din og skaper flere konkrete henvendelser.
+                I tillegg jobber vi aktivt med synlighet. Vi løfter frem bedriften din gjennom våre egne kanaler, inkludert sosiale medier og digitale plattformer der målgruppen din allerede er. Dette gir økt eksponering, styrker merkevaren din og skaper flere konkrete henvendelser.
               </p>
 
               <p>
@@ -43,7 +43,7 @@ export default function VoksBedriftenDin() {
               <p>
                 Med Hently får du ikke bare synlighet – du får et system som kontinuerlig jobber for å skaffe deg nye kunder.{" "}
                 <Link href="/for-bedrifter" className="font-semibold transition-opacity hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
-                  Start samarbeid
+                  Samarbeid med oss
                 </Link>
               </p>
             </div>
