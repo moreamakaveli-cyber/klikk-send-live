@@ -80,7 +80,7 @@ export default function OurServices() {
 
                 {/* Lenke */}
                 <Link 
-                  href="/bestill" 
+                  href={index === 2 ? "/umiddelbar-levering-i-oslo" : "/bestill"} 
                   className="text-sm font-semibold flex items-center gap-1 transition-colors service-link" 
                   style={{ color: 'hsl(150, 30%, 15%)' }}
                 >

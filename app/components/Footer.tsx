@@ -117,8 +117,13 @@ export default function Footer() {
                 style={{ color: 'rgba(255,255,255,0.92)', background: 'transparent' }}
                 onClick={() => {
                   try {
-                    if (typeof window !== "undefined") {
-                      window.dispatchEvent(new CustomEvent("open-cookie-settings"));
+                    if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") {
+                      const eventName = "open-cookie-settings";
+                      if (typeof CustomEvent !== "undefined") {
+                        window.dispatchEvent(new CustomEvent(eventName));
+                      } else {
+                        window.dispatchEvent(new Event(eventName));
+                      }
                     }
                   } catch (_) {
                     // avoid unhandled rejection

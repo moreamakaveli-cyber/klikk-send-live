@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 
 export async function GET() {
   try {
@@ -23,6 +23,8 @@ export async function GET() {
     }
 
     // Test connection by checking if we can access the database
+    const supabase = getSupabaseClient();
+
     const { data: testData, error: testError } = await supabase
       .from('orders')
       .select('id')
