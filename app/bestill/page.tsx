@@ -25,28 +25,28 @@ const packageOptions: PackageOption[] = [
   {
     id: "liten",
     title: "Liten",
-    text: "Passer for små gjenstander som dokumenter, nøkler, små pakker, vesker eller en liten pose.",
+    text: "",
     maxWeight: "Maks 10 kg",
     maxDimensions: "Maks 40 × 40 × 40 cm",
-    examples: "Dokumenter, nøkler, små pakker, vesker, liten pose",
+    examples: "",
     icon: Package,
   },
   {
     id: "medium",
     title: "Mellomstor",
-    text: "Passer for flere esker, ryggsekk, PC eller mindre kjøkkenutstyr.",
+    text: "",
     maxWeight: "Maks 20 kg",
     maxDimensions: "Maks 60 × 50 × 50 cm",
-    examples: "Flere esker, ryggsekk, PC, mindre kjøkkenutstyr",
+    examples: "",
     icon: Box,
   },
   {
     id: "stor",
     title: "Stor",
-    text: "Passer for koffert, mikrobølgeovn, større esker eller lignende.",
+    text: "",
     maxWeight: "Maks 35 kg",
     maxDimensions: "Maks 80 × 60 × 60 cm",
-    examples: "Koffert, mikrobølgeovn, større esker",
+    examples: "",
     icon: Archive,
   },
 ];
@@ -341,11 +341,10 @@ function BestillContent() {
                           isSelected ? "text-orange-600" : "text-gray-900"
                         }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? 'oklch(70.5% 0.213 47.604)' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
                       </div>
-                        <div className="space-y-1 mb-2">
+                        <div className="space-y-1">
                           <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxWeight}</p>
                           <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxDimensions}</p>
                         </div>
-                        <p className="text-xs" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>Eksempler: {option.examples}</p>
                     </button>
                   );
                 })}

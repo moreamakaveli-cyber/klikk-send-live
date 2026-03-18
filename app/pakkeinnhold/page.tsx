@@ -23,11 +23,6 @@ export default function Pakkeinnhold() {
               <h2 className="text-2xl md:text-3xl font-semibold mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Liten</h2>
               <div className="space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                 <div>
-                  <p className="text-base md:text-lg mb-2">
-                    Passer for små gjenstander som dokumenter, nøkler, små pakker, vesker eller en liten pose.
-                  </p>
-                </div>
-                <div>
                   <p className="font-semibold mb-1">Vekt:</p>
                   <p>Maks 10 kg</p>
                 </div>
@@ -42,11 +37,6 @@ export default function Pakkeinnhold() {
             <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm">
               <h2 className="text-2xl md:text-3xl font-semibold mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Mellomstor</h2>
               <div className="space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                <div>
-                  <p className="text-base md:text-lg mb-2">
-                    Passer for flere esker, ryggsekk, PC eller mindre kjøkkenutstyr.
-                  </p>
-                </div>
                 <div>
                   <p className="font-semibold mb-1">Vekt:</p>
                   <p>Maks 20 kg</p>
@@ -63,22 +53,12 @@ export default function Pakkeinnhold() {
               <h2 className="text-2xl md:text-3xl font-semibold mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Stor</h2>
               <div className="space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                 <div>
-                  <p className="text-base md:text-lg mb-2">
-                    Passer for koffert, mikrobølgeovn, større esker eller lignende.
-                  </p>
-                </div>
-                <div>
                   <p className="font-semibold mb-1">Vekt:</p>
                   <p>Maks 35 kg</p>
                 </div>
                 <div>
                   <p className="font-semibold mb-1">Mål:</p>
                   <p>Maks 80 × 60 × 60 cm</p>
-                </div>
-                <div>
-                  <p className="text-sm md:text-base italic">
-                    Må kunne transporteres forsvarlig av én person.
-                  </p>
                 </div>
               </div>
             </div>

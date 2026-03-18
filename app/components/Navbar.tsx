@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Info, Star, Lightbulb, Phone, Users, Shield, HelpCircle, Clock, Building, Handshake, DollarSign } from "lucide-react";
+import { Package, Menu, X, Phone, Users, Shield, HelpCircle, Clock, Building, Handshake, DollarSign } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +15,18 @@ export default function Navbar() {
     setIsMenuOpen(false);
   };
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const menuItems = [
     { href: "/for-bedrifter", label: "For bedrifter", icon: Building },
     { href: "/om-oss", label: "Om oss", icon: Users },
@@ -22,9 +34,6 @@ export default function Navbar() {
     { href: "/trygghet-og-sikkerhet", label: "Trygghet og sikkerhet", icon: Shield },
     { href: "/dette-lurer-mange-pa", label: "Ofte stilte spørsmål", icon: HelpCircle },
     { href: "/pakkeinnhold", label: "Pakkeinnhold", icon: Package },
-    { href: "/#how-it-works", label: "Slik fungerer det", icon: Info },
-    { href: "/#why-choose", label: "Hvorfor velge Hently", icon: Star },
-    { href: "/#how-to-use", label: "Hvordan kan du bruke oss", icon: Lightbulb },
     { href: "/kontakt-oss", label: "Kontakt oss", icon: Phone },
   ];
 
@@ -36,10 +45,15 @@ export default function Navbar() {
           <div className="flex items-center">
             {/* Menu Button - Always visible */}
             <button 
-              onClick={toggleMenu}
-              className="w-8 h-8 flex items-center justify-center"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+              }}
+              className="w-8 h-8 flex items-center justify-center z-[60] relative"
               style={{ color: 'hsl(150, 30%, 15%)' }}
               aria-label="Toggle menu"
+              type="button"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -99,29 +113,24 @@ export default function Navbar() {
       {/* Overlay */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+          className="fixed inset-0 bg-black/50 z-[45] transition-opacity duration-300"
           onClick={closeMenu}
+          style={{ pointerEvents: 'auto' }}
         />
       )}
 
       {/* Navigation Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-[50] shadow-2xl transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center p-6 border-b border-gray-200">
           <Link href="/" className="flex items-center" onClick={closeMenu}>
             <img src="/logo.png" alt="Hently" style={{ height: "130px", width: "auto" }} />
           </Link>
-          <button
-            onClick={closeMenu}
-            className="w-8 h-8 flex items-center justify-center text-gray-700 hover:text-gray-900 transition-colors"
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
         </div>
 
         {/* Menu Items */}
