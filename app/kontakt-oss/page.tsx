@@ -34,11 +34,11 @@ export default function KontaktOss() {
                     <span className="text-lg font-semibold">E-post:</span>
                   </div>
                   <a
-                    href="mailto:oslo@klikkogsend.no"
+                    href="mailto:oslo@hently.no"
                     className="text-xl font-semibold transition-opacity hover:opacity-80"
                           style={{ color: 'oklch(70.5% 0.213 47.604)' }}
                   >
-                    oslo@klikkogsend.no
+                    oslo@hently.no
                   </a>
                 </div>
 

@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Hentit - Umiddelbar henting og levering",
+  title: "Hently - Umiddelbar henting og levering",
   description:
     "Billig, raskt og enkelt. Vi henter og leverer smått og stort - fra nøkler og klær til møbler og elektronikk. Fra A til B, samme dag.",
   icons: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Hentit",
+    title: "Hently",
   },
 };
 

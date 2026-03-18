@@ -82,8 +82,8 @@ export default function Footer() {
               <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
                 <li className="flex items-center gap-3">
                   <Mail className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
-                  <a href="mailto:oslo@klikkogsend.no" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    oslo@klikkogsend.no
+                  <a href="mailto:oslo@hently.no" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                    oslo@hently.no
                   </a>
                 </li>
                 <li className="flex items-center gap-3">

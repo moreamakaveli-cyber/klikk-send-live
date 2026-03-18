@@ -48,9 +48,19 @@ export default function Navbar() {
               )}
             </button>
             
-            {/* Logo */}
-            <Link href="/" className="flex items-center" style={{ marginLeft: "-19px" }}>
+            {/* Logo - Desktop only */}
+            <Link href="/" className="hidden md:flex items-center" style={{ marginLeft: "-19px" }}>
               <img src="/logo.png" alt="Hently" style={{ height: "130px", width: "auto" }} />
+            </Link>
+          </div>
+
+          {/* Center: Mobile nav links (For bedrifter, Tjenester) */}
+          <div className="flex md:hidden items-center gap-3 flex-1 justify-center">
+            <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
+              For bedrifter
+            </Link>
+            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
+              Tjenester
             </Link>
           </div>
 

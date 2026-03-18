@@ -51,6 +51,13 @@ export default function HvorforVelgeKlikkogsend() {
             <li className="flex items-start gap-4">
               <span className="font-bold mt-1 text-xl" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
               <div>
+                <span className="font-semibold text-lg md:text-xl block mb-2">Øk salgene, nå til flere kunder:</span>
+                <p>Bedrifter som samarbeider med Hently kan også bli synlige på vår plattform. Dette kan bidra til at flere kunder oppdager og velger din bedrift.</p>
+              </div>
+            </li>
+            <li className="flex items-start gap-4">
+              <span className="font-bold mt-1 text-xl" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>•</span>
+              <div>
                 <span className="font-semibold text-lg md:text-xl block mb-2">Ingen binding</span>
                 <p>Samarbeidet er fleksibelt, og kan avsluttes når som helst.</p>
               </div>

@@ -25,7 +25,7 @@ export default function HeroSection() {
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
-                Har du varer klare? Vi henter hos deg og leverer direkte til kunden.
+                Direkte levering fra bedrift til kunde.
               </p>
               <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>
@@ -36,7 +36,7 @@ export default function HeroSection() {
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
-                Har du varer klare? Vi henter hos deg og leverer direkte til kunden.
+                Direkte levering fra bedrift til kunde.
               </p>
               <p>Din tid er verdifull – la oss ta oss av leveransen.</p>
             </div>

@@ -32,7 +32,7 @@ export default function ForBedrifter() {
                 Fyll ut skjema
               </a>
               <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                Spørsmål? <a href="mailto:oslo@klikkogsend.no" className="underline" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>oslo@klikkogsend.no</a>
+                Spørsmål? <a href="mailto:oslo@hently.no" className="underline" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>oslo@hently.no</a>
               </p>
             </div>
           </div>

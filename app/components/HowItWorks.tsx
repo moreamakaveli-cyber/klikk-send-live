@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Hand, Package, ShoppingBag, Shirt, Heart, Cake, KeyRound, BookOpen, Wallet } from "lucide-react";
+import { Search, Hand, Package, ShoppingBag, Heart, Cake, KeyRound, BookOpen, Wallet } from "lucide-react";
 import OurServices from "./OurServices";
 
 // Custom HandHeart icon component
@@ -27,34 +27,30 @@ const HandHeart = ({ className, style }: { className?: string; style?: React.CSS
 );
 
 const useCases = [
-  { icon: Shirt, text: "Ble klærne hos skredderen klare? Vi henter og leverer!" },
-  { icon: ShoppingBag, text: "En kunde har ikke tid til å hente klærne? Vi ordner levering." },
-  { icon: Heart, text: "Kunden bor langt unna butikken? Vi leverer helt hjem." },
-  { icon: Package, text: "Flere plagg klare for henting? Vi leverer dem samlet til kunden." },
-  { icon: ShoppingBag, text: "Vil du tilby hjemlevering i butikken? Vi tar transporten." },
-  { icon: Shirt, text: "Kunden vil sende klær til skredderen? Vi kan hente hos kunden." },
-  { icon: Heart, text: "Trenger en kunde levering til jobb eller arrangement? Vi leverer direkte." },
-  { icon: Package, text: "Skredderiet vil spare tid i butikken? Vi håndterer leveringen." },
+  { icon: ShoppingBag, text: "Vil du tilby umiddelbar hjemlevering fra din bedrift?" },
+  { icon: Package, text: "Vil kunden sende varer til butikk?" },
+  { icon: Heart, text: "Kunden vil ha varen levert samme dag?" },
+  { icon: ShoppingBag, text: "Vil din bedrift tilby bedre service uten ekstra arbeid?" },
 ];
 
 const steps = [
   {
     number: 1,
     icon: Search,
-    title: "Kunden får SMS om at plagget er klart.",
-    description: "Når klærne er klare får kunden tilbud om hjemmelevering med Hently",
+    title: "Kunden får SMS når varen er klar.",
+    description: "Når varen er klar får kunden tilbud om umiddelbar hjemmelevering med Hently",
   },
   {
     number: 2,
     icon: Hand,
-    title: "Vi henter hos skredderen",
-    description: "Hently henter plagget i butikken på avtalt tidspunkt.",
+    title: "Vi henter hos bedrift",
+    description: "Våre bud henter i butikken på oppgitt tidspunkt.",
   },
   {
     number: 3,
     icon: HandHeart,
-    title: "Kunden får leveringen",
-    description: "Vi leverer direkte til kundens ønsket adresse.",
+    title: "Kunden mottar leveringen",
+    description: "Vi leverer direkte til kundens angitte adresse.",
   },
 ];
 

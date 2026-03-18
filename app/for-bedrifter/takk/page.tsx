@@ -19,11 +19,11 @@ export default function BedriftTakk() {
           <p className="text-base md:text-lg mb-8 md:mb-12" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
             Har du spørsmål i mellomtiden? Kontakt oss på{" "}
             <a 
-              href="mailto:oslo@klikkogsend.no" 
+              href="mailto:oslo@hently.no" 
               className="underline hover:opacity-80 transition-opacity"
               style={{ color: 'oklch(70.5% 0.213 47.604)' }}
             >
-              oslo@klikkogsend.no
+              oslo@hently.no
             </a>
           </p>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Shirt, ShoppingBag, Heart } from "lucide-react";
+import { Package, ShoppingBag, Heart } from "lucide-react";
 
 interface Service {
   icon: React.ComponentType<{ className?: string; color?: string; strokeWidth?: number }>;
@@ -14,22 +14,22 @@ interface Service {
 
 const services: Service[] = [
   {
-    icon: Shirt,
+    icon: Package,
     iconColor: "hsl(16, 85%, 55%)", // accent (korall)
-    title: "Lever ferdige klær til kunde",
-    description: "Når plagget er klart kan vi hente det hos deg og levere det direkte til kunden.",
+    title: "Lever vare til kunde",
+    description: "Når varen er klar, henter vi den i butikk og leverer direkte til kunde.",
   } as Service,
   {
     icon: ShoppingBag,
     iconColor: "oklch(70.5% 0.213 47.604)", // primary (oransje)
-    title: "Hent klær hos kunde",
-    description: "En kunde vil sende klær til skredderen? Vi kan hente hjemme hos kunden og levere til butikken.",
+    title: "Henting hos kunde",
+    description: "Har en kunde varer som skal sendes til en bedrift? Vi henter hos kunden og leverer direkte til bedriften.",
   } as Service,
   {
     icon: Heart,
     iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
-    title: "Rask levering i Oslo",
-    description: "Vi leverer små pakker og klær raskt mellom skredder og kunde i Oslo.",
+    title: "Umiddelbar levering i Oslo",
+    description: "Vi leverer små varer umiddelbart fra bedrift til kunde i hele Oslo.",
   } as Service,
 ];
 
