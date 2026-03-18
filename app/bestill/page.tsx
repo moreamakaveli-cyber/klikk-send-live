@@ -225,13 +225,13 @@ function BestillContent() {
 
       // Save order to Supabase (try, but don't fail if it errors)
       try {
-        await saveOrder({
+      await saveOrder({
           name: pickupName,
           phone: pickupPhone,
-          pickup_address: pickupAddress,
-          delivery_address: deliveryAddress,
-          package_size: packageSize,
-        });
+        pickup_address: pickupAddress,
+        delivery_address: deliveryAddress,
+        package_size: packageSize,
+      });
       } catch (saveError) {
         console.error("Failed to save to Supabase:", saveError);
         // Continue anyway
@@ -239,24 +239,24 @@ function BestillContent() {
 
       // Send email via EmailJS (try, but don't fail if it errors)
       try {
-        const templateParams = {
+      const templateParams = {
           name: pickupName,
           phone: pickupPhone,
-          package: packageSize,
-          pickup: pickupAddress,
-          delivery: deliveryAddress,
+        package: packageSize,
+        pickup: pickupAddress,
+        delivery: deliveryAddress,
           isKlikkHent: isKlikkHent ? "Ja" : "Nei",
           pickupCode: formData.pickupPickupCode || "",
           deliveryName: `${formData.deliveryFirstName} ${formData.deliveryLastName}`,
           deliveryPhone: formData.deliveryPhone,
-        };
+      };
 
-        await emailjs.send(
-          "service_476sm2p",
-          "template_xmmnr9c",
-          templateParams,
-          "HLFNfJ-HvjqeXLMXL"
-        );
+      await emailjs.send(
+        "service_476sm2p",
+        "template_xmmnr9c",
+        templateParams,
+        "HLFNfJ-HvjqeXLMXL"
+      );
       } catch (emailError) {
         console.error("Failed to send email:", emailError);
         // Continue anyway
@@ -394,14 +394,14 @@ function BestillContent() {
                               style={{ fontFamily: 'var(--font-sans), sans-serif' }}
                             />
                           </div>
-                          <div>
-                            <label
+                      <div>
+                        <label
                               htmlFor="pickupPickupCode"
                               className="block text-sm font-medium mb-2"
                               style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                            >
+                        >
                               Hentekode
-                            </label>
+                        </label>
                             <input
                               type="text"
                               id="pickupPickupCode"
@@ -418,51 +418,51 @@ function BestillContent() {
                       {!isKlikkHent && (
                         <>
                           <div>
-                            <div className="grid grid-cols-2 gap-3">
-                              <input
-                                type="text"
-                                id="pickupFirstName"
-                                name="pickupFirstName"
-                                placeholder="Fornavn"
-                                value={formData.pickupFirstName}
-                                onChange={handleInputChange}
-                                required
+                        <div className="grid grid-cols-2 gap-3">
+                          <input
+                            type="text"
+                            id="pickupFirstName"
+                            name="pickupFirstName"
+                            placeholder="Fornavn"
+                            value={formData.pickupFirstName}
+                            onChange={handleInputChange}
+                            required
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
                                 style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                              />
-                              <input
-                                type="text"
-                                id="pickupLastName"
-                                name="pickupLastName"
-                                placeholder="Etternavn"
-                                value={formData.pickupLastName}
-                                onChange={handleInputChange}
-                                required
+                          />
+                          <input
+                            type="text"
+                            id="pickupLastName"
+                            name="pickupLastName"
+                            placeholder="Etternavn"
+                            value={formData.pickupLastName}
+                            onChange={handleInputChange}
+                            required
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
                                 style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <label
-                              htmlFor="pickupPhone"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="pickupPhone"
                               className="block text-sm font-medium mb-2"
                               style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                            >
-                              Telefonnummer *
-                            </label>
-                            <input
-                              type="tel"
-                              id="pickupPhone"
-                              name="pickupPhone"
-                              value={formData.pickupPhone}
-                              onChange={handleInputChange}
+                        >
+                          Telefonnummer *
+                        </label>
+                        <input
+                          type="tel"
+                          id="pickupPhone"
+                          name="pickupPhone"
+                          value={formData.pickupPhone}
+                          onChange={handleInputChange}
                               maxLength={9}
-                              required
+                          required
                               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
                               style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                          </div>
+                        />
+                      </div>
                         </>
                       )}
                       <div>
@@ -709,7 +709,7 @@ function BestillContent() {
                       )}
                       <div><span className="font-medium">Adresse:</span> {combineAddress(formData.pickupStreet, formData.pickupPostalCode, formData.pickupCity)}</div>
                     </div>
-                  </div>
+                        </div>
 
                   {/* Levering */}
                   <div className="bg-white rounded-lg p-4 border border-gray-200">

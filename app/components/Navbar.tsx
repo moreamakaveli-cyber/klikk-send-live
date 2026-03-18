@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Package, Menu, X, Info, Star, Lightbulb, Phone, Users, Shield, HelpCircle, Clock, Building, Handshake } from "lucide-react";
+import { Package, Menu, X, Info, Star, Lightbulb, Phone, Users, Shield, HelpCircle, Clock, Building, Handshake, DollarSign } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,13 +54,16 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Mobile nav links (For bedrifter, Tjenester) */}
+          {/* Center: Mobile nav links (For bedrifter, Tjenester, Pris) */}
           <div className="flex md:hidden items-center gap-3 flex-1 justify-center">
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
               For bedrifter
             </Link>
             <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
               Tjenester
+            </Link>
+            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
+              Pris
             </Link>
           </div>
 
@@ -73,6 +76,10 @@ export default function Navbar() {
             <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               <Package className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
               Tjenester
+            </Link>
+            <Link href="/priser" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
+              <DollarSign className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
+              Pris
             </Link>
             <Link href="/bestill">
               <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>

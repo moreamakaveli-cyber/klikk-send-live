@@ -11,37 +11,37 @@ export default function Priser() {
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 md:mb-12 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Priser og betaling
-            </h1>
-              
+          </h1>
+          
             <div className="space-y-4 mb-12">
               <div className="flex items-center justify-between py-6 border-b" style={{ borderColor: 'hsl(36, 30%, 90%)' }}>
-                <div>
+              <div>
                   <h3 className="text-lg md:text-xl font-semibold mb-1" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                    Kort levering (0–3 km)
-                  </h3>
-                </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</p>
+                  Kort levering (0–3 km)
+                </h3>
               </div>
-              
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</p>
+            </div>
+            
               <div className="flex items-center justify-between py-6 border-b" style={{ borderColor: 'hsl(36, 30%, 90%)' }}>
-                <div>
+              <div>
                   <h3 className="text-lg md:text-xl font-semibold mb-1" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                     Medium levering (3–6 km)
-                  </h3>
-                </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>169 kr</p>
+                </h3>
               </div>
-              
-              <div className="flex items-center justify-between py-6">
-                <div>
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>169 kr</p>
+            </div>
+            
+            <div className="flex items-center justify-between py-6">
+              <div>
                   <h3 className="text-lg md:text-xl font-semibold mb-1" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                     Lengre levering (6–20 km)
-                  </h3>
-                </div>
-                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>219 kr</p>
+                </h3>
               </div>
+                <p className="text-xl md:text-2xl font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>219 kr</p>
             </div>
-              
+          </div>
+            
             <div className="space-y-4 pt-8 border-t" style={{ borderColor: 'hsl(36, 30%, 90%)', fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p className="text-base md:text-lg">Vi følger faste satser. Prisen beregnes ut fra avstand etter at vi har mottatt bestillingen din. Du får en SMS med bekreftet pris før oppdraget utføres.</p>
               <p className="text-base md:text-lg">Betaling skjer med Vipps når pakken er levert.</p>
@@ -50,7 +50,7 @@ export default function Priser() {
                   <Link href="/trygghet-og-sikkerhet" className="underline hover:opacity-80 transition-opacity" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
                   her
                 </Link>.
-              </p>
+            </p>
             </div>
           </div>
         </div>

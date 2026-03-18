@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Hand, Package, ShoppingBag, Heart, Cake, KeyRound, BookOpen, Wallet } from "lucide-react";
 import OurServices from "./OurServices";
 
@@ -164,19 +165,16 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Priser og betaling */}
-          <div id="prices" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+          {/* Voks bedriften din med Hently */}
+          <div id="grow-business" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Priser og betaling
+              Voks bedriften din med Hently
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              <div className="mb-4">
-                <p className="text-lg md:text-xl font-semibold mb-4">
-                  Fast pris per levering: <span className="text-base md:text-lg font-bold" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>119 kr</span>
-                </p>
-                <p className="mb-6">En enkel og forutsigbar pris for både bedriften og kunden.</p>
-              </div>
-              <Link href="/betaling-og-oppgjor" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+              <p>
+                Få virksomheten din til å vokse med Hently.
+              </p>
+              <Link href="/voks-bedriften-din" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
                 Les mer
                 <span>→</span>
               </Link>

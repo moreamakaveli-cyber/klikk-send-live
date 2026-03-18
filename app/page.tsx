@@ -12,7 +12,7 @@ export default function Home() {
       <HeroSection />
       <HowItWorks />
       <div className="mt-auto">
-        <Footer />
+      <Footer />
       </div>
     </main>
   );

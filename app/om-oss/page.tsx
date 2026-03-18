@@ -9,21 +9,21 @@ export default function OmOss() {
         <div className="max-w-[1400px] mx-auto">
           <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal mb-8 md:mb-12 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Om oss
-            </h1>
+            Om oss
+          </h1>
             
             <div className="space-y-6 leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p className="text-base md:text-lg">
                 Hently ble startet for å gjøre lokal levering enklere og raskere. Vi tilbyr en effektiv løsning for henting og levering av små og mellomstore gjenstander, uten at du må betale for en dyr drosjetur eller vente flere dager på tradisjonell frakt.
-              </p>
-              
+            </p>
+            
               <p className="text-base md:text-lg">
                 Behovet oppstod fordi vi selv erfarte hvor upraktisk det er når man glemmer noe hjemme, skal sende noe til en venn, eller trenger rask levering av et kjøp.
-              </p>
-              
+            </p>
+            
               <p className="text-base md:text-lg">
                 Hently er en lokal leveringstjeneste som frakter ting fra A til B på kort tid. Vi jobber for å gjøre tjenesten trygg, rask og enkel å bruke.
-              </p>
+            </p>
             </div>
           </div>
         </div>
