@@ -21,28 +21,25 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Second Column: Links */}
+            {/* Second Column: Våre plattformer */}
             <div>
               <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
-                Lenker
+                Våre plattformer
               </h3>
-              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-                <li>
-                  <Link href="/#how-it-works" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    Tjenester
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#how-it-works" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    Slik fungerer det
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/om-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    Om oss
-                  </Link>
-                </li>
-              </ul>
+              <div className="mt-4">
+                <a
+                  href="https://www.instagram.com/hentlynorge"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity"
+                  aria-label="Hently på Instagram"
+                >
+                  <Instagram className="w-6 h-6 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.92)' }} />
+                  <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+                    Instagram
+                  </span>
+                </a>
+              </div>
             </div>
 
             {/* Third Column: Bedrift */}

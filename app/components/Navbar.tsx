@@ -69,16 +69,13 @@ export default function Navbar() {
 
           {/* Right side: Nav links + Bestill nå - Desktop only */}
           <div className="hidden md:flex items-center gap-6 md:gap-8 ml-auto">
-            <Link href="/for-bedrifter" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              <Handshake className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
+            <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               For bedrifter
             </Link>
-            <Link href="/#how-it-works" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              <Package className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
+            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               Tjenester
             </Link>
-            <Link href="/priser" className="flex items-center gap-2 font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              <DollarSign className="w-4 h-4 flex-shrink-0" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
+            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               Pris
             </Link>
             <Link href="/bestill">

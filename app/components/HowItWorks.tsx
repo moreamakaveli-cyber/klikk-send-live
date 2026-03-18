@@ -172,7 +172,7 @@ export default function HowItWorks() {
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p>
-                Få virksomheten din til å vokse med Hently.
+                Med Hently får du ikke bare synlighet – du får et system som kontinuerlig jobber for å skaffe deg nye kunder.
               </p>
               <Link href="/voks-bedriften-din" className="text-sm font-semibold flex items-center gap-1 transition-colors hover:opacity-80" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
                 Les mer
