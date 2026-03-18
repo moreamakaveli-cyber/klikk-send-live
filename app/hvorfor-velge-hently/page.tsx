@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
-export default function HvorforVelgeKlikkogsend() {
+export default function HvorforVelgeHently() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       <Navbar />
