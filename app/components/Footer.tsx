@@ -64,7 +64,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Link href="/jobb-i-hently" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
                     Jobb i Hently
                   </Link>
                 </li>

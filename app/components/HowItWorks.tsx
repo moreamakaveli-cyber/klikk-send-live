@@ -38,8 +38,8 @@ const steps = [
   {
     number: 1,
     icon: Search,
-    title: "Kunden får SMS når varen er klar.",
-    description: "Når varen er klar får kunden tilbud om umiddelbar hjemmelevering med Hently",
+    title: "Kunden velger levering",
+    description: "Kunden velger Hently som leveringsalternativ når varen er klar.",
   },
   {
     number: 2,
@@ -138,7 +138,7 @@ export default function HowItWorks() {
           {/* Why Choose Hently */}
           <div id="why-choose" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Hvorfor velge Hently?
+              <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>Hvorfor</span> velge Hently?
             </h3>
             <p className="text-base md:text-lg mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> hjemlevering til dine kunder og styrk servicen i din bedrift.
@@ -152,7 +152,7 @@ export default function HowItWorks() {
           {/* How to Use */}
           <div id="how-to-use" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Slik fungerer samarbeid
+              Slik fungerer <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>samarbeid</span>
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p>
@@ -168,7 +168,7 @@ export default function HowItWorks() {
           {/* Få bedriften din til å vokse */}
           <div id="grow-business" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-              Få bedriften din til å vokse
+              Få <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>bedriften din</span> til å vokse
             </h3>
             <div className="space-y-4 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               <p>

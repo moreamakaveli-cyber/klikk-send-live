@@ -55,11 +55,7 @@ export default function Navbar() {
               aria-label="Toggle menu"
               type="button"
             >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              <Menu className="w-6 h-6" />
             </button>
             
             {/* Logo - Desktop only */}
@@ -127,10 +123,18 @@ export default function Navbar() {
         style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
       >
         {/* Drawer Header */}
-        <div className="flex items-center p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <Link href="/" className="flex items-center" onClick={closeMenu}>
             <img src="/logo.png" alt="Hently" style={{ height: "130px", width: "auto" }} />
           </Link>
+          <button
+            onClick={closeMenu}
+            className="w-8 h-8 flex items-center justify-center text-gray-700 hover:text-gray-900 transition-colors"
+            aria-label="Close menu"
+            type="button"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </div>
 
         {/* Menu Items */}

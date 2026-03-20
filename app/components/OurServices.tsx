@@ -8,6 +8,8 @@ interface Service {
   iconColor: string;
   title: string;
   description: string;
+  href: string;
+  cta: string;
   features?: string[];
   feature?: string;
 }
@@ -18,18 +20,24 @@ const services: Service[] = [
     iconColor: "hsl(16, 85%, 55%)", // accent (korall)
     title: "Lever vare til kunde",
     description: "Når varen er klar, henter vi den i butikk og leverer direkte til kunde.",
+    href: "/lever-vare-til-kunde",
+    cta: "Les mer",
   } as Service,
   {
     icon: ShoppingBag,
     iconColor: "oklch(70.5% 0.213 47.604)", // primary (oransje)
     title: "Henting hos kunde",
     description: "Har en kunde varer som skal sendes til en bedrift? Vi henter hos kunden og leverer direkte til bedriften.",
+    href: "/henting-hos-kunde",
+    cta: "Les mer",
   } as Service,
   {
     icon: Heart,
     iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
     title: "Umiddelbar levering i Oslo",
     description: "Vi leverer små varer umiddelbart fra bedrift til kunde i hele Oslo.",
+    href: "/umiddelbar-levering-i-oslo",
+    cta: "Les mer",
   } as Service,
 ];
 
@@ -80,11 +88,11 @@ export default function OurServices() {
 
                 {/* Lenke */}
                 <Link 
-                  href={index === 2 ? "/umiddelbar-levering-i-oslo" : "/bestill"} 
+                  href={service.href}
                   className="text-sm font-semibold flex items-center gap-1 transition-colors service-link" 
                   style={{ color: 'hsl(150, 30%, 15%)' }}
                 >
-                  {index === 0 ? "Bestill levering" : index === 1 ? "Bestill henting" : "Les mer"}
+                  {service.cta}
                   <span className="service-arrow">→</span>
                 </Link>
               </div>
