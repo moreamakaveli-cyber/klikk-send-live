@@ -28,8 +28,7 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   const menuItems = [
-    { href: "/voks-bedriften-din", label: "For bedrifter", icon: Building },
-    { href: "/for-bedrifter", label: "Bli kunde", icon: Handshake },
+    { href: "/for-bedrifter", label: "For bedrifter", icon: Building },
     { href: "/om-oss", label: "Om oss", icon: Users },
     { href: "/apningstider", label: "Åpningstider", icon: Clock },
     { href: "/trygghet-og-sikkerhet", label: "Trygghet og sikkerhet", icon: Shield },
@@ -87,7 +86,7 @@ export default function Navbar() {
             <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               Tjenester
             </Link>
-            <Link href="/bestill">
+            <Link href="/launch">
               <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
                 Bestill nå
               </button>
