@@ -18,7 +18,7 @@ const services: Service[] = [
   {
     icon: Package,
     iconColor: "hsl(16, 85%, 55%)", // accent (korall)
-    title: "Lever vare til kunde",
+    title: "Levering til kunde",
     description: "Vi henter fra lager og leverer direkte til kunde.",
     href: "/lever-vare-til-kunde",
     cta: "Les mer",

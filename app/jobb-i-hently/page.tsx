@@ -69,7 +69,7 @@ export default function JobbIHently() {
                   >
                     <div>
                       <h3 className="text-xl md:text-2xl font-semibold mb-1">1. Motta oppdrag</h3>
-                      <p>Når du er tilgjengelig, får du forespørsler i systemet vårt.</p>
+                      <p>Når du er tilgjengelig, mottar du forespørsler om oppdrag i vårt system.</p>
                     </div>
                     <div>
                       <h3 className="text-xl md:text-2xl font-semibold mb-1">2. Hent vare</h3>
@@ -99,7 +99,6 @@ export default function JobbIHently() {
                     style={{ fontFamily: "var(--font-sans), sans-serif", color: "hsl(150, 30%, 15%)" }}
                   >
                     <li>Fleksibel arbeidstid – jobb når det passer deg</li>
-                    <li>God betaling sammenlignet med lignende budjobber</li>
                     <li>Ukentlige utbetalinger</li>
                     <li>Enkelt system og tydelige oppdrag</li>
                   </ul>
@@ -120,7 +119,7 @@ export default function JobbIHently() {
                     <li>Mulighet for utvikling og nye roller over tid</li>
                     <li>Opplæring og tett oppfølging</li>
                     <li>Sosiale samlinger og et inkluderende miljø</li>
-                    <li>Goder som støtte til transport, som månedskort (der det er aktuelt)</li>
+                    <li>Støtte til transport, som månedskort (der det er aktuelt).</li>
                   </ul>
                 </details>
 

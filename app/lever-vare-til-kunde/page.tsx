@@ -16,7 +16,7 @@ export default function LeverVareTilKundePage() {
               color: "hsl(150, 30%, 15%)",
             }}
           >
-            Lever vare til kunde
+            Levering til kunde
           </h1>
 
           <div
@@ -40,6 +40,20 @@ export default function LeverVareTilKundePage() {
               <h2 className="text-xl md:text-2xl font-semibold">3. Levering</h2>
               <p>Vi leverer varen direkte til kunden.</p>
             </div>
+
+            <p
+              className="text-base md:text-lg leading-relaxed pt-8 mt-8 border-t border-gray-200"
+              style={{
+                fontFamily: "var(--font-sans), sans-serif",
+                color: "hsl(150, 30%, 15%)",
+              }}
+            >
+              Når en kunde legger inn en bestilling i nettbutikken din, mottas ordreinformasjonen
+              automatisk i vårt system. Når varen er klargjort, organiserer vi henting enten
+              umiddelbart eller til et avtalt tidspunkt, tilpasset kundens behov. Vi sørger for en
+              sikker og presis levering direkte til kunden, med fokus på kvalitet, pålitelighet og
+              en profesjonell kundeopplevelse gjennom hele leveransen.
+            </p>
           </div>
         </div>
       </section>

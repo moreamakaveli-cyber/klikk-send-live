@@ -40,6 +40,18 @@ export default function HentingHosKundePage() {
               <h2 className="text-xl md:text-2xl font-semibold">3. Levering</h2>
               <p>Vi leverer direkte til din butikk.</p>
             </div>
+
+            <p
+              className="text-base md:text-lg leading-relaxed pt-8 mt-8 border-t border-gray-200"
+              style={{
+                fontFamily: "var(--font-sans), sans-serif",
+                color: "hsl(150, 30%, 15%)",
+              }}
+            >
+              Når en bestilling er klar, henter vi varen direkte hos kunden til avtalt tidspunkt.
+              Deretter leverer vi den umiddelbart til din bedrift, uten unødvendige stopp underveis.
+              Dette gir en rask, effektiv og enkel leveranse for både din bedrift og kunden.
+            </p>
           </div>
         </div>
       </section>

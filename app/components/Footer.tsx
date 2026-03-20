@@ -134,19 +134,8 @@ export default function Footer() {
               </button>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base">
-              <div className="flex items-center gap-4">
-                <div style={{ color: 'rgba(255,255,255,0.92)' }}>
-                  © 2026 Hently. Alle rettigheter reservert.
-                </div>
-                <a
-                  href="https://www.instagram.com/hentlynorge"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-white/10 p-1.5 hover:bg-white/20 transition-colors"
-                  aria-label="Hently på Instagram"
-                >
-                  <Instagram className="w-6 h-6" style={{ color: 'rgba(255,255,255,0.92)' }} />
-                </a>
+              <div style={{ color: 'rgba(255,255,255,0.92)' }}>
+                © 2026 Hently. Alle rettigheter reservert.
               </div>
               <div className="flex gap-6">
                 <Link href="#privacy" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
