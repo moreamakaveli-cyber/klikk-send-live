@@ -65,16 +65,13 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Mobile nav links (For bedrifter, Tjenester, Pris) */}
+          {/* Center: Mobile nav links */}
           <div className="flex md:hidden items-center gap-3 flex-1 justify-center">
-            <Link href="/voks-bedriften-din" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)', fontSize: '0.875rem' }}>
-              Få bedriften din til å vokse
+            <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
+              For bedrifter
             </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
               Bli kunde
-            </Link>
-            <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
-              Tjenester
             </Link>
           </div>
 
@@ -96,14 +93,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile: Bestill nå button */}
-          <div className="md:hidden">
-            <Link href="/bestill">
-              <button className="rounded-full px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>
-                Bestill nå
-              </button>
-            </Link>
-          </div>
+          {/* Mobile right side intentionally empty */}
+          <div className="md:hidden" />
         </div>
       </nav>
 
