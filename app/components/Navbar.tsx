@@ -28,7 +28,8 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   const menuItems = [
-    { href: "/for-bedrifter", label: "For bedrifter", icon: Building },
+    { href: "/voks-bedriften-din", label: "For bedrifter", icon: Building },
+    { href: "/for-bedrifter", label: "Bli kunde", icon: Handshake },
     { href: "/om-oss", label: "Om oss", icon: Users },
     { href: "/apningstider", label: "Åpningstider", icon: Clock },
     { href: "/trygghet-og-sikkerhet", label: "Trygghet og sikkerhet", icon: Shield },
@@ -67,7 +68,7 @@ export default function Navbar() {
 
           {/* Center: Mobile nav links */}
           <div className="flex md:hidden items-center gap-3 flex-1 justify-center">
-            <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
+            <Link href="/voks-bedriften-din" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)', fontSize: '0.875rem' }}>
               For bedrifter
             </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
