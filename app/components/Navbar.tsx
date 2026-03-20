@@ -35,6 +35,7 @@ export default function Navbar() {
     { href: "/dette-lurer-mange-pa", label: "Ofte stilte spørsmål", icon: HelpCircle },
     { href: "/pakkeinnhold", label: "Pakkeinnhold", icon: Package },
     { href: "/kontakt-oss", label: "Kontakt oss", icon: Phone },
+    { href: "/jobb-i-hently", label: "Jobb i Hently", icon: Users },
   ];
 
   return (
@@ -66,27 +67,27 @@ export default function Navbar() {
 
           {/* Center: Mobile nav links (For bedrifter, Tjenester, Pris) */}
           <div className="flex md:hidden items-center gap-3 flex-1 justify-center">
+            <Link href="/voks-bedriften-din" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)', fontSize: '0.875rem' }}>
+              Få bedriften din til å vokse
+            </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
-              For bedrifter
+              Bli kunde
             </Link>
             <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
               Tjenester
-            </Link>
-            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
-              Pris
             </Link>
           </div>
 
           {/* Right side: Nav links + Bestill nå - Desktop only */}
           <div className="hidden md:flex items-center gap-6 md:gap-8 ml-auto">
+            <Link href="/voks-bedriften-din" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)', fontSize: '1rem' }}>
+              Få bedriften din til å vokse
+            </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              For bedrifter
+              Bli kunde
             </Link>
             <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               Tjenester
-            </Link>
-            <Link href="/priser" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              Pris
             </Link>
             <Link href="/bestill">
               <button className="rounded-full px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)', fontFamily: 'var(--font-sans), sans-serif' }}>

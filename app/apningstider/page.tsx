@@ -14,7 +14,7 @@ export default function Apningstider() {
             
             <div className="text-center">
               <p className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                08:00 til 23:00 mandag til søndag
+                Døgnåpent
               </p>
             </div>
           </div>

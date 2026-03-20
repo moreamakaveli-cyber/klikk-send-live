@@ -30,10 +30,10 @@ const faqItems = [
   {
     id: 4,
     title: "Betaling",
-    question: "Når betaler jeg?",
-    text: "Hos oss betaler du først når pakken er levert. Dette gir deg en trygg og enkel handel – ingen betaling før du har mottatt bestillingen din.",
-    linkText: "Les mer",
-    linkHref: "/trygghet-og-sikkerhet",
+    question: "",
+    text: "Kunden betaler til butikken, inkludert leveringen. Butikken overfører deretter Hently sin andel, samlet i et månedlig eller ukentlig oppgjør.",
+    linkText: "",
+    linkHref: "",
   },
   {
     id: 5,
@@ -64,19 +64,23 @@ export default function DetteLurerMangePa() {
                 <h2 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                   {item.title}
                 </h2>
-                <h3 className="text-lg md:text-xl font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                  {item.question}
-                </h3>
+                {item.question && (
+                  <h3 className="text-lg md:text-xl font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                    {item.question}
+                  </h3>
+                )}
                 <p className="mb-6 flex-grow leading-relaxed text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                   {item.text}
                 </p>
-                <Link
-                  href={item.linkHref}
-                  className="font-semibold transition-opacity hover:opacity-80 text-sm md:text-base"
-                      style={{ color: 'oklch(70.5% 0.213 47.604)' }}
-                >
-                  {item.linkText} →
-                </Link>
+                {item.linkText && item.linkHref && (
+                  <Link
+                    href={item.linkHref}
+                    className="font-semibold transition-opacity hover:opacity-80 text-sm md:text-base"
+                    style={{ color: 'oklch(70.5% 0.213 47.604)' }}
+                  >
+                    {item.linkText} →
+                  </Link>
+                )}
               </div>
             ))}
           </div>

@@ -26,7 +26,7 @@ export default function Samarbeid() {
                   Bestilling
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                  Når plagget er klart sender butikken en vanlig hentemelding til kunden. I meldingen kan kunden velge hjemlevering via en SMS-link fra Hently. Kunden kan også skanne en QR-kode i butikken og bestille levering selv.
+                  Når varen er klar sender butikken en vanlig hentemelding til kunden. I meldingen kan kunden velge hjemlevering via en SMS-link fra Hently. Kunden kan også skanne en QR-kode i butikken og bestille levering selv.
                 </p>
               </div>
 
