@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Package, ShoppingBag, Heart, Users, Megaphone, TrendingUp, Zap } from "lucide-react";
+import { Package, ShoppingBag, Heart, Warehouse, Users, Megaphone, TrendingUp, Zap } from "lucide-react";
 
 interface Service {
   icon: React.ComponentType<{ className?: string; color?: string; strokeWidth?: number }>;
@@ -37,6 +37,15 @@ const services: Service[] = [
     title: "Umiddelbar levering i Oslo",
     description: "Vi leverer små varer umiddelbart fra bedrift til kunde i hele Oslo.",
     href: "/umiddelbar-levering-i-oslo",
+    cta: "Les mer",
+  } as Service,
+  {
+    icon: Warehouse,
+    iconColor: "hsl(150, 30%, 35%)",
+    title: "Vi tilbyr lagring i vårt lager i Oslo",
+    description:
+      "På denne måten kan vi sende ut varene for deg slik at kundene dine vil få det levert umiddelbart.",
+    href: "/lagring-lager-oslo",
     cta: "Les mer",
   } as Service,
 ];
@@ -76,7 +85,7 @@ export default function OurServices() {
           Vi hjelper bedrifter med å hente og levere varer direkte til kundene – raskt og enkelt.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
