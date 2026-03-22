@@ -17,7 +17,7 @@ interface Service {
 const services: Service[] = [
   {
     icon: Package,
-    iconColor: "hsl(16, 85%, 55%)", // accent (korall)
+    iconColor: "hsl(16, 85%, 55%)",
     title: "Levering til kunde",
     description: "Vi henter fra lager og leverer direkte til kunde.",
     href: "/lever-vare-til-kunde",
@@ -25,7 +25,7 @@ const services: Service[] = [
   } as Service,
   {
     icon: ShoppingBag,
-    iconColor: "oklch(70.5% 0.213 47.604)", // primary (oransje)
+    iconColor: "oklch(70.5% 0.213 47.604)",
     title: "Henting hos kunde",
     description: "Har en kunde varer som skal sendes til en bedrift? Vi henter!",
     href: "/henting-hos-kunde",
@@ -33,7 +33,7 @@ const services: Service[] = [
   } as Service,
   {
     icon: Heart,
-    iconColor: "hsl(220, 70%, 55%)", // highlight (blå)
+    iconColor: "hsl(220, 70%, 55%)",
     title: "Umiddelbar levering i Oslo",
     description: "Vi leverer små varer umiddelbart fra bedrift til kunde i hele Oslo.",
     href: "/umiddelbar-levering-i-oslo",
@@ -92,32 +92,35 @@ export default function OurServices() {
               <div
                 key={index}
                 className="p-6 flex flex-col items-start gap-3 transition-shadow"
-                style={{ 
-                  backgroundColor: '#FFFFFF', 
-                  borderRadius: '20px',
-                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderRadius: "20px",
+                  boxShadow:
+                    "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
                 }}
               >
-                {/* Ikon-badge */}
-                <div className="rounded-2xl p-3" style={{ backgroundColor: '#F7F7F7' }}>
+                <div className="rounded-2xl p-3" style={{ backgroundColor: "#F7F7F7" }}>
                   <Icon className="w-7 h-7" color={service.iconColor} strokeWidth={2} />
                 </div>
 
-                {/* Tittel */}
-                <h3 className="text-xl font-normal" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
+                <h3
+                  className="text-xl font-normal"
+                  style={{ fontFamily: "var(--font-serif), serif", color: "hsl(150, 30%, 15%)" }}
+                >
                   {service.title}
                 </h3>
 
-                {/* Beskrivelse */}
-                <p className="text-sm leading-relaxed flex-grow" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
+                <p
+                  className="text-sm leading-relaxed flex-grow"
+                  style={{ fontFamily: "var(--font-sans), sans-serif", color: "hsl(150, 10%, 40%)" }}
+                >
                   {service.description}
                 </p>
 
-                {/* Lenke */}
-                <Link 
+                <Link
                   href={service.href}
-                  className="text-sm font-semibold flex items-center gap-1 transition-colors service-link" 
-                  style={{ color: 'hsl(150, 30%, 15%)' }}
+                  className="text-sm font-semibold flex items-center gap-1 transition-colors service-link"
+                  style={{ color: "hsl(150, 30%, 15%)" }}
                 >
                   {service.cta}
                   <span className="service-arrow">→</span>

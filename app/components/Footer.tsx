@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Package, Mail, Phone, MapPin, Instagram } from "lucide-react";
+import { Package, Phone, MapPin, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -28,7 +28,7 @@ export default function Footer() {
               </h3>
               <div className="mt-4">
                 <a
-                  href="https://www.instagram.com/hentlynorge"
+                  href="https://www.instagram.com/hently.no/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity"
@@ -77,12 +77,6 @@ export default function Footer() {
                 Kontakt
               </h3>
               <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-                <li className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
-                  <a href="mailto:oslo@hently.no" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
-                    oslo@hently.no
-                  </a>
-                </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
                   <a href="tel:+4797940097" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>

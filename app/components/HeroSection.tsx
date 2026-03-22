@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import Button from "./ui/button";
 
 export default function HeroSection() {
   return (
@@ -21,7 +20,7 @@ export default function HeroSection() {
 
             {/* Subtitle - Desktop */}
             <div className="hidden md:block text-lg md:text-xl mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">
+              <p className="font-semibold">
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
@@ -32,7 +31,7 @@ export default function HeroSection() {
 
             {/* Description - Mobile */}
             <div className="md:hidden text-sm mb-6 leading-relaxed space-y-3" style={{ color: 'hsl(150, 30%, 15%)', fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="font-medium">
+              <p className="font-semibold">
                 Tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering til dine kunder
               </p>
               <p className="font-semibold">
@@ -55,13 +54,6 @@ export default function HeroSection() {
                   <ArrowRight className="w-3 h-3 md:w-3.5 md:h-3.5 flex-shrink-0" style={{ color: '#ffffff' }} />
                 </button>
               </Link>
-            </div>
-
-            {/* Pricing text */}
-            <div className="space-y-2 md:space-y-4" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-              <p className="hidden md:block text-base" style={{ color: 'hsl(150, 30%, 15%)' }}>
-                Faste og rimelige priser - beregnet etter avstand.
-              </p>
             </div>
           </div>
 

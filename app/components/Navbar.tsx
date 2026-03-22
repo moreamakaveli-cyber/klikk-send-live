@@ -71,7 +71,7 @@ export default function Navbar() {
               For bedrifter
             </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '0.875rem' }}>
-              Bli kunde
+              Start samarbeid
             </Link>
           </div>
 
@@ -81,7 +81,7 @@ export default function Navbar() {
               Få bedriften din til å vokse
             </Link>
             <Link href="/for-bedrifter" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
-              Bli kunde
+              Start samarbeid
             </Link>
             <Link href="/#how-it-works" className="font-normal transition-opacity hover:opacity-80" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)', fontSize: '1rem' }}>
               Tjenester

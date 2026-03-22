@@ -27,9 +27,9 @@ export default function LagringLagerOsloPage() {
               color: "hsl(150, 30%, 15%)",
             }}
           >
-            <p className="font-semibold">Driver du en nettbutikk eller fysisk butikk?</p>
-            <p className="font-semibold">
-              Selger du produkter som kan leveres raskere til kundene dine?
+            <p className="font-semibold leading-relaxed">
+              Driver du en nett- eller fysisk butikk? Selger du produkter som kan leveres raskere
+              til kundene dine?
             </p>
 
             <p className="leading-relaxed">
@@ -39,9 +39,15 @@ export default function LagringLagerOsloPage() {
             </p>
 
             <p className="leading-relaxed">
-              Vi lagrer varene dine i vårt lager i Oslo og sender dem ut umiddelbart, eller på
-              ønsket tidspunkt. Dette gjør at du kan nå flere kunder, øke synligheten og øke
-              salget.
+              Dette fungerer spesielt godt for nettbutikker med lager utenfor Oslo. Med Hently slipper
+              kundene dine i Oslo å vente i flere dager på levering – de kan få varen levert{" "}
+              <span style={{ color: "oklch(70.5% 0.213 47.604)" }}>umiddelbart</span>.
+            </p>
+
+            <p className="leading-relaxed">
+              Vi lagrer varene dine i vårt lager i Oslo. Vi pakker dem slik du ønsker og sender
+              dem ut umiddelbart, eller på ønsket tidspunkt. Dette gjør at du kan nå flere kunder,
+              øke synligheten og øke salget.
             </p>
 
             <div className="space-y-4 pt-4">
@@ -63,14 +69,12 @@ export default function LagringLagerOsloPage() {
                   className="mt-4 space-y-4 text-base md:text-lg"
                   style={{ fontFamily: "var(--font-sans), sans-serif", color: "hsl(150, 30%, 15%)" }}
                 >
-                  <p className="font-medium">
-                    1. Du sender en batch med varer til oss, og vi håndterer resten.
-                  </p>
-                  <ol className="list-decimal pl-6 space-y-2">
-                    <li>Kunden bestiller i nettbutikken din og velger Hently som leveringsalternativ</li>
-                    <li>Vi mottar bestillingen automatisk</li>
-                    <li>Vi pakker og sender varen direkte til kunden</li>
-                  </ol>
+                  <p>Du sender en batch med varer til oss – vi tar oss av resten.</p>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>Kunden bestiller i nettbutikken din og velger Hently som leveringsalternativ.</li>
+                    <li>Vi mottar bestillingen automatisk.</li>
+                    <li>Vi plukker, pakker og sender varen direkte til kunden.</li>
+                  </ul>
                 </div>
               </details>
 
@@ -94,8 +98,38 @@ export default function LagringLagerOsloPage() {
                   className="mt-4 space-y-3 text-base md:text-lg"
                   style={{ fontFamily: "var(--font-sans), sans-serif", color: "hsl(150, 30%, 15%)" }}
                 >
-                  <p>Du mottar hele beløpet fra kunden, både for produkt og frakt.</p>
+                  <p>Du mottar hele beløpet fra kunden – både for produkt og frakt.</p>
                   <p>Vi får vår andel gjennom et avtalt oppgjør i etterkant.</p>
+                </div>
+              </details>
+
+              <details
+                className="group rounded-2xl p-4 md:p-5"
+                style={{ backgroundColor: "#F7F7F7" }}
+              >
+                <summary
+                  className="list-none cursor-pointer flex items-center justify-between gap-4"
+                  style={{
+                    fontFamily: "var(--font-serif), serif",
+                    color: "oklch(70.5% 0.213 47.604)",
+                  }}
+                >
+                  <span className="text-xl md:text-2xl font-normal">Hva koster det?</span>
+                  <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform group-open:rotate-180" />
+                </summary>
+                <div
+                  className="mt-4 space-y-4 text-base md:text-lg leading-relaxed"
+                  style={{ fontFamily: "var(--font-sans), sans-serif", color: "hsl(150, 30%, 15%)" }}
+                >
+                  <p>
+                    Vi blir enige om en pris som er tilpasset din bedrift. Prisen avhenger av hvor
+                    mye du lagrer hos oss, om du ønsker plukk og pakk, og om du vil bli markedsført
+                    gjennom våre kanaler.
+                  </p>
+                  <p>
+                    Vi skreddersyr en løsning som passer deg – og vi er konkurransedyktige på pris,
+                    ofte lavere enn tradisjonelle 3PL-aktører.
+                  </p>
                 </div>
               </details>
             </div>

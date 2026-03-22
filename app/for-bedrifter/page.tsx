@@ -11,7 +11,7 @@ export default function ForBedrifter() {
           <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] flex-shrink-0 mx-auto md:mx-0">
             <Image
               src="/team-goals.svg"
-              alt="Bli kunde"
+              alt="Start samarbeid"
               width={448}
               height={448}
               className="w-full h-full"
@@ -19,7 +19,7 @@ export default function ForBedrifter() {
           </div>
           <div className="flex-grow text-center md:text-left">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
-              Bli kunde
+              Start samarbeid
             </h1>
             <p className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto md:mx-0 mb-6" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
               Få virksomheten din til å vokse med Hently. Nå flere kunder, øk salget og tilby <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>umiddelbar</span> levering fra butikk.
@@ -31,9 +31,6 @@ export default function ForBedrifter() {
               <a href="/for-bedrifter/registrer" className="text-lg md:text-xl font-semibold underline" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'oklch(70.5% 0.213 47.604)' }}>
                 Fyll ut skjema
               </a>
-              <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                Spørsmål? <a href="mailto:oslo@hently.no" className="underline" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>oslo@hently.no</a>
-              </p>
             </div>
           </div>
         </div>
@@ -43,23 +40,23 @@ export default function ForBedrifter() {
         </h2>
 
         <div className="space-y-8 md:space-y-12">
-          {/* Nå ut til flere kunder */}
+          {/* Rask levering – flere kjøp */}
           <div className="p-6 md:p-8 rounded-3xl" style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
             <h3 className="text-xl md:text-2xl font-normal mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
-              Nå ut til flere kunder
+              Rask levering – flere kjøp
             </h3>
             <p className="text-base md:text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              Vi hjelper deg å nå flere kunder i ditt område ved å tilby rask levering direkte fra din bedrift. Når levering kan skje umiddelbart, fjerner du ventetid som ofte stopper kjøp. Det gjør at flere velger din bedrift.
+              Når levering skjer umiddelbart, fjerner du friksjonen som ofte stopper kjøp. Det gjør at flere velger din bedrift.
             </p>
           </div>
 
-          {/* Øk verdien av tjenesten */}
+          {/* Øk omsetningen i din bedrift */}
           <div className="p-6 md:p-8 rounded-3xl" style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
             <h3 className="text-xl md:text-2xl font-normal mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
-              Øk verdien av tjenesten
+              Øk omsetningen i din bedrift
             </h3>
             <p className="text-base md:text-lg leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-              Når du kan tilby hjemlevering av ferdige klær eller vask, blir tjenesten mer attraktiv for kundene. Mange setter pris på å slippe en ekstra tur til butikken.
+              Vi jobber aktivt for å skaffe deg flere kunder. Gjennom vår plattform eksponeres produktene og tjenestene dine for riktig målgruppe – noe som gir økt synlighet og flere salg.
             </p>
           </div>
 

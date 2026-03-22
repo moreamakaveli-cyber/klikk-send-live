@@ -17,14 +17,15 @@ export default function BedriftTakk() {
           </p>
 
           <p className="text-base md:text-lg mb-8 md:mb-12" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-            Har du spørsmål i mellomtiden? Kontakt oss på{" "}
-            <a 
-              href="mailto:oslo@hently.no" 
-              className="underline hover:opacity-80 transition-opacity"
-              style={{ color: 'oklch(70.5% 0.213 47.604)' }}
-            >
-              oslo@hently.no
+            Har du spørsmål i mellomtiden? Ring oss på{" "}
+            <a href="tel:+4797940097" className="underline hover:opacity-80 transition-opacity" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+              +47 979 40 097
             </a>
+            {" "}eller{" "}
+            <a href="tel:+4792117289" className="underline hover:opacity-80 transition-opacity" style={{ color: 'oklch(70.5% 0.213 47.604)' }}>
+              +47 921 17 289
+            </a>
+            .
           </p>
 
           <Link href="/">

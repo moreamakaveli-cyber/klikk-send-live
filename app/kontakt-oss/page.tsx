@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Mail, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 export default function KontaktOss() {
   return (
@@ -27,21 +27,6 @@ export default function KontaktOss() {
               </p>
 
               <div className="pt-8 space-y-6">
-                {/* E-post */}
-                <div>
-                  <div className="flex items-center justify-center gap-3 mb-2">
-                    <Mail className="w-6 h-6" style={{ color: 'oklch(70.5% 0.213 47.604)' }} />
-                    <span className="text-lg font-semibold">E-post:</span>
-                  </div>
-                  <a
-                    href="mailto:oslo@hently.no"
-                    className="text-xl font-semibold transition-opacity hover:opacity-80"
-                          style={{ color: 'oklch(70.5% 0.213 47.604)' }}
-                  >
-                    oslo@hently.no
-                  </a>
-                </div>
-
                 {/* Telefonnumre */}
                 <div>
                   <p className="text-base md:text-lg mb-2">

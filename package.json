@@ -1,9 +1,11 @@
 {
-  "name": "klikk-send",
+  "name": "hently",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 127.0.0.1 --webpack",
+    "dev:clean": "rm -rf .next && next dev -H 127.0.0.1 --webpack",
+    "dev:turbo": "next dev -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
