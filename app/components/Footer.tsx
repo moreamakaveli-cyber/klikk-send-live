@@ -2,28 +2,37 @@
 import Link from "next/link";
 import { Package, Phone, MapPin, Instagram } from "lucide-react";
 
+const footerBg = "hsl(220, 36%, 22%)";
+const brandOrange = "oklch(70.5% 0.213 47.604)";
+const footerWhite = "rgba(255, 255, 255, 0.92)";
+
 export default function Footer() {
   return (
     <footer className="w-full">
-      {/* Main orange section - full width, starts directly against white background */}
-      <div className="rounded-t-3xl p-8 md:p-12 w-full" style={{ backgroundColor: 'oklch(70.5% 0.213 47.604)' }}>
+      <div className="rounded-t-3xl p-8 md:p-12 w-full" style={{ backgroundColor: footerBg }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
             {/* Left Column: Brand */}
             <div>
               <div className="mb-4">
-                <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+                <h2
+                  className="text-2xl md:text-3xl font-bold"
+                  style={{ fontFamily: "var(--font-sans), sans-serif", color: brandOrange }}
+                >
                   Hently
                 </h2>
               </div>
-              <p className="text-sm md:text-base leading-relaxed" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+              <p
+                className="text-sm md:text-base leading-relaxed"
+                style={{ fontFamily: "var(--font-sans), sans-serif", color: footerWhite }}
+              >
                 Vi tilbyr umiddelbar henting og levering i hele Oslo. Din tid er verdifull - la oss ta oss av leveransen.
               </p>
             </div>
 
             {/* Second Column: Våre plattformer */}
             <div>
-              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: "var(--font-sans), sans-serif", color: footerWhite }}>
                 Våre plattformer
               </h3>
               <div className="mt-4">
@@ -34,8 +43,8 @@ export default function Footer() {
                   className="inline-flex items-center gap-3 hover:opacity-80 transition-opacity"
                   aria-label="Hently på Instagram"
                 >
-                  <Instagram className="w-6 h-6 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.92)' }} />
-                  <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+                  <Instagram className="w-6 h-6 flex-shrink-0" style={{ color: footerWhite }} />
+                  <span className="text-sm md:text-base" style={{ fontFamily: "var(--font-sans), sans-serif", color: footerWhite }}>
                     Instagram
                   </span>
                 </a>
@@ -44,27 +53,27 @@ export default function Footer() {
 
             {/* Third Column: Bedrift */}
             <div>
-              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: "var(--font-sans), sans-serif", color: footerWhite }}>
                 Bedrift
               </h3>
-              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: "var(--font-sans), sans-serif" }}>
                 <li>
-                  <Link href="/om-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Link href="/om-oss" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     Om oss
                   </Link>
                 </li>
                 <li>
-                  <Link href="/trygghet-og-sikkerhet" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Link href="/trygghet-og-sikkerhet" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     Trygghet og sikkerhet
                   </Link>
                 </li>
                 <li>
-                  <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Link href="/kontakt-oss" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     Kontakt oss
                   </Link>
                 </li>
                 <li>
-                  <Link href="/jobb-i-hently" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Link href="/jobb-i-hently" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     Jobb i Hently
                   </Link>
                 </li>
@@ -73,25 +82,25 @@ export default function Footer() {
 
             {/* Right Column: Contact */}
             <div>
-              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'rgba(255,255,255,0.92)' }}>
+              <h3 className="font-semibold mb-4 text-lg" style={{ fontFamily: "var(--font-sans), sans-serif", color: footerWhite }}>
                 Kontakt
               </h3>
-              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+              <ul className="space-y-3 text-sm md:text-base" style={{ fontFamily: "var(--font-sans), sans-serif" }}>
                 <li className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
-                  <a href="tel:+4797940097" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: footerWhite }} />
+                  <a href="tel:+4797940097" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     +47 979 40 097
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
-                  <a href="tel:+4792117289" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                  <Phone className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: footerWhite }} />
+                  <a href="tel:+4792117289" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                     +47 921 17 289
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: 'rgba(255,255,255,0.85)' }} />
-                  <span style={{ color: 'rgba(255,255,255,0.92)' }}>Oslo, Norge</span>
+                  <MapPin className="w-5 h-5 flex-shrink-0" strokeWidth={2} style={{ color: footerWhite }} />
+                  <span style={{ color: footerWhite }}>Oslo, Norge</span>
                 </li>
               </ul>
             </div>
@@ -99,16 +108,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom section with privacy heading and legal links */}
-        <div className="border-t border-white/20 mt-8 pt-6">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12 space-y-3" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
+        <div className="border-t border-white/15 mt-8 pt-6">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 space-y-3" style={{ fontFamily: "var(--font-sans), sans-serif" }}>
             <div>
-              <h3 className="text-sm md:text-base font-semibold" style={{ color: 'rgba(255,255,255,0.92)' }}>
+              <h3 className="text-sm md:text-base font-semibold" style={{ color: footerWhite }}>
                 Personvern
               </h3>
               <button
                 type="button"
                 className="mt-1 text-xs md:text-sm underline hover:opacity-80"
-                style={{ color: 'rgba(255,255,255,0.92)', background: 'transparent' }}
+                style={{ color: footerWhite, background: "transparent" }}
                 onClick={() => {
                   try {
                     if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") {
@@ -128,14 +137,14 @@ export default function Footer() {
               </button>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm md:text-base">
-              <div style={{ color: 'rgba(255,255,255,0.92)' }}>
+              <div style={{ color: footerWhite }}>
                 © 2026 Hently. Alle rettigheter reservert.
               </div>
               <div className="flex gap-6">
-                <Link href="#privacy" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                <Link href="#privacy" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                   Personvernserklæring
                 </Link>
-                <Link href="#terms" className="hover:opacity-80 transition-opacity" style={{ color: 'rgba(255,255,255,0.92)' }}>
+                <Link href="#terms" className="hover:opacity-80 transition-opacity" style={{ color: footerWhite }}>
                   Vilkår
                 </Link>
               </div>
