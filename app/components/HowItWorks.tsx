@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Search, Hand, Package, ShoppingBag, Heart, Cake, KeyRound, BookOpen, Wallet } from "lucide-react";
+import { Search, Hand, Package, ShoppingBag, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 import OurServices from "./OurServices";
 
 // Custom HandHeart icon component
@@ -63,9 +63,16 @@ export default function HowItWorks() {
         <OurServices />
 
         {/* Slik fungerer Hently - først */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-6 md:mb-8 mt-4"
+          style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}
+        >
           Slik fungerer Hently
-        </h2>
+        </motion.h2>
 
         {/* Large rounded container with secondary background */}
         <div className="rounded-3xl p-6 md:p-8 lg:p-10 mb-8 md:mb-12" style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
@@ -73,7 +80,15 @@ export default function HowItWorks() {
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div key={step.number} className="flex flex-col items-center md:items-start">
+                <motion.div
+                  key={step.number}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className="flex flex-col items-center md:items-start"
+                >
                   {/* Icon with colored background circle */}
                   <div className="mb-4">
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'hsl(16, 85%, 55%)' }}>
@@ -91,7 +106,7 @@ export default function HowItWorks() {
                   <p className="text-base md:text-lg leading-relaxed text-center md:text-left" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
                     {step.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -99,12 +114,26 @@ export default function HowItWorks() {
 
         {/* Use cases - Når passer Hently? */}
         <div className="mb-6 md:mb-8 mt-2 md:mt-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-normal text-center mb-4 md:mb-6"
+            style={{ fontFamily: 'var(--font-serif), serif', color: 'oklch(70.5% 0.213 47.604)' }}
+          >
             Når passer Hently?
-          </h2>
-          <p className="text-center mb-8 max-w-xl mx-auto" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-center mb-8 max-w-xl mx-auto"
+            style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}
+          >
             Vi frakter fra A til B. Tiden din er verdifull. La oss ta leveringen.
-          </p>
+          </motion.p>
           <div
             className="rounded-2xl p-6 md:p-8"
             style={{
@@ -115,8 +144,13 @@ export default function HowItWorks() {
               {useCases.map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div
+                  <motion.div
                     key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
                     className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-colors"
                     style={{ backgroundColor: '#F7F7F7', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}
                   >
@@ -126,7 +160,7 @@ export default function HowItWorks() {
                     <span className="text-sm md:text-base" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
                       {item.text}
                     </span>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -136,7 +170,16 @@ export default function HowItWorks() {
         {/* Why Choose & How to Use & Sustainability Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-12">
           {/* Why Choose Hently */}
-          <div id="why-choose" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+          <motion.div
+            id="why-choose"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.45 }}
+            className="p-6 md:p-8 scroll-mt-20"
+            style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}
+          >
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-4 md:mb-6" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>Hvorfor</span> velge Hently?
             </h3>
@@ -147,10 +190,19 @@ export default function HowItWorks() {
               Les mer
               <span>→</span>
             </Link>
-          </div>
+          </motion.div>
 
           {/* How to Use */}
-          <div id="how-to-use" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+          <motion.div
+            id="how-to-use"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.45, delay: 0.08 }}
+            className="p-6 md:p-8 scroll-mt-20"
+            style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}
+          >
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Slik fungerer <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>samarbeid</span>
             </h3>
@@ -163,10 +215,19 @@ export default function HowItWorks() {
                 <span>→</span>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Få bedriften din til å vokse */}
-          <div id="grow-business" className="p-6 md:p-8 scroll-mt-20" style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}>
+          <motion.div
+            id="grow-business"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.45, delay: 0.16 }}
+            className="p-6 md:p-8 scroll-mt-20"
+            style={{ backgroundColor: '#FFFFFF', borderRadius: '20px', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.06)' }}
+          >
             <h3 className="text-xl md:text-2xl lg:text-3xl font-normal mb-6 md:mb-8" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
               Få <span style={{ color: 'oklch(70.5% 0.213 47.604)' }}>bedriften din</span> til å vokse
             </h3>
@@ -179,7 +240,7 @@ export default function HowItWorks() {
                 <span>→</span>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

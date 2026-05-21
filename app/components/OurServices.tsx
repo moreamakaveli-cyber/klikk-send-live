@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Package, ShoppingBag, Heart, Warehouse, Users, Megaphone, TrendingUp, Zap } from "lucide-react";
+import { Package, ShoppingBag, Heart, Handshake, Users, Megaphone, TrendingUp } from "lucide-react";
 
 interface Service {
   icon: React.ComponentType<{ className?: string; color?: string; strokeWidth?: number }>;
@@ -19,7 +19,7 @@ const services: Service[] = [
     icon: Package,
     iconColor: "hsl(16, 85%, 55%)",
     title: "Levering til kunde",
-    description: "Vi henter fra lager og leverer direkte til kunde.",
+    description: "Vi henter fra bedrift og leverer direkte til kunde.",
     href: "/lever-vare-til-kunde",
     cta: "Les mer",
   } as Service,
@@ -39,18 +39,15 @@ const services: Service[] = [
     href: "/umiddelbar-levering-i-oslo",
     cta: "Les mer",
   } as Service,
-  {
-    icon: Warehouse,
-    iconColor: "hsl(150, 30%, 35%)",
-    title: "Vi tilbyr lagring i vårt lager i Oslo",
-    description:
-      "På denne måten kan vi sende ut varene for deg slik at kundene dine vil få det levert umiddelbart.",
-    href: "/lagring-lager-oslo",
-    cta: "Les mer",
-  } as Service,
 ];
 
 const growthCards = [
+  {
+    icon: Handshake,
+    title: "Hvorfor samarbeide med Hently?",
+    text: "Gjør bedriften mer moderne og fremtidsrettet.",
+    href: "/hvorfor-samarbeide-med-hently",
+  },
   {
     icon: Users,
     title: "Nå ut til flere kunder",
@@ -67,11 +64,6 @@ const growthCards = [
     title: "Flere kunder - økt omsetning",
     text: "Økt synlighet og flere henvendelser gir høyere konvertering og økt inntekt.",
   },
-  {
-    icon: Zap,
-    title: "Tilby umiddelbar levering",
-    text: "Gi kundene dine muligheten til å få varen levert på døren umiddelbart, i stedet for å vente flere dager på tradisjonell frakt.",
-  },
 ];
 
 export default function OurServices() {
@@ -85,7 +77,7 @@ export default function OurServices() {
           Vi hjelper bedrifter med å hente og levere varer direkte til kundene – raskt og enkelt.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (

@@ -1,61 +1,76 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import emailjs from "@emailjs/browser";
-import { saveOrder } from "@/lib/supabase";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { savePendingOrder, type PendingOrder } from "@/lib/pending-order";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Package, Box, Archive, ArrowRight, ArrowLeft, Check } from "lucide-react";
 import Button from "../components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 type PackageSize = "liten" | "medium" | "stor" | null;
 
-interface PackageOption {
-  id: PackageSize;
-  title: string;
-  text: string;
-  maxWeight: string;
-  maxDimensions: string;
-  examples: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const packageOptions: PackageOption[] = [
+const packageOptions = [
   {
-    id: "liten",
+    id: "liten" as PackageSize,
     title: "Liten",
-    text: "",
     maxWeight: "Maks 10 kg",
-    maxDimensions: "Maks 40 × 40 × 40 cm",
-    examples: "",
+    maxDimensions: "40 × 40 × 40 cm",
     icon: Package,
+    emoji: "📦",
   },
   {
-    id: "medium",
+    id: "medium" as PackageSize,
     title: "Mellomstor",
-    text: "",
     maxWeight: "Maks 20 kg",
-    maxDimensions: "Maks 60 × 50 × 50 cm",
-    examples: "",
+    maxDimensions: "60 × 50 × 50 cm",
     icon: Box,
+    emoji: "🗃️",
   },
   {
-    id: "stor",
+    id: "stor" as PackageSize,
     title: "Stor",
-    text: "",
     maxWeight: "Maks 35 kg",
-    maxDimensions: "Maks 80 × 60 × 60 cm",
-    examples: "",
+    maxDimensions: "80 × 60 × 60 cm",
     icon: Archive,
+    emoji: "🛋️",
   },
 ];
 
+const stepVariants = {
+  enter: { opacity: 0, x: 40 },
+  center: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -40 },
+};
+
+function Field({
+  label,
+  children,
+}: {
+  label?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      {label && (
+        <label className="text-sm font-medium" style={{ color: "hsl(150, 30%, 15%)" }}>
+          {label}
+        </label>
+      )}
+      {children}
+    </div>
+  );
+}
+
+const inputClass =
+  "w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none bg-white text-gray-900 text-sm transition-all duration-150";
+
 function BestillContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const isKlikkHent = searchParams.get('type') === 'klikk-hent';
+  const isKlikkHent = searchParams.get("type") === "klikk-hent";
   const [step, setStep] = useState(1);
+  const [direction, setDirection] = useState(1);
   const [selectedSize, setSelectedSize] = useState<PackageSize>(null);
   const [formData, setFormData] = useState({
     pickupBusinessName: "",
@@ -75,31 +90,27 @@ function BestillContent() {
     comment: "",
   });
   const [isSending, setIsSending] = useState(false);
+  const [isPaying, setIsPaying] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
 
-  // Combine address fields into full address string
-  const combineAddress = (street: string, postalCode: string, city: string): string => {
-    return `${street}, ${postalCode} ${city}, Norway`;
-  };
+  const combineAddress = (street: string, postalCode: string, city: string) =>
+    `${street}, ${postalCode} ${city}, Norway`;
 
-  // Validate address fields
-  const validateAddress = (
-    street: string,
-    postalCode: string,
-    city: string
-  ): boolean => {
-    if (!street.trim()) return false;
-    if (!postalCode.trim() || !/^\d{4}$/.test(postalCode)) return false;
-    if (!city.trim()) return false;
-    return true;
+  const validateAddress = (street: string, postalCode: string, city: string) =>
+    !!street.trim() && /^\d{4}$/.test(postalCode) && !!city.trim();
+
+  const goTo = (next: number) => {
+    setDirection(next > step ? 1 : -1);
+    setStep(next);
   };
 
   const handleNext = () => {
     if (step === 1 && selectedSize) {
-      setStep(2);
+      goTo(2);
       setValidationError(null);
     } else if (step === 2) {
-      // Validate all required fields
       const isPickupValid = validateAddress(
         formData.pickupStreet,
         formData.pickupPostalCode,
@@ -110,11 +121,9 @@ function BestillContent() {
         formData.deliveryPostalCode,
         formData.deliveryCity
       );
-
-      const pickupNameValid = isKlikkHent 
-        ? formData.pickupBusinessName.trim() 
+      const pickupNameValid = isKlikkHent
+        ? formData.pickupBusinessName.trim()
         : formData.pickupFirstName && formData.pickupLastName;
-      
       const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
 
       if (
@@ -127,650 +136,669 @@ function BestillContent() {
         isDeliveryValid
       ) {
         setValidationError(null);
-        setStep(3);
+        goTo(3);
       } else {
-        setValidationError("Vennligst fyll inn en gyldig adresse");
+        setValidationError("Fyll inn alle obligatoriske felt.");
       }
     }
   };
 
   const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
+    if (step === 3) {
+      setOrderConfirmed(false);
+      setPaymentError(null);
     }
+    if (step > 1) goTo(step - 1);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     let value = e.target.value;
-    
-    // Only allow numbers for postal code fields
-    if (e.target.name === "pickupPostalCode" || e.target.name === "deliveryPostalCode") {
-      value = value.replace(/\D/g, ""); // Remove non-numeric characters
-    }
-    
-    // Only allow numbers for phone fields and limit to 9 digits
-    if (e.target.name === "pickupPhone" || e.target.name === "deliveryPhone") {
-      value = value.replace(/\D/g, ""); // Remove non-numeric characters
-      if (value.length > 9) {
-        value = value.slice(0, 9); // Limit to 9 digits
-      }
-    }
-    
-    setFormData({
-      ...formData,
-      [e.target.name]: value,
-    });
-    // Clear validation error when user starts typing
-    if (validationError) {
-      setValidationError(null);
-    }
+    if (["pickupPostalCode", "deliveryPostalCode"].includes(e.target.name))
+      value = value.replace(/\D/g, "");
+    if (["pickupPhone", "deliveryPhone"].includes(e.target.name))
+      value = value.replace(/\D/g, "").slice(0, 9);
+    setFormData({ ...formData, [e.target.name]: value });
+    if (validationError) setValidationError(null);
   };
 
+  const buildPendingOrder = (): PendingOrder | null => {
+    const isPickupValid = validateAddress(
+      formData.pickupStreet,
+      formData.pickupPostalCode,
+      formData.pickupCity
+    );
+    const isDeliveryValid = validateAddress(
+      formData.deliveryStreet,
+      formData.deliveryPostalCode,
+      formData.deliveryCity
+    );
+    const pickupNameValid = isKlikkHent
+      ? formData.pickupBusinessName?.trim()
+      : formData.pickupFirstName && formData.pickupLastName;
+    const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
 
-  const handleConfirm = async () => {
-    setIsSending(true);
-    
-    try {
-      // Validate input based on order type
-      const isPickupValid = validateAddress(
-        formData.pickupStreet,
-        formData.pickupPostalCode,
-        formData.pickupCity
-      );
-      const isDeliveryValid = validateAddress(
-        formData.deliveryStreet,
-        formData.deliveryPostalCode,
-        formData.deliveryCity
-      );
+    if (
+      !pickupNameValid ||
+      !pickupPhoneValid ||
+      !isPickupValid ||
+      !formData.deliveryFirstName ||
+      !formData.deliveryLastName ||
+      !formData.deliveryPhone ||
+      !isDeliveryValid ||
+      !selectedSize
+    )
+      return null;
 
-      const pickupNameValid = isKlikkHent
-        ? formData.pickupBusinessName?.trim()
-        : formData.pickupFirstName && formData.pickupLastName;
+    const pickupAddress = combineAddress(
+      formData.pickupStreet,
+      formData.pickupPostalCode,
+      formData.pickupCity
+    );
+    const deliveryAddress = combineAddress(
+      formData.deliveryStreet,
+      formData.deliveryPostalCode,
+      formData.deliveryCity
+    );
+    const pickupName = isKlikkHent
+      ? formData.pickupBusinessName
+      : `${formData.pickupFirstName} ${formData.pickupLastName}`;
+    const pickupPhone = isKlikkHent ? "" : formData.pickupPhone;
+    const packageSize =
+      packageOptions.find((p) => p.id === selectedSize)?.title || "";
 
-      const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
-
-      if (
-        !pickupNameValid ||
-        !pickupPhoneValid ||
-        !isPickupValid ||
-        !formData.deliveryFirstName ||
-        !formData.deliveryLastName ||
-        !formData.deliveryPhone ||
-        !isDeliveryValid ||
-        !selectedSize
-      ) {
-        alert("Vennligst fyll ut alle obligatoriske felt.");
-        setIsSending(false);
-        return;
-      }
-
-      // Combine addresses
-      const pickupAddress = combineAddress(
-        formData.pickupStreet,
-        formData.pickupPostalCode,
-        formData.pickupCity
-      );
-      const deliveryAddress = combineAddress(
-        formData.deliveryStreet,
-        formData.deliveryPostalCode,
-        formData.deliveryCity
-      );
-
-      // Prepare data based on order type
-      const pickupName = isKlikkHent
-        ? formData.pickupBusinessName
-        : `${formData.pickupFirstName} ${formData.pickupLastName}`;
-      const pickupPhone = isKlikkHent ? "" : formData.pickupPhone;
-      const packageSize = packageOptions.find((p) => p.id === selectedSize)?.title || "";
-
-      // Save order to Supabase (try, but don't fail if it errors)
-      try {
-      await saveOrder({
-          name: pickupName,
-          phone: pickupPhone,
-        pickup_address: pickupAddress,
-        delivery_address: deliveryAddress,
-        package_size: packageSize,
-      });
-      } catch (saveError) {
-        console.error("Failed to save to Supabase:", saveError);
-        // Continue anyway
-      }
-
-      // Send email via EmailJS (try, but don't fail if it errors)
-      try {
-      const templateParams = {
-          name: pickupName,
-          phone: pickupPhone,
+    return {
+      name: pickupName,
+      phone: pickupPhone,
+      pickup_address: pickupAddress,
+      delivery_address: deliveryAddress,
+      package_size: packageSize,
+      emailParams: {
+        name: pickupName,
+        phone: pickupPhone,
         package: packageSize,
         pickup: pickupAddress,
         delivery: deliveryAddress,
-          isKlikkHent: isKlikkHent ? "Ja" : "Nei",
-          pickupCode: formData.pickupPickupCode || "",
-          deliveryName: `${formData.deliveryFirstName} ${formData.deliveryLastName}`,
-          deliveryPhone: formData.deliveryPhone,
-      };
+        isKlikkHent: isKlikkHent ? "Ja" : "Nei",
+        pickupCode: formData.pickupPickupCode || "",
+        deliveryName: `${formData.deliveryFirstName} ${formData.deliveryLastName}`,
+        deliveryPhone: formData.deliveryPhone,
+      },
+    };
+  };
 
-      await emailjs.send(
-        "service_476sm2p",
-        "template_xmmnr9c",
-        templateParams,
-        "HLFNfJ-HvjqeXLMXL"
-      );
-      } catch (emailError) {
-        console.error("Failed to send email:", emailError);
-        // Continue anyway
-      }
-
-      // Navigate to thank you page after successful validation
-      router.push("/takk");
-    } catch (error: unknown) {
-      console.error("Unexpected error:", error);
-      const message = error instanceof Error ? error.message : "Vennligst prøv igjen.";
-      alert(`Det oppstod en feil: ${message}`);
+  const handleConfirm = () => {
+    setIsSending(true);
+    setPaymentError(null);
+    const pending = buildPendingOrder();
+    if (!pending) {
+      alert("Vennligst fyll ut alle obligatoriske felt.");
       setIsSending(false);
+      return;
+    }
+    savePendingOrder(pending);
+    setOrderConfirmed(true);
+    setIsSending(false);
+  };
+
+  const handleStripeCheckout = async () => {
+    const pending = buildPendingOrder();
+    if (!pending) {
+      alert("Vennligst fyll ut alle obligatoriske felt.");
+      return;
+    }
+    setIsPaying(true);
+    setPaymentError(null);
+    savePendingOrder(pending);
+    try {
+      const response = await fetch("/api/stripe/checkout", { method: "POST" });
+      const data = (await response.json()) as { url?: string; error?: string };
+      if (!response.ok || !data.url)
+        throw new Error(data.error ?? "Kunne ikke starte betaling.");
+      window.location.href = data.url;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Kunne ikke starte betaling.";
+      setPaymentError(message);
+      setIsPaying(false);
     }
   };
 
+  const stepLabels = ["Størrelse", "Adresser", "Bekreft"];
+
   return (
-    <main className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
+    <main className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <Navbar />
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          {/* Progress indicator */}
+
+      <section className="py-16 px-6">
+        <div className="max-w-2xl mx-auto">
+
+          {/* Progress */}
           <div className="mb-12">
-            <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="flex items-center justify-center gap-2 mb-3">
               {[1, 2, 3].map((s) => (
                 <div key={s} className="flex items-center">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                      step >= s
-                        ? "bg-orange-600 text-white"
-                        : "bg-gray-200 text-gray-500"
-                    }`}
+                  <motion.div
+                    animate={{
+                      backgroundColor:
+                        step >= s ? "oklch(70.5% 0.213 47.604)" : "#E5E7EB",
+                      scale: step === s ? 1.15 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm"
+                    style={{ color: step >= s ? "#fff" : "#9CA3AF" }}
                   >
-                    {step > s ? <Check className="w-5 h-5" /> : s}
-                  </div>
+                    {step > s ? <Check className="w-4 h-4" /> : s}
+                  </motion.div>
                   {s < 3 && (
-                    <div
-                      className={`w-16 h-0.5 ${
-                        step > s ? "bg-orange-600" : "bg-gray-200"
-                      }`}
+                    <motion.div
+                      animate={{
+                        backgroundColor:
+                          step > s ? "oklch(70.5% 0.213 47.604)" : "#E5E7EB",
+                      }}
+                      transition={{ duration: 0.4 }}
+                      className="w-12 h-0.5 mx-1"
                     />
                   )}
                 </div>
               ))}
             </div>
+            <div className="flex justify-center gap-12 text-xs" style={{ color: "hsl(150, 10%, 50%)" }}>
+              {stepLabels.map((label, i) => (
+                <span
+                  key={label}
+                  style={{
+                    color:
+                      step === i + 1
+                        ? "oklch(70.5% 0.213 47.604)"
+                        : "hsl(150, 10%, 60%)",
+                    fontWeight: step === i + 1 ? 600 : 400,
+                  }}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* STEP 1: Choose package size */}
-          {step === 1 && (
-            <div>
-              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-                Velg størrelse på levering
-              </h1>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
-                {packageOptions.map((option) => {
-                  const Icon = option.icon;
-                  const isSelected = selectedSize === option.id;
-                  return (
-                    <button
-                      key={option.id}
-                      onClick={() => setSelectedSize(option.id)}
-                      className={`p-5 md:p-6 rounded-lg border transition-all duration-200 text-left ${
-                        isSelected
-                          ? "border-orange-600 shadow-sm"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                      style={{ backgroundColor: isSelected ? 'rgba(251, 146, 60, 0.15)' : '#FFFFFF' }}
+          {/* Steps */}
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={step}
+              custom={direction}
+              variants={{
+                enter: (d: number) => ({ opacity: 0, x: d * 40 }),
+                center: { opacity: 1, x: 0 },
+                exit: (d: number) => ({ opacity: 0, x: d * -40 }),
+              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+
+              {/* STEP 1 */}
+              {step === 1 && (
+                <div>
+                  <h1
+                    className="text-3xl font-normal mb-2 text-center"
+                    style={{ fontFamily: "var(--font-serif), serif", color: "hsl(150, 30%, 15%)" }}
+                  >
+                    Hva skal sendes?
+                  </h1>
+                  <p className="text-center text-sm mb-8" style={{ color: "hsl(150, 10%, 50%)" }}>
+                    Velg størrelsen som passer best
+                  </p>
+
+                  <div className="flex flex-col gap-3 mb-10">
+                    {packageOptions.map((option) => {
+                      const Icon = option.icon;
+                      const isSelected = selectedSize === option.id;
+                      return (
+                        <motion.button
+                          key={option.id}
+                          onClick={() => setSelectedSize(option.id)}
+                          whileHover={{ scale: 1.01 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full flex items-center gap-5 p-5 rounded-2xl border-2 text-left transition-colors duration-150"
+                          style={{
+                            borderColor: isSelected
+                              ? "oklch(70.5% 0.213 47.604)"
+                              : "#E5E7EB",
+                            backgroundColor: isSelected
+                              ? "rgba(251,146,60,0.06)"
+                              : "#FAFAFA",
+                          }}
+                        >
+                          <div
+                            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style={{
+                              backgroundColor: isSelected
+                                ? "oklch(70.5% 0.213 47.604)"
+                                : "#F3F4F6",
+                            }}
+                          >
+                            <Icon
+                              className="w-6 h-6"
+                              style={{ color: isSelected ? "#fff" : "#6B7280" }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <p
+                              className="font-semibold text-base"
+                              style={{
+                                color: isSelected
+                                  ? "oklch(70.5% 0.213 47.604)"
+                                  : "hsl(150, 30%, 15%)",
+                                fontFamily: "var(--font-serif), serif",
+                              }}
+                            >
+                              {option.title}
+                            </p>
+                            <p className="text-sm mt-0.5" style={{ color: "hsl(150, 10%, 50%)" }}>
+                              {option.maxWeight} · {option.maxDimensions}
+                            </p>
+                          </div>
+                          {isSelected && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                              style={{ backgroundColor: "oklch(70.5% 0.213 47.604)" }}
+                            >
+                              <Check className="w-3.5 h-3.5 text-white" />
+                            </motion.div>
+                          )}
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+
+                  <motion.div
+                    whileHover={{ scale: selectedSize ? 1.02 : 1 }}
+                    whileTap={{ scale: selectedSize ? 0.98 : 1 }}
+                  >
+                    <Button
+                      variant="hero-primary"
+                      onClick={handleNext}
+                      disabled={!selectedSize}
+                      className="w-full py-4 text-base rounded-2xl"
                     >
-                      <div className="flex items-center gap-3 mb-3">
-                        <div
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                            isSelected ? "bg-orange-600" : "bg-gray-100"
-                          }`}
-                          style={isSelected ? { backgroundColor: 'oklch(70.5% 0.213 47.604)' } : {}}
-                        >
-                          <Icon
-                            className={`w-5 h-5 ${
-                              isSelected ? "text-white" : "text-gray-600"
-                            }`}
-                          />
-                        </div>
-                        <h3 className={`text-lg md:text-xl font-normal ${
-                          isSelected ? "text-orange-600" : "text-gray-900"
-                        }`} style={{ fontFamily: 'var(--font-serif), serif', color: isSelected ? 'oklch(70.5% 0.213 47.604)' : 'hsl(150, 30%, 15%)' }}>{option.title}</h3>
-                      </div>
-                        <div className="space-y-1">
-                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxWeight}</p>
-                          <p className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 10%, 40%)' }}>{option.maxDimensions}</p>
-                        </div>
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="flex justify-end">
-                <Button
-                  variant="hero-primary"
-                  onClick={handleNext}
-                  disabled={!selectedSize}
-                  className="px-8 py-3"
-                >
-                  Neste
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 2: Contact and addresses */}
-          {step === 2 && (
-            <div>
-              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-                Hvor skal vi hente og levere?
-              </h1>
-              <div className="max-w-6xl mx-auto">
-                {/* Two-column layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 items-stretch">
-                  {/* Left column: Henting */}
-                  <div className="p-4 md:p-5 flex flex-col h-full">
-                    <h2 className="text-lg md:text-xl font-normal mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-                      {isKlikkHent ? "Navn på butikk" : "Hvem henter vi fra?"}
-                    </h2>
-                    <div className="space-y-4 flex-grow">
-                      {isKlikkHent && (
-                        <>
-                          <div>
-                            <input
-                              type="text"
-                              id="pickupBusinessName"
-                              name="pickupBusinessName"
-                              placeholder="F.eks. Power, Elkjøp"
-                              value={formData.pickupBusinessName}
-                              onChange={handleInputChange}
-                              required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                          </div>
-                      <div>
-                        <label
-                              htmlFor="pickupPickupCode"
-                              className="block text-sm font-medium mb-2"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                        >
-                              Hentekode
-                        </label>
-                            <input
-                              type="text"
-                              id="pickupPickupCode"
-                              name="pickupPickupCode"
-                              placeholder="Hentekode hvis tilgjengelig"
-                              value={formData.pickupPickupCode}
-                              onChange={handleInputChange}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                          </div>
-                        </>
-                      )}
-                      {!isKlikkHent && (
-                        <>
-                          <div>
-                        <div className="grid grid-cols-2 gap-3">
-                          <input
-                            type="text"
-                            id="pickupFirstName"
-                            name="pickupFirstName"
-                            placeholder="Fornavn"
-                            value={formData.pickupFirstName}
-                            onChange={handleInputChange}
-                            required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                                style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                          <input
-                            type="text"
-                            id="pickupLastName"
-                            name="pickupLastName"
-                            placeholder="Etternavn"
-                            value={formData.pickupLastName}
-                            onChange={handleInputChange}
-                            required
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                                style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="pickupPhone"
-                              className="block text-sm font-medium mb-2"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                        >
-                          Telefonnummer *
-                        </label>
-                        <input
-                          type="tel"
-                          id="pickupPhone"
-                          name="pickupPhone"
-                          value={formData.pickupPhone}
-                          onChange={handleInputChange}
-                              maxLength={9}
-                          required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                        />
-                      </div>
-                        </>
-                      )}
-                      <div>
-                        <label
-                          htmlFor="pickupStreet"
-                          className="block text-sm font-medium mb-2"
-                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                        >
-                          Henteadresse *
-                        </label>
-                        <div className="space-y-3">
-                          <input
-                            type="text"
-                            id="pickupStreet"
-                            name="pickupStreet"
-                            placeholder="Gateadresse"
-                            value={formData.pickupStreet}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                          <div className="grid grid-cols-2 gap-3">
-                            <input
-                              type="text"
-                              id="pickupPostalCode"
-                              name="pickupPostalCode"
-                              placeholder="Postnummer"
-                              value={formData.pickupPostalCode}
-                              onChange={handleInputChange}
-                              required
-                              maxLength={4}
-                              pattern="[0-9]{4}"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                            <input
-                              type="text"
-                              id="pickupCity"
-                              name="pickupCity"
-                              placeholder="By"
-                              value={formData.pickupCity}
-                              onChange={handleInputChange}
-                              required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right column: Levering */}
-                  <div className="p-4 md:p-5 flex flex-col h-full">
-                    <h2 className="text-lg md:text-xl font-normal mb-4" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>Levering til</h2>
-                    <div className="space-y-4 flex-grow">
-                      <div>
-                        <div className="grid grid-cols-2 gap-3">
-                          <input
-                            type="text"
-                            id="deliveryFirstName"
-                            name="deliveryFirstName"
-                            placeholder="Fornavn"
-                            value={formData.deliveryFirstName}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                          <input
-                            type="text"
-                            id="deliveryLastName"
-                            name="deliveryLastName"
-                            placeholder="Etternavn"
-                            value={formData.deliveryLastName}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="deliveryPhone"
-                          className="block text-sm font-medium mb-2"
-                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                        >
-                          Telefonnummer *
-                        </label>
-                        <input
-                          type="tel"
-                          id="deliveryPhone"
-                          name="deliveryPhone"
-                          value={formData.deliveryPhone}
-                          onChange={handleInputChange}
-                          maxLength={9}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                          style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="deliveryStreet"
-                          className="block text-sm font-medium mb-2"
-                          style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
-                        >
-                          Leveringsadresse *
-                        </label>
-                        <div className="space-y-3">
-                          <input
-                            type="text"
-                            id="deliveryStreet"
-                            name="deliveryStreet"
-                            placeholder="Gateadresse"
-                            value={formData.deliveryStreet}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                            style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                          />
-                          <div className="grid grid-cols-2 gap-3">
-                            <input
-                              type="text"
-                              id="deliveryPostalCode"
-                              name="deliveryPostalCode"
-                              placeholder="Postnummer"
-                              value={formData.deliveryPostalCode}
-                              onChange={handleInputChange}
-                              required
-                              maxLength={4}
-                              pattern="[0-9]{4}"
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                            <input
-                              type="text"
-                              id="deliveryCity"
-                              name="deliveryCity"
-                              placeholder="By"
-                              value={formData.deliveryCity}
-                              onChange={handleInputChange}
-                              required
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-gray-900 text-sm"
-                              style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      Fortsett
+                      <ArrowRight className="w-5 h-5" />
+                    </Button>
+                  </motion.div>
                 </div>
+              )}
 
-                {/* Comment textarea below both columns */}
-                <div className="mb-6">
-                  <label
-                    htmlFor="comment"
-                    className="block text-sm font-medium mb-2"
-                    style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}
+              {/* STEP 2 */}
+              {step === 2 && (
+                <div>
+                  <h1
+                    className="text-3xl font-normal mb-2 text-center"
+                    style={{ fontFamily: "var(--font-serif), serif", color: "hsl(150, 30%, 15%)" }}
                   >
-                    Beskjed til budet (valgfritt)
-                  </label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    value={formData.comment}
-                    onChange={handleInputChange}
-                    rows={5}
-                    placeholder="For eksempel: etasje, ringeklokke, portkode, hvor pakken står, eller andre leveringsinstrukser."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none resize-none bg-white text-gray-900 placeholder:text-gray-400 text-sm"
-                    style={{ fontFamily: 'var(--font-sans), sans-serif' }}
-                  />
-                </div>
+                    Henting og levering
+                  </h1>
+                  <p className="text-center text-sm mb-8" style={{ color: "hsl(150, 10%, 50%)" }}>
+                    Fyll inn adressene – så tar vi oss av resten
+                  </p>
 
-                {/* Validation error message */}
-                {validationError && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                    <p className="text-red-600 text-sm font-medium">{validationError}</p>
-                  </div>
-                )}
+                  <div className="flex flex-col gap-6 mb-6">
 
-                {/* Navigation buttons */}
-                <div className="flex justify-between">
-                  <Button
-                    variant="hero-secondary"
-                    onClick={handleBack}
-                    className="px-8 py-3"
-                  >
-                    <ArrowLeft className="w-5 h-5" />
-                    Tilbake
-                  </Button>
-                  <Button
-                    variant="hero-primary"
-                    onClick={handleNext}
-                    disabled={
-                      (isKlikkHent 
-                        ? !formData.pickupBusinessName?.trim()
-                        : !formData.pickupFirstName || !formData.pickupLastName || !formData.pickupPhone) ||
-                      !formData.pickupStreet ||
-                      !formData.pickupPostalCode ||
-                      !formData.pickupCity ||
-                      !formData.deliveryFirstName ||
-                      !formData.deliveryLastName ||
-                      !formData.deliveryPhone ||
-                      !formData.deliveryStreet ||
-                      !formData.deliveryPostalCode ||
-                      !formData.deliveryCity
-                    }
-                    className="px-8 py-3"
-                  >
-                    Fortsett
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 3: Price confirmation */}
-          {step === 3 && (
-            <div>
-              <h1 className="text-3xl md:text-4xl font-normal mb-6 text-center" style={{ fontFamily: 'var(--font-serif), serif', color: 'hsl(150, 30%, 15%)' }}>
-                Bekreft bestilling
-              </h1>
-              <div className="max-w-3xl mx-auto space-y-4">
-                {/* Henting og levering side-by-side */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Henting */}
-                  <div className="bg-white rounded-lg p-4 border border-gray-200">
-                    <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Vi henter fra</h4>
-                    <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
+                    {/* Henting */}
+                    <div className="bg-gray-50 rounded-2xl p-5 flex flex-col gap-4">
+                      <p className="font-semibold text-sm uppercase tracking-wide" style={{ color: "hsl(150, 10%, 50%)" }}>
+                        📍 Henter fra
+                      </p>
                       {isKlikkHent ? (
                         <>
-                          <div><span className="font-medium">Butikk:</span> {formData.pickupBusinessName}</div>
-                          {formData.pickupPickupCode && <div><span className="font-medium">Hentekode:</span> {formData.pickupPickupCode}</div>}
+                          <Field>
+                            <input
+                              type="text"
+                              name="pickupBusinessName"
+                              placeholder="Navn på butikk (f.eks. Power, Elkjøp)"
+                              value={formData.pickupBusinessName}
+                              onChange={handleInputChange}
+                              className={inputClass}
+                            />
+                          </Field>
+                          <Field label="Hentekode (valgfritt)">
+                            <input
+                              type="text"
+                              name="pickupPickupCode"
+                              placeholder="Hentekode"
+                              value={formData.pickupPickupCode}
+                              onChange={handleInputChange}
+                              className={inputClass}
+                            />
+                          </Field>
                         </>
                       ) : (
                         <>
-                          <div><span className="font-medium">Navn:</span> {formData.pickupFirstName} {formData.pickupLastName}</div>
-                          <div><span className="font-medium">Telefon:</span> {formData.pickupPhone}</div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <input
+                              type="text"
+                              name="pickupFirstName"
+                              placeholder="Fornavn"
+                              value={formData.pickupFirstName}
+                              onChange={handleInputChange}
+                              className={inputClass}
+                            />
+                            <input
+                              type="text"
+                              name="pickupLastName"
+                              placeholder="Etternavn"
+                              value={formData.pickupLastName}
+                              onChange={handleInputChange}
+                              className={inputClass}
+                            />
+                          </div>
+                          <Field label="Telefon">
+                            <input
+                              type="tel"
+                              name="pickupPhone"
+                              placeholder="Telefonnummer"
+                              value={formData.pickupPhone}
+                              onChange={handleInputChange}
+                              maxLength={9}
+                              className={inputClass}
+                            />
+                          </Field>
                         </>
                       )}
-                      <div><span className="font-medium">Adresse:</span> {combineAddress(formData.pickupStreet, formData.pickupPostalCode, formData.pickupCity)}</div>
-                    </div>
+                      <Field label="Adresse">
+                        <input
+                          type="text"
+                          name="pickupStreet"
+                          placeholder="Gateadresse"
+                          value={formData.pickupStreet}
+                          onChange={handleInputChange}
+                          className={inputClass}
+                        />
+                        <div className="grid grid-cols-2 gap-3 mt-2">
+                          <input
+                            type="text"
+                            name="pickupPostalCode"
+                            placeholder="Postnummer"
+                            value={formData.pickupPostalCode}
+                            onChange={handleInputChange}
+                            maxLength={4}
+                            className={inputClass}
+                          />
+                          <input
+                            type="text"
+                            name="pickupCity"
+                            placeholder="By"
+                            value={formData.pickupCity}
+                            onChange={handleInputChange}
+                            className={inputClass}
+                          />
                         </div>
-
-                  {/* Levering */}
-                  <div className="bg-white rounded-lg p-4 border border-gray-200">
-                    <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Vi leverer til</h4>
-                    <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                      <div><span className="font-medium">Navn:</span> {formData.deliveryFirstName} {formData.deliveryLastName}</div>
-                      <div><span className="font-medium">Telefon:</span> {formData.deliveryPhone}</div>
-                      <div><span className="font-medium">Adresse:</span> {combineAddress(formData.deliveryStreet, formData.deliveryPostalCode, formData.deliveryCity)}</div>
+                      </Field>
                     </div>
+
+                    {/* Levering */}
+                    <div className="bg-gray-50 rounded-2xl p-5 flex flex-col gap-4">
+                      <p className="font-semibold text-sm uppercase tracking-wide" style={{ color: "hsl(150, 10%, 50%)" }}>
+                        🏠 Leverer til
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <input
+                          type="text"
+                          name="deliveryFirstName"
+                          placeholder="Fornavn"
+                          value={formData.deliveryFirstName}
+                          onChange={handleInputChange}
+                          className={inputClass}
+                        />
+                        <input
+                          type="text"
+                          name="deliveryLastName"
+                          placeholder="Etternavn"
+                          value={formData.deliveryLastName}
+                          onChange={handleInputChange}
+                          className={inputClass}
+                        />
+                      </div>
+                      <Field label="Telefon">
+                        <input
+                          type="tel"
+                          name="deliveryPhone"
+                          placeholder="Telefonnummer"
+                          value={formData.deliveryPhone}
+                          onChange={handleInputChange}
+                          maxLength={9}
+                          className={inputClass}
+                        />
+                      </Field>
+                      <Field label="Adresse">
+                        <input
+                          type="text"
+                          name="deliveryStreet"
+                          placeholder="Gateadresse"
+                          value={formData.deliveryStreet}
+                          onChange={handleInputChange}
+                          className={inputClass}
+                        />
+                        <div className="grid grid-cols-2 gap-3 mt-2">
+                          <input
+                            type="text"
+                            name="deliveryPostalCode"
+                            placeholder="Postnummer"
+                            value={formData.deliveryPostalCode}
+                            onChange={handleInputChange}
+                            maxLength={4}
+                            className={inputClass}
+                          />
+                          <input
+                            type="text"
+                            name="deliveryCity"
+                            placeholder="By"
+                            value={formData.deliveryCity}
+                            onChange={handleInputChange}
+                            className={inputClass}
+                          />
+                        </div>
+                      </Field>
+                    </div>
+
+                    {/* Kommentar */}
+                    <Field label="Beskjed til budet (valgfritt)">
+                      <textarea
+                        name="comment"
+                        value={formData.comment}
+                        onChange={handleInputChange}
+                        rows={3}
+                        placeholder="Etasje, portkode, ringeklokke..."
+                        className={inputClass + " resize-none"}
+                      />
+                    </Field>
+                  </div>
+
+                  <AnimatePresence>
+                    {validationError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl"
+                      >
+                        <p className="text-red-600 text-sm">{validationError}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="flex gap-3">
+                    <Button
+                      variant="hero-secondary"
+                      onClick={handleBack}
+                      className="px-6 py-4 rounded-2xl"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                    </Button>
+                    <Button
+                      variant="hero-primary"
+                      onClick={handleNext}
+                      className="flex-1 py-4 text-base rounded-2xl"
+                    >
+                      Se oppsummering
+                      <ArrowRight className="w-5 h-5" />
+                    </Button>
                   </div>
                 </div>
+              )}
 
-                {/* Pakkestørrelse */}
-                <div className="bg-white rounded-lg p-4 border border-gray-200">
-                  <div className="text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                    <span className="font-medium">Pakkestørrelse:</span> {packageOptions.find((p) => p.id === selectedSize)?.title}
+              {/* STEP 3 */}
+              {step === 3 && (
+                <div>
+                  <h1
+                    className="text-3xl font-normal mb-2 text-center"
+                    style={{ fontFamily: "var(--font-serif), serif", color: "hsl(150, 30%, 15%)" }}
+                  >
+                    Se over og betal
+                  </h1>
+                  <p className="text-center text-sm mb-8" style={{ color: "hsl(150, 10%, 50%)" }}>
+                    Ser alt riktig ut?
+                  </p>
+
+                  <div className="flex flex-col gap-3 mb-8">
+
+                    {/* Pakkestørrelse */}
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4 flex items-center gap-4">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: "oklch(70.5% 0.213 47.604)" }}
+                      >
+                        <Package className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium uppercase tracking-wide" style={{ color: "hsl(150, 10%, 55%)" }}>Pakkestørrelse</p>
+                        <p className="font-semibold text-sm" style={{ color: "hsl(150, 30%, 15%)" }}>
+                          {packageOptions.find((p) => p.id === selectedSize)?.title} · {packageOptions.find((p) => p.id === selectedSize)?.maxWeight}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Henting */}
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                      <p className="text-xs font-medium uppercase tracking-wide mb-2" style={{ color: "hsl(150, 10%, 55%)" }}>📍 Henter fra</p>
+                      <div className="text-sm flex flex-col gap-1" style={{ color: "hsl(150, 30%, 15%)" }}>
+                        {isKlikkHent ? (
+                          <>
+                            <span className="font-semibold">{formData.pickupBusinessName}</span>
+                            {formData.pickupPickupCode && <span>Hentekode: {formData.pickupPickupCode}</span>}
+                          </>
+                        ) : (
+                          <>
+                            <span className="font-semibold">{formData.pickupFirstName} {formData.pickupLastName}</span>
+                            <span style={{ color: "hsl(150, 10%, 50%)" }}>{formData.pickupPhone}</span>
+                          </>
+                        )}
+                        <span style={{ color: "hsl(150, 10%, 50%)" }}>
+                          {formData.pickupStreet}, {formData.pickupPostalCode} {formData.pickupCity}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Levering */}
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                      <p className="text-xs font-medium uppercase tracking-wide mb-2" style={{ color: "hsl(150, 10%, 55%)" }}>🏠 Leverer til</p>
+                      <div className="text-sm flex flex-col gap-1" style={{ color: "hsl(150, 30%, 15%)" }}>
+                        <span className="font-semibold">{formData.deliveryFirstName} {formData.deliveryLastName}</span>
+                        <span style={{ color: "hsl(150, 10%, 50%)" }}>{formData.deliveryPhone}</span>
+                        <span style={{ color: "hsl(150, 10%, 50%)" }}>
+                          {formData.deliveryStreet}, {formData.deliveryPostalCode} {formData.deliveryCity}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pris */}
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                      <p className="text-xs font-medium uppercase tracking-wide mb-3" style={{ color: "hsl(150, 10%, 55%)" }}>Pris</p>
+                      <div className="flex flex-col gap-2 text-sm" style={{ color: "hsl(150, 30%, 15%)" }}>
+                        <div className="flex justify-between">
+                          <span>0–3 km</span>
+                          <span className="font-semibold">119 kr</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>3–6 km</span>
+                          <span className="font-semibold">169 kr</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>6–20 km</span>
+                          <span className="font-semibold">219 kr</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {orderConfirmed && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="mb-4 p-4 bg-green-50 border border-green-200 rounded-2xl text-sm"
+                        style={{ color: "hsl(150, 30%, 15%)" }}
+                      >
+                        ✅ Bestilling bekreftet! Klikk på Betal for å fullføre.
+                      </motion.div>
+                    )}
+                    {paymentError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl"
+                      >
+                        <p className="text-red-600 text-sm">{paymentError}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="flex gap-3">
+                    <Button
+                      variant="hero-secondary"
+                      onClick={handleBack}
+                      disabled={isPaying}
+                      className="px-6 py-4 rounded-2xl"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                    </Button>
+
+                    {!orderConfirmed ? (
+                      <Button
+                        variant="hero-primary"
+                        onClick={(e) => { e.preventDefault(); handleConfirm(); }}
+                        disabled={isSending}
+                        className="flex-1 py-4 text-base rounded-2xl"
+                      >
+                        {isSending ? "Bekrefter..." : "Bekreft bestilling"}
+                        {!isSending && <Check className="w-5 h-5" />}
+                      </Button>
+                    ) : (
+                      <motion.div
+                        className="flex-1"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <Button
+                          variant="hero-primary"
+                          onClick={(e) => { e.preventDefault(); handleStripeCheckout(); }}
+                          disabled={isPaying}
+                          className="w-full py-4 text-base rounded-2xl"
+                        >
+                          {isPaying ? "Åpner betaling..." : "Gå til betaling →"}
+                        </Button>
+                      </motion.div>
+                    )}
                   </div>
                 </div>
+              )}
 
-                {/* Prisoppsummering */}
-                <div className="bg-white rounded-lg p-4 border border-gray-200">
-                  <h4 className="text-sm font-semibold mb-3" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>Pris</h4>
-                  <div className="space-y-1.5 text-sm" style={{ fontFamily: 'var(--font-sans), sans-serif', color: 'hsl(150, 30%, 15%)' }}>
-                    <div className="flex justify-between">
-                      <span>Kort levering (0–3 km):</span>
-                      <span className="font-semibold">119 kr</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Medium levering (3–6 km):</span>
-                      <span className="font-semibold">169 kr</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Lengre levering (6–20 km):</span>
-                      <span className="font-semibold">219 kr</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between mt-6 max-w-2xl mx-auto">
-                <Button
-                  variant="hero-secondary"
-                  onClick={handleBack}
-                  className="px-6 py-2.5"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Tilbake
-                </Button>
-                <Button
-                  variant="hero-primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleConfirm();
-                  }}
-                  disabled={isSending}
-                  className="px-6 py-2.5"
-                >
-                  {isSending ? "Sender..." : "Bekreft bestilling"}
-                  {!isSending && <Check className="w-4 h-4" />}
-                </Button>
-              </div>
-            </div>
-          )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
       <Footer />
@@ -780,7 +808,7 @@ function BestillContent() {
 
 export default function Bestill() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Laster...</div>}>
       <BestillContent />
     </Suspense>
   );
