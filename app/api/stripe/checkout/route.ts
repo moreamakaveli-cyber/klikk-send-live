@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { getSiteUrl, stripe } from "@/lib/stripe";
+import { getSiteUrl, getStripe } from "@/lib/stripe";
 
 export async function POST() {
   try {
     const siteUrl = getSiteUrl();
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card", "klarna"],
       line_items: [
