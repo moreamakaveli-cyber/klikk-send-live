@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { savePendingOrder, type PendingOrder } from "@/lib/pending-order";
+import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Package, Box, Archive, ArrowRight, ArrowLeft, Check } from "lucide-react";
@@ -67,6 +66,7 @@ const inputClass =
   "w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-orange-400 outline-none bg-white text-gray-900 text-sm transition-all duration-150";
 
 function BestillContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const isKlikkHent = searchParams.get("type") === "klikk-hent";
   const [step, setStep] = useState(1);
@@ -89,10 +89,6 @@ function BestillContent() {
     deliveryCity: "",
     comment: "",
   });
-  const [isSending, setIsSending] = useState(false);
-  const [isPaying, setIsPaying] = useState(false);
-  const [orderConfirmed, setOrderConfirmed] = useState(false);
-  const [paymentError, setPaymentError] = useState<string | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const combineAddress = (street: string, postalCode: string, city: string) =>
@@ -144,10 +140,6 @@ function BestillContent() {
   };
 
   const handleBack = () => {
-    if (step === 3) {
-      setOrderConfirmed(false);
-      setPaymentError(null);
-    }
     if (step > 1) goTo(step - 1);
   };
 
@@ -163,7 +155,7 @@ function BestillContent() {
     if (validationError) setValidationError(null);
   };
 
-  const buildPendingOrder = (): PendingOrder | null => {
+  const isOrderValid = () => {
     const isPickupValid = validateAddress(
       formData.pickupStreet,
       formData.pickupPostalCode,
@@ -179,90 +171,24 @@ function BestillContent() {
       : formData.pickupFirstName && formData.pickupLastName;
     const pickupPhoneValid = isKlikkHent ? true : formData.pickupPhone;
 
-    if (
-      !pickupNameValid ||
-      !pickupPhoneValid ||
-      !isPickupValid ||
-      !formData.deliveryFirstName ||
-      !formData.deliveryLastName ||
-      !formData.deliveryPhone ||
-      !isDeliveryValid ||
-      !selectedSize
-    )
-      return null;
-
-    const pickupAddress = combineAddress(
-      formData.pickupStreet,
-      formData.pickupPostalCode,
-      formData.pickupCity
+    return (
+      !!pickupNameValid &&
+      !!pickupPhoneValid &&
+      isPickupValid &&
+      !!formData.deliveryFirstName &&
+      !!formData.deliveryLastName &&
+      !!formData.deliveryPhone &&
+      isDeliveryValid &&
+      !!selectedSize
     );
-    const deliveryAddress = combineAddress(
-      formData.deliveryStreet,
-      formData.deliveryPostalCode,
-      formData.deliveryCity
-    );
-    const pickupName = isKlikkHent
-      ? formData.pickupBusinessName
-      : `${formData.pickupFirstName} ${formData.pickupLastName}`;
-    const pickupPhone = isKlikkHent ? "" : formData.pickupPhone;
-    const packageSize =
-      packageOptions.find((p) => p.id === selectedSize)?.title || "";
-
-    return {
-      name: pickupName,
-      phone: pickupPhone,
-      pickup_address: pickupAddress,
-      delivery_address: deliveryAddress,
-      package_size: packageSize,
-      emailParams: {
-        name: pickupName,
-        phone: pickupPhone,
-        package: packageSize,
-        pickup: pickupAddress,
-        delivery: deliveryAddress,
-        isKlikkHent: isKlikkHent ? "Ja" : "Nei",
-        pickupCode: formData.pickupPickupCode || "",
-        deliveryName: `${formData.deliveryFirstName} ${formData.deliveryLastName}`,
-        deliveryPhone: formData.deliveryPhone,
-      },
-    };
   };
 
-  const handleConfirm = () => {
-    setIsSending(true);
-    setPaymentError(null);
-    const pending = buildPendingOrder();
-    if (!pending) {
-      alert("Vennligst fyll ut alle obligatoriske felt.");
-      setIsSending(false);
-      return;
-    }
-    savePendingOrder(pending);
-    setOrderConfirmed(true);
-    setIsSending(false);
-  };
-
-  const handleStripeCheckout = async () => {
-    const pending = buildPendingOrder();
-    if (!pending) {
+  const handleBestill = () => {
+    if (!isOrderValid()) {
       alert("Vennligst fyll ut alle obligatoriske felt.");
       return;
     }
-    setIsPaying(true);
-    setPaymentError(null);
-    savePendingOrder(pending);
-    try {
-      const response = await fetch("/api/stripe/checkout", { method: "POST" });
-      const data = (await response.json()) as { url?: string; error?: string };
-      if (!response.ok || !data.url)
-        throw new Error(data.error ?? "Kunne ikke starte betaling.");
-      window.location.href = data.url;
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Kunne ikke starte betaling.";
-      setPaymentError(message);
-      setIsPaying(false);
-    }
+    router.push("/launch");
   };
 
   const stepLabels = ["Størrelse", "Adresser", "Bekreft"];
@@ -657,10 +583,10 @@ function BestillContent() {
                     className="text-3xl font-normal mb-2 text-center"
                     style={{ fontFamily: "var(--font-serif), serif", color: "hsl(150, 30%, 15%)" }}
                   >
-                    Se over og betal
+                    Se over bestillingen
                   </h1>
                   <p className="text-center text-sm mb-8" style={{ color: "hsl(150, 10%, 50%)" }}>
-                    Ser alt riktig ut?
+                    Ser alt riktig ut? Trykk Bestill for å fortsette.
                   </p>
 
                   <div className="flex flex-col gap-3 mb-8">
@@ -734,65 +660,37 @@ function BestillContent() {
                     </div>
                   </div>
 
-                  <AnimatePresence>
-                    {orderConfirmed && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="mb-4 p-4 bg-green-50 border border-green-200 rounded-2xl text-sm"
-                        style={{ color: "hsl(150, 30%, 15%)" }}
-                      >
-                        ✅ Bestilling bekreftet! Klikk på Betal for å fullføre.
-                      </motion.div>
-                    )}
-                    {paymentError && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl"
-                      >
-                        <p className="text-red-600 text-sm">{paymentError}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className="mb-6 p-4 rounded-2xl border border-orange-100 bg-orange-50/50 text-sm text-center"
+                    style={{ color: "hsl(150, 30%, 15%)" }}>
+                    Online bestilling åpner snart. Du kommer til en side der du kan melde interesse.
+                  </div>
 
                   <div className="flex gap-3">
                     <Button
                       variant="hero-secondary"
                       onClick={handleBack}
-                      disabled={isPaying}
                       className="px-6 py-4 rounded-2xl"
                     >
                       <ArrowLeft className="w-5 h-5" />
                     </Button>
 
-                    {!orderConfirmed ? (
+                    <motion.div
+                      className="flex-1"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
                       <Button
                         variant="hero-primary"
-                        onClick={(e) => { e.preventDefault(); handleConfirm(); }}
-                        disabled={isSending}
-                        className="flex-1 py-4 text-base rounded-2xl"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleBestill();
+                        }}
+                        className="w-full py-4 text-base rounded-2xl"
                       >
-                        {isSending ? "Bekrefter..." : "Bekreft bestilling"}
-                        {!isSending && <Check className="w-5 h-5" />}
+                        Bestill
+                        <ArrowRight className="w-5 h-5" />
                       </Button>
-                    ) : (
-                      <motion.div
-                        className="flex-1"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Button
-                          variant="hero-primary"
-                          onClick={(e) => { e.preventDefault(); handleStripeCheckout(); }}
-                          disabled={isPaying}
-                          className="w-full py-4 text-base rounded-2xl"
-                        >
-                          {isPaying ? "Åpner betaling..." : "Gå til betaling →"}
-                        </Button>
-                      </motion.div>
-                    )}
+                    </motion.div>
                   </div>
                 </div>
               )}
