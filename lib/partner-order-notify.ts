@@ -11,10 +11,26 @@ const PARTNER_SLUG = "kvaernerbyen";
 export const PARTNER_ORDER_NOTIFY_SELECT =
   "id, payment_status, total_amount, cleaning_amount, delivery_fee, shop_order_number, customer_name, phone, address, postal_code, delivery_time_option, delivery_time_at";
 
+export type PaidOrderEmailResult = {
+  attempted: boolean;
+  sentCount: number;
+  skippedReason?: string;
+  errors: string[];
+};
+
 function getResend() {
   const key = process.env.RESEND_API_KEY;
   if (!key) return null;
   return new Resend(key);
+}
+
+function isMissingEmailSentColumnError(error: { message?: string; code?: string }): boolean {
+  const msg = (error.message ?? "").toLowerCase();
+  return (
+    msg.includes("confirmation_email_sent_at") ||
+    error.code === "PGRST204" ||
+    (msg.includes("column") && msg.includes("does not exist"))
+  );
 }
 
 function formatKr(amount: number): string {
@@ -99,16 +115,45 @@ function buildCustomerReceiptHtml(
 /**
  * Etter vellykket betaling: operasjonelle varsler til Hently + Kværnerbyen.
  * Valgfritt kvittering til kunde (e-post fra Stripe Checkout).
- * Uten RESEND_API_KEY: returnerer stille (betaling/ordre påvirkes ikke).
  */
 export async function sendPaidOrderEmails(
   order: PartnerOrderRow,
   customerEmail: string | null,
-): Promise<void> {
+  options?: { skipIfAlreadyPaid?: boolean },
+): Promise<PaidOrderEmailResult> {
+  const result: PaidOrderEmailResult = {
+    attempted: false,
+    sentCount: 0,
+    errors: [],
+  };
+
+  if (options?.skipIfAlreadyPaid) {
+    result.skippedReason = "already_paid";
+    return result;
+  }
+
   const resend = getResend();
-  if (!resend) return;
+  if (!resend) {
+    console.warn("[sendPaidOrderEmails] RESEND_API_KEY is not set — no emails sent");
+    result.skippedReason = "missing_resend_api_key";
+    return result;
+  }
+
+  const hentlyTo = process.env.HENTLY_NOTIFY_EMAIL?.trim();
+  const partnerTo = process.env.KVARNERBYEN_NOTIFY_EMAIL?.trim();
+  const customerTo = customerEmail?.trim();
+
+  if (!hentlyTo && !partnerTo && !customerTo) {
+    console.warn(
+      "[sendPaidOrderEmails] No recipients configured (HENTLY_NOTIFY_EMAIL / KVARNERBYEN_NOTIFY_EMAIL / Stripe customer email)",
+    );
+    result.skippedReason = "no_recipients";
+    return result;
+  }
 
   const supabase = getSupabaseAdmin();
+  let maySend = true;
+
   const { data: claimed, error: claimError } = await supabase
     .from("partner_orders")
     .update({ confirmation_email_sent_at: new Date().toISOString() })
@@ -119,11 +164,28 @@ export async function sendPaidOrderEmails(
     .maybeSingle();
 
   if (claimError) {
-    console.error("partner_orders confirmation_email_sent_at:", claimError);
-    return;
+    if (isMissingEmailSentColumnError(claimError)) {
+      console.warn(
+        "[sendPaidOrderEmails] confirmation_email_sent_at column missing — run supabase/migrations/20240527_partner_orders_email_sent.sql",
+      );
+      maySend = true;
+    } else {
+      console.error("[sendPaidOrderEmails] claim failed:", claimError.message);
+      result.skippedReason = "claim_failed";
+      result.errors.push(claimError.message);
+      return result;
+    }
+  } else if (!claimed) {
+    result.skippedReason = "email_already_sent";
+    return result;
   }
-  if (!claimed) return;
 
+  if (!maySend) {
+    result.skippedReason = "claim_blocked";
+    return result;
+  }
+
+  result.attempted = true;
   const payload = buildOrderConfirmResponse(order);
   const opsHtml = buildOpsNotificationHtml(order);
   const from =
@@ -131,50 +193,76 @@ export async function sendPaidOrderEmails(
   const orderRef = formatOrderRef(order.id);
   const customerName = order.customer_name ?? "Kunde";
 
-  const sends: Promise<unknown>[] = [];
+  const sends: Promise<{ kind: string; ok: boolean; error?: string }>[] = [];
 
-  const hentlyTo = process.env.HENTLY_NOTIFY_EMAIL?.trim();
   if (hentlyTo) {
     sends.push(
-      resend.emails.send({
-        from,
-        to: hentlyTo,
-        subject: `[Hently] Ny ordre ${orderRef} – ${customerName}`,
-        html: opsHtml,
-      }),
+      resend.emails
+        .send({
+          from,
+          to: hentlyTo,
+          subject: `[Hently] Ny ordre ${orderRef} – ${customerName}`,
+          html: opsHtml,
+        })
+        .then(() => ({ kind: "hently_ops", ok: true }))
+        .catch((e: unknown) => ({
+          kind: "hently_ops",
+          ok: false,
+          error: e instanceof Error ? e.message : String(e),
+        })),
     );
   }
 
-  const partnerTo = process.env.KVARNERBYEN_NOTIFY_EMAIL?.trim();
   if (partnerTo) {
     sends.push(
-      resend.emails.send({
-        from,
-        to: partnerTo,
-        subject: `[Kværnerbyen] Ny levering ${orderRef} – ${customerName}`,
-        html: opsHtml,
-      }),
+      resend.emails
+        .send({
+          from,
+          to: partnerTo,
+          subject: `[Kværnerbyen] Ny levering ${orderRef} – ${customerName}`,
+          html: opsHtml,
+        })
+        .then(() => ({ kind: "partner_ops", ok: true }))
+        .catch((e: unknown) => ({
+          kind: "partner_ops",
+          ok: false,
+          error: e instanceof Error ? e.message : String(e),
+        })),
     );
   }
 
-  const email = customerEmail?.trim();
-  if (email) {
+  if (customerTo) {
     sends.push(
-      resend.emails.send({
-        from,
-        to: email,
-        subject: "Takk for bestillingen – Hently",
-        html: buildCustomerReceiptHtml(payload.confirm),
-      }),
+      resend.emails
+        .send({
+          from,
+          to: customerTo,
+          subject: "Takk for bestillingen – Hently",
+          html: buildCustomerReceiptHtml(payload.confirm),
+        })
+        .then(() => ({ kind: "customer_receipt", ok: true }))
+        .catch((e: unknown) => ({
+          kind: "customer_receipt",
+          ok: false,
+          error: e instanceof Error ? e.message : String(e),
+        })),
     );
   }
 
-  if (sends.length === 0) return;
-
-  const results = await Promise.allSettled(sends);
-  for (const r of results) {
-    if (r.status === "rejected") {
-      console.error("sendPaidOrderEmails:", r.reason);
+  const outcomes = await Promise.all(sends);
+  for (const o of outcomes) {
+    if (o.ok) {
+      result.sentCount += 1;
+      console.info(`[sendPaidOrderEmails] sent ${o.kind} for order ${order.id}`);
+    } else if (o.error) {
+      result.errors.push(`${o.kind}: ${o.error}`);
+      console.error(`[sendPaidOrderEmails] failed ${o.kind}:`, o.error);
     }
   }
+
+  if (result.attempted && result.sentCount === 0 && result.errors.length > 0) {
+    result.skippedReason = "all_sends_failed";
+  }
+
+  return result;
 }

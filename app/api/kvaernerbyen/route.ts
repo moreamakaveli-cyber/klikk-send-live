@@ -3,7 +3,7 @@ import {
   normalizePartnerOrderBody,
   validatePartnerOrderPayload,
 } from "@/lib/partner-order-validate";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, getSupabaseProjectRef } from "@/lib/supabase-admin";
 
 export const runtime = "nodejs";
 
@@ -80,6 +80,13 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+
+    console.info("[POST /api/kvaernerbyen] order created", {
+      supabase_project: getSupabaseProjectRef(),
+      order_id: data.id,
+      payment_status: "pending",
+      total_amount: data.total_amount,
+    });
 
     return NextResponse.json({
       order_id: data.id,

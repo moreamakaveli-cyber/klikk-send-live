@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdmin, getSupabaseProjectRef } from "@/lib/supabase-admin";
 import { getCheckoutPaymentMethodTypes, getStripeAdmin } from "@/lib/stripe-admin";
 import Stripe from "stripe";
 import { parsePartnerAddress } from "@/lib/partner-address";
@@ -101,6 +101,13 @@ export async function POST(request: NextRequest) {
         order_id: o.id,
         partner_slug: PARTNER_SLUG,
       },
+    });
+
+    console.info("[POST /api/kvaernerbyen/checkout] session created", {
+      supabase_project: getSupabaseProjectRef(),
+      order_id: o.id,
+      stripe_session_id: session.id,
+      metadata_order_id: session.metadata?.order_id ?? null,
     });
 
     return NextResponse.json({ url: session.url });

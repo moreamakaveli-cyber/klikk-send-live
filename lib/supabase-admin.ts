@@ -21,3 +21,16 @@ export function getSupabaseAdmin(): SupabaseClient {
 
   return adminClient;
 }
+
+/** Supabase-prosjektref fra URL (f.eks. enubgrmmdlgkxpobuenl) – for logger, ikke hemmelig. */
+export function getSupabaseProjectRef(): string | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!url) return null;
+  try {
+    const host = new URL(url).hostname;
+    const ref = host.split(".")[0];
+    return ref || null;
+  } catch {
+    return null;
+  }
+}
