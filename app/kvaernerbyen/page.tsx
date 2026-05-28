@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AddressSuggestion } from "@/app/api/address-suggest/route";
 import { formatNorwegianPhoneDisplay, normalizeNorwegianPhone } from "@/lib/norwegian-phone";
+import { validatePartnerOrderPayload } from "@/lib/partner-order-validate";
 import { getMarketingHomeHref } from "@/lib/site-url";
 import "./kvaernerbyen.css";
 
@@ -571,6 +572,29 @@ export default function KvaernerbyenPage() {
   async function handlePay() {
     if (!validateStep1() || !validateStep2()) return;
 
+    const delivery_time_option =
+      delivMode === "pick" ? ("scheduled" as const) : ("asap" as const);
+    const delivery_time_at =
+      delivery_time_option === "scheduled" ? buildDeliveryTimeAt() : null;
+
+    const orderPayload = {
+      customer_name: fullName.trim(),
+      phone: normalizeNorwegianPhone(phone) ?? "",
+      address: buildAddress(),
+      postal_code: postnr.trim(),
+      shop_order_number: deliveryItems.trim().slice(0, 240),
+      garment_count: itemCount,
+      cleaning_amount: cleaningAmount,
+      delivery_time_option,
+      delivery_time_at,
+    };
+
+    const validation = validatePartnerOrderPayload(orderPayload);
+    if (!validation.ok) {
+      setError(validation.error);
+      return;
+    }
+
     setLoading(true);
     setError("");
     const eta = getEtaLabel();
@@ -580,21 +604,13 @@ export default function KvaernerbyenPage() {
       const res = await fetch("/api/kvaernerbyen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customer_name: fullName.trim(),
-          phone: normalizeNorwegianPhone(phone) ?? phone.trim(),
-          address: buildAddress(),
-          postal_code: postnr.trim(),
-          shop_order_number: deliveryItems.trim().slice(0, 240),
-          garment_count: itemCount,
-          cleaning_amount: cleaningAmount,
-          delivery_time_option: delivMode === "pick" ? "scheduled" : "asap",
-          delivery_time_at: buildDeliveryTimeAt(),
-        }),
+        body: JSON.stringify(validation.data),
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Kunne ikke opprette ordre");
+        const fieldHint =
+          typeof data.field === "string" ? ` (${data.field})` : "";
+        setError((data.error || "Kunne ikke opprette ordre") + fieldHint);
         return;
       }
 

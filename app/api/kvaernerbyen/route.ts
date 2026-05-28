@@ -1,67 +1,58 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  normalizePartnerOrderBody,
+  validatePartnerOrderPayload,
+} from "@/lib/partner-order-validate";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+
+export const runtime = "nodejs";
 
 const PARTNER_SLUG = "kvaernerbyen";
 const DELIVERY_FEE = 119;
 
-type OrderBody = {
-  customer_name?: string;
-  phone?: string;
-  address?: string;
-  postal_code?: string;
-  shop_order_number?: string;
-  garment_count?: number;
-  cleaning_amount?: number;
-  delivery_time_option?: "asap" | "scheduled";
-  delivery_time_at?: string | null;
-};
-
-function validateOrder(body: OrderBody): string | null {
-  if (!body.customer_name?.trim()) return "Navn er påkrevd";
-  if (!body.phone?.trim()) return "Telefon er påkrevd";
-  if (!body.address?.trim()) return "Adresse er påkrevd";
-  if (!body.postal_code?.trim()) return "Postnummer er påkrevd";
-  if (!body.shop_order_number?.trim()) return "Beskriv hva som skal leveres";
-  if (!body.garment_count || body.garment_count < 1) return "Velg antall varer";
-  if (body.cleaning_amount == null || body.cleaning_amount <= 0) {
-    return "Oppgi totalbeløp fra Kværnerbyen Rens & Skorep";
-  }
-  const digits = body.phone.replace(/\D/g, "");
-  if (digits.length !== 8) return "Telefonnummer må være 8 siffer";
-  if (body.delivery_time_option !== "asap" && body.delivery_time_option !== "scheduled") {
-    return "Velg leveringstid";
-  }
-  if (body.delivery_time_option === "scheduled" && !body.delivery_time_at) {
-    return "Velg tidspunkt for levering";
-  }
-  return null;
-}
-
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as OrderBody;
-    const error = validateOrder(body);
-    if (error) {
-      return NextResponse.json({ error }, { status: 400 });
+    let raw: Record<string, unknown>;
+    try {
+      raw = (await request.json()) as Record<string, unknown>;
+    } catch {
+      console.warn("[POST /api/kvaernerbyen] invalid JSON body");
+      return NextResponse.json(
+        { error: "Ugyldig forespørsel (JSON)", field: "body" },
+        { status: 400 },
+      );
     }
 
+    const normalized = normalizePartnerOrderBody(raw);
+    const validation = validatePartnerOrderPayload(normalized);
+
+    if (!validation.ok) {
+      console.warn(
+        `[POST /api/kvaernerbyen] validation failed: field=${validation.field} error=${validation.error}`,
+      );
+      return NextResponse.json(
+        { error: validation.error, field: validation.field },
+        { status: 400 },
+      );
+    }
+
+    const body = validation.data;
     const supabase = getSupabaseAdmin();
-    const phoneDigits = body.phone ? body.phone.replace(/\D/g, "") : "";
+
     const { data, error: dbError } = await supabase
       .from("partner_orders")
       .insert({
         partner_slug: PARTNER_SLUG,
-        customer_name: body.customer_name!.trim(),
-        phone: phoneDigits,
-        address: body.address!.trim(),
-        postal_code: body.postal_code!.trim(),
-        shop_order_number: body.shop_order_number!.trim(),
+        customer_name: body.customer_name,
+        phone: body.phone,
+        address: body.address,
+        postal_code: body.postal_code,
+        shop_order_number: body.shop_order_number,
         garment_count: body.garment_count,
         cleaning_amount: body.cleaning_amount,
         delivery_fee: DELIVERY_FEE,
         delivery_time_option: body.delivery_time_option,
-        delivery_time_at:
-          body.delivery_time_option === "scheduled" ? body.delivery_time_at : null,
+        delivery_time_at: body.delivery_time_at,
         payment_status: "pending",
         delivery_status: "new",
       })
@@ -84,14 +75,11 @@ export async function POST(request: NextRequest) {
             : isNetworkIssue
               ? "Kunne ikke koble til Supabase akkurat nå. Sjekk nett/dns og prøv igjen."
               : "Kunne ikke opprette ordre i Supabase. Sjekk prosjekt-ID, nøkler og tabellstruktur.",
+          field: "database",
         },
         { status: 500 },
       );
     }
-
-    // Stripe PaymentIntent kan legges inn her når dere er klare:
-    // const stripe = getStripe();
-    // const intent = await stripe.paymentIntents.create({ amount: Math.round(data.total_amount * 100), ... });
 
     return NextResponse.json({
       order_id: data.id,
@@ -105,7 +93,7 @@ export async function POST(request: NextRequest) {
       e instanceof Error && e.message.includes("SUPABASE_SERVICE_ROLE")
         ? "Server mangler SUPABASE_SERVICE_ROLE_KEY i miljøvariabler"
         : "Noe gikk galt";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message, field: "server" }, { status: 500 });
   }
 }
 
