@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { AddressSuggestion } from "@/app/api/address-suggest/route";
 import { formatNorwegianPhoneDisplay, normalizeNorwegianPhone } from "@/lib/norwegian-phone";
+import { getMarketingHomeHref } from "@/lib/site-url";
 import "./kvaernerbyen.css";
+
+const MARKETING_HOME_HREF = getMarketingHomeHref();
 
 const stepVariants = {
   enter: (direction: number) => ({
@@ -632,9 +634,13 @@ export default function KvaernerbyenPage() {
     <div className="kb-page">
       <div className="kb-wrap">
         <div className="kb-topbar">
-          <Link href="/" className="kb-logo">
+          <a
+            href={MARKETING_HOME_HREF}
+            className="kb-logo"
+            aria-label="Hently forsiden"
+          >
             <Image src="/logo.png" alt="Hently" width={280} height={93} priority />
-          </Link>
+          </a>
           <div className="kb-partner-tag">Kværnerbyen Rens &amp; Skorep</div>
         </div>
 
